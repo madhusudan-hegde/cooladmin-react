@@ -1,4 +1,4 @@
-import { Footer, IconButton, MButton, MCard, PageHeader, SectionEyebrow } from '@cooladmin/react'
+import { Footer, IconButton, MButton, MCard, PageHeader, SectionEyebrow } from '@madhusudan-hegde/cooladmin-react'
 import { LoadingDemoButton } from '@/components/loading-demo-button'
 
 export const metadata = { title: 'Buttons' }

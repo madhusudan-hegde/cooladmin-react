@@ -1,4 +1,4 @@
-import { Footer, MCard, PageHeader, SectionEyebrow } from '@cooladmin/react'
+import { Footer, MCard, PageHeader, SectionEyebrow } from '@madhusudan-hegde/cooladmin-react'
 import { UiModalsDemo } from '@/components/ui-modals-demo'
 
 export const metadata = { title: 'Modals' }

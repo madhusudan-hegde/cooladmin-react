@@ -1,7 +1,7 @@
 'use client'
 
 import type { ChartData, ChartOptions } from 'chart.js'
-import { Chart } from '@cooladmin/react'
+import { Chart } from '@madhusudan-hegde/cooladmin-react'
 import { KPI_COLORS, KPI_COLORS_RGB, trafficTrend } from '@/lib/dashboard-data'
 import { compactNumber, verticalFade } from '@/lib/chart-fills'
 

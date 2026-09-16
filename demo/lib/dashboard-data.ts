@@ -1,4 +1,4 @@
-import type { AccentSlot, PriorityLevel, StatusPillStatus } from '@cooladmin/react'
+import type { AccentSlot, PriorityLevel, StatusPillStatus } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Demo datasets for the four CoolAdmin dashboards (index.html → index4.html),

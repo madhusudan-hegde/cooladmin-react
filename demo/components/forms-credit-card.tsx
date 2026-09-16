@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { cn, useToast } from '@cooladmin/react'
+import { cn, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 interface CardFields {
   amount: string

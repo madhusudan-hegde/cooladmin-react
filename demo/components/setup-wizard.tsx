@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
-import { Input, MButton, Select, Textarea, Wizard, cn, useToast } from '@cooladmin/react'
-import type { WizardStep } from '@cooladmin/react'
+import { Input, MButton, Select, Textarea, Wizard, cn, useToast } from '@madhusudan-hegde/cooladmin-react'
+import type { WizardStep } from '@madhusudan-hegde/cooladmin-react'
 import { wizardInitialState, wizardPlans, wizardRoles, wizardTeamSizes } from '@/lib/wizard-data'
 import type { WizardFormState, WizardPlanId } from '@/lib/wizard-data'
 

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { AuthLayout } from '@cooladmin/react'
+import { AuthLayout } from '@madhusudan-hegde/cooladmin-react'
 
 export const metadata = {
   title: { default: 'CoolAdmin React', template: '%s · CoolAdmin React' },

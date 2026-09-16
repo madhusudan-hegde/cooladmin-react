@@ -1,6 +1,6 @@
 'use client'
 
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 /** Cancel / Save changes actions from profile.html's page header. */
 export function ProfileHeaderActions() {

@@ -1,4 +1,4 @@
-import { Footer, PageHeader } from '@cooladmin/react'
+import { Footer, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { ProfileHeaderActions } from '@/components/profile-header-actions'
 import { ProfileSettingsTabs } from '@/components/profile-settings-tabs'
 

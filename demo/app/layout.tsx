@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { getBodyClassName } from '@cooladmin/react'
-import '@cooladmin/react/css'
+import { getBodyClassName } from '@madhusudan-hegde/cooladmin-react'
+import '@madhusudan-hegde/cooladmin-react/css'
 import './globals.css'
 
 export const metadata: Metadata = {

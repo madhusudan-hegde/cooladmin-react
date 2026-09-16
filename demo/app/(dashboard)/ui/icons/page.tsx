@@ -1,4 +1,4 @@
-import { Footer, PageHeader } from '@cooladmin/react'
+import { Footer, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { iconCategories } from '@/lib/icons-data'
 import { IconShowcase } from '@/components/icon-showcase'
 

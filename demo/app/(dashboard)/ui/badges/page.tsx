@@ -7,7 +7,7 @@ import {
   PriorityChip,
   SectionEyebrow,
   StatusPill,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import {
   apiKeys,
   bootstrapBadges,

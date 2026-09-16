@@ -8,7 +8,7 @@ import {
   SectionEyebrow,
   StatusPill,
   useToast,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import { currentPlan, invoices, paymentMethod, usageMeters } from '@/lib/profile-data'
 
 /** "Billing" tab: current plan, invoices, payment method and usage meters. */

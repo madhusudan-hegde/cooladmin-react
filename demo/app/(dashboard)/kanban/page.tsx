@@ -1,4 +1,4 @@
-import { Footer } from '@cooladmin/react'
+import { Footer } from '@madhusudan-hegde/cooladmin-react'
 import { KanbanBoard } from '@/components/kanban-board'
 
 export const metadata = { title: 'Kanban board' }

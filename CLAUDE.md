@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`@cooladmin/react` — the CoolAdmin 3.4.0 admin template (Bootstrap 5.3, Colorlib) re-implemented as a React 19 component library for the Next.js App Router (React Server Components). It deliberately copies the architecture and conventions of `adminlte-react` (see "Upstream references"). **The repo root _is_ the library** (the published npm package). It is also a small pnpm workspace: the root package is the library, and `demo/` is a Next.js 16 App Router app that dogfoods it via `"@cooladmin/react": "workspace:*"` (pnpm symlinks `demo/node_modules/@cooladmin/react` → repo root).
+`@madhusudan-hegde/cooladmin-react` — the CoolAdmin 3.4.0 admin template (Bootstrap 5.3, Colorlib) re-implemented as a React 19 component library for the Next.js App Router (React Server Components). It deliberately copies the architecture and conventions of `adminlte-react` (see "Upstream references"). **The repo root _is_ the library** (the published npm package). It is also a small pnpm workspace: the root package is the library, and `demo/` is a Next.js 16 App Router app that dogfoods it via `"@madhusudan-hegde/cooladmin-react": "workspace:*"` (pnpm symlinks `demo/node_modules/@madhusudan-hegde/cooladmin-react` → repo root).
 
-- Root (`src/`, `package.json` named `@cooladmin/react`, `tsup.config.ts`, `dist/`) — the publishable library
+- Root (`src/`, `package.json` named `@madhusudan-hegde/cooladmin-react`, `tsup.config.ts`, `dist/`) — the publishable library
 - `demo/` — demo + dev playground; consumes the library through the workspace link
 
 Testing: `pnpm test` runs Vitest (jsdom) unit tests colocated in `src/` (`*.test.ts(x)`); the demo has Playwright tests (`cd demo && pnpm test` — route smoke + axe a11y, starts its own dev server on port 3210, system Chrome channel; Next refuses a second dev server per project, so when one is already running pass `DEMO_PORT=<its port>` to reuse it). `pnpm lint` runs ESLint (`eslint.config.mjs`: typescript-eslint + react-hooks) over `src/`; `pnpm type-check` (`tsc --noEmit`) is the strict type gate. CI (`.github/workflows/ci.yml`) runs type-check, lint, unit tests, the library build (plus an RSC-boundary check on `dist/`), and the demo type-check + build.
@@ -72,7 +72,7 @@ The demo imports the compiled `dist/`, not `src/`. After editing library source,
 
 ### What the library ships vs. what the consumer provides
 
-The library ships JS + **only** `dist/css/cooladmin.css` (import via `'@cooladmin/react/css'`). Everything else is the consumer's responsibility, loaded via CDN in `demo/app/layout.tsx`:
+The library ships JS + **only** `dist/css/cooladmin.css` (import via `'@madhusudan-hegde/cooladmin-react/css'`). Everything else is the consumer's responsibility, loaded via CDN in `demo/app/layout.tsx`:
 
 - **Bootstrap 5.3.8** CSS and **bundle JS** (`bootstrap.bundle.min.js`, needed for dropdowns/collapse/modals; Popper included)
 - **Font Awesome 7.3.1 Free** CSS — icons are FA class strings (`fa-solid fa-chart-line`)

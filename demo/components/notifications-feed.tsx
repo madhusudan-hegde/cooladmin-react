@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import { EmptyState, MButton, MCard, PageHeader, cn, useToast } from '@cooladmin/react'
+import { EmptyState, MButton, MCard, PageHeader, cn, useToast } from '@madhusudan-hegde/cooladmin-react'
 import {
   NOTIFICATION_CHIP_LABELS,
   NOTIFICATION_FILTERS,

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { ChartData, ChartOptions } from 'chart.js'
-import { Chart, MCard, cn } from '@cooladmin/react'
+import { Chart, MCard, cn } from '@madhusudan-hegde/cooladmin-react'
 import { KPI_COLORS, KPI_COLORS_RGB, revenueTrend } from '@/lib/dashboard-data'
 import { compactNumber, verticalFade } from '@/lib/chart-fills'
 

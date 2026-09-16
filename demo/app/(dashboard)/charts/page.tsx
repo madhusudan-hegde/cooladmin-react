@@ -1,4 +1,4 @@
-import { Footer, MButton, MCard, PageHeader } from '@cooladmin/react'
+import { Footer, MButton, MCard, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { showcaseChartCards } from '@/lib/charts-data'
 import { ShowcaseChart } from '@/components/showcase-chart'
 

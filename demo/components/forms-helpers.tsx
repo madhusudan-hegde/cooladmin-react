@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { cn } from '@cooladmin/react'
+import { cn } from '@madhusudan-hegde/cooladmin-react'
 
 /* Small presentational helpers for the /forms page (CoolAdmin form.html).
  * Pure RSC — no state; the interactive cards live in forms-*.tsx client files. */

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { Footer, MCard, PageHeader, SectionEyebrow } from '@cooladmin/react'
+import { Footer, MCard, PageHeader, SectionEyebrow } from '@madhusudan-hegde/cooladmin-react'
 
 export const metadata = { title: 'Typography' }
 

@@ -1,4 +1,4 @@
-import { Footer, PageHeader } from '@cooladmin/react'
+import { Footer, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 
 export const metadata = { title: 'Grid system' }
 

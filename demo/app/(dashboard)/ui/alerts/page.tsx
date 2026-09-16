@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { Alert, Footer, MCard, PageHeader, SectionEyebrow, cn } from '@cooladmin/react'
+import { Alert, Footer, MCard, PageHeader, SectionEyebrow, cn } from '@madhusudan-hegde/cooladmin-react'
 import { accentRailCards, dismissibleAlerts, noticeCards } from '@/lib/ui-alerts-data'
 import { UiAlertsToastDemo } from '@/components/ui-alerts-toast-demo'
 

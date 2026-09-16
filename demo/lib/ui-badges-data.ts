@@ -1,4 +1,4 @@
-import type { BadgeVariant, PriorityLevel, StatusPillStatus } from '@cooladmin/react'
+import type { BadgeVariant, PriorityLevel, StatusPillStatus } from '@madhusudan-hegde/cooladmin-react'
 
 /** Sample data for CoolAdmin's badge.html (the /ui/badges page). */
 

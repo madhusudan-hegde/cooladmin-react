@@ -1,4 +1,4 @@
-import { Footer, SectionEyebrow } from '@cooladmin/react'
+import { Footer, SectionEyebrow } from '@madhusudan-hegde/cooladmin-react'
 import { pricingFaq } from '@/lib/pricing-data'
 import { ContactSalesButton, PricingPlans } from '@/components/pricing-plans'
 

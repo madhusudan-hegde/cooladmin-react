@@ -1,4 +1,4 @@
-import type { AccentSlot } from '@cooladmin/react'
+import type { AccentSlot } from '@madhusudan-hegde/cooladmin-react'
 
 /** Sample data for CoolAdmin's modal.html + modal.post.html (the /ui/modals page). */
 

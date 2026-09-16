@@ -1,8 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { MButton, useOptionalCommandPalette } from '@cooladmin/react'
-import type { MButtonProps } from '@cooladmin/react'
+import { MButton, useOptionalCommandPalette } from '@madhusudan-hegde/cooladmin-react'
+import type { MButtonProps } from '@madhusudan-hegde/cooladmin-react'
 
 /** `location.reload()` button for the 500 / maintenance pages. */
 export function ReloadButton({ children, ...rest }: Omit<MButtonProps, 'onClick' | 'href'>) {

@@ -8,7 +8,7 @@ import {
   ProgressBar,
   StatCard,
   StatusPill,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import {
   activeProjects,
   projectActivity,

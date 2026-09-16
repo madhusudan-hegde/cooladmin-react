@@ -1,4 +1,4 @@
-import type { AccentSlot } from '@cooladmin/react'
+import type { AccentSlot } from '@madhusudan-hegde/cooladmin-react'
 import type { KpiCard } from '@/lib/dashboard-data'
 import { avatar } from '@/lib/dashboard-data'
 

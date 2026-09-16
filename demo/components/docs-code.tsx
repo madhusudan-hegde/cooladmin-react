@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { cn, useToast } from '@cooladmin/react'
+import { cn, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 export interface CodeBlockProps {
   /** The code, rendered verbatim inside `<pre><code>`. */

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MCard, Switch, useToast } from '@cooladmin/react'
+import { MCard, Switch, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { emailNotifications, pushNotifications } from '@/lib/profile-data'
 import type { NotificationPref } from '@/lib/profile-data'
 

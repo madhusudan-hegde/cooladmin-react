@@ -1,7 +1,7 @@
 'use client'
 
 import type { FormEvent, ReactNode } from 'react'
-import { useToast } from '@cooladmin/react'
+import { useToast } from '@madhusudan-hegde/cooladmin-react'
 
 export interface DemoFormProps {
   id: string

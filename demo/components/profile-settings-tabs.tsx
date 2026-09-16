@@ -1,7 +1,7 @@
 'use client'
 
-import { Tabs } from '@cooladmin/react'
-import type { TabItem } from '@cooladmin/react'
+import { Tabs } from '@madhusudan-hegde/cooladmin-react'
+import type { TabItem } from '@madhusudan-hegde/cooladmin-react'
 import { ProfileAccountPane } from '@/components/profile-account-pane'
 import { ProfileApiKeysPane } from '@/components/profile-api-keys-pane'
 import { ProfileBillingPane } from '@/components/profile-billing-pane'

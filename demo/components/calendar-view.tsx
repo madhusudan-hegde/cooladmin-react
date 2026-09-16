@@ -11,7 +11,7 @@ import {
   useAccent,
   useColorMode,
   useToast,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import {
   CALENDAR_EVENT_TYPE_OPTIONS,
   CALENDAR_TAG_COLORS,

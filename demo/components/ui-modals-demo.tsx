@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { CSSProperties, FormEvent } from 'react'
-import { Input, MButton, Modal, Select, StatCard, Textarea, useToast } from '@cooladmin/react'
+import { Input, MButton, Modal, Select, StatCard, Textarea, useToast } from '@madhusudan-hegde/cooladmin-react'
 import {
   inviteRoles,
   legacyLaunchers,

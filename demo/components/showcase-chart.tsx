@@ -1,7 +1,7 @@
 'use client'
 
 import type { ChartData, ChartOptions, ScriptableContext } from 'chart.js'
-import { Chart, resolveColor, withAlpha } from '@cooladmin/react'
+import { Chart, resolveColor, withAlpha } from '@madhusudan-hegde/cooladmin-react'
 import {
   CHART_PALETTE,
   browserShare,

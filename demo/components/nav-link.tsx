@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import type { LinkComponent } from '@cooladmin/react'
+import type { LinkComponent } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Router link injected into the library (sidebar, account menu, palette) via

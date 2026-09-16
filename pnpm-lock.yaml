@@ -68,7 +68,7 @@ importers:
 
   demo:
     dependencies:
-      '@cooladmin/react':
+      '@madhusudan-hegde/cooladmin-react':
         specifier: workspace:*
         version: link:..
       chart.js:

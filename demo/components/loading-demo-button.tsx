@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 type Phase = 'idle' | 'saving' | 'saved'
 

@@ -1,4 +1,4 @@
-import type { StatusPillStatus } from '@cooladmin/react'
+import type { StatusPillStatus } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Customer dataset for /tables/data, lifted verbatim from CoolAdmin's

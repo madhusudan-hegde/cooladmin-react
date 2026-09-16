@@ -1,4 +1,4 @@
-import { Footer } from '@cooladmin/react'
+import { Footer } from '@madhusudan-hegde/cooladmin-react'
 import { NotificationsFeed } from '@/components/notifications-feed'
 
 export const metadata = { title: 'Notifications' }

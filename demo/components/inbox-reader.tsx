@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { EmptyState, IconButton, cn } from '@cooladmin/react'
+import { EmptyState, IconButton, cn } from '@madhusudan-hegde/cooladmin-react'
 import { ATTACHMENT_ICONS, INBOX_LABELS } from '@/lib/inbox-data'
 import type { InboxMessage } from '@/lib/inbox-data'
 

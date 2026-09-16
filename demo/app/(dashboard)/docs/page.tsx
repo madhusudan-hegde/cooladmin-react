@@ -1,4 +1,4 @@
-import { Footer, MButton, PageHeader } from '@cooladmin/react'
+import { Footer, MButton, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { DocsToc } from '@/components/docs-toc'
 import { CodeBlock } from '@/components/docs-code'
 
@@ -26,13 +26,13 @@ function Anchor({ id }: { id: string }) {
 }
 
 const INSTALL = `# Install the library (React 19 + Next.js App Router)
-pnpm add @cooladmin/react
+pnpm add @madhusudan-hegde/cooladmin-react
 
 # Optional peers — only if you use <Chart> / <Sparkline>
 pnpm add chart.js`
 
 const ROOT_LAYOUT = `// app/layout.tsx
-import '@cooladmin/react/css'
+import '@madhusudan-hegde/cooladmin-react/css'
 
 export default function RootLayout({ children }) {
   return (
@@ -46,8 +46,8 @@ export default function RootLayout({ children }) {
 }`
 
 const DASHBOARD_LAYOUT = `// app/(dashboard)/layout.tsx
-import { DashboardLayout } from '@cooladmin/react'
-import type { MenuNode } from '@cooladmin/react'
+import { DashboardLayout } from '@madhusudan-hegde/cooladmin-react'
+import type { MenuNode } from '@madhusudan-hegde/cooladmin-react'
 
 const menuItems: MenuNode[] = [
   { type: 'header', label: 'Overview' },
@@ -75,11 +75,11 @@ export default function Layout({ children }) {
   )
 }`
 
-const STRUCTURE = `@cooladmin/react
+const STRUCTURE = `@madhusudan-hegde/cooladmin-react
 ├── dist/
 │   ├── index.js                ESM barrel (per-file modules, RSC boundaries preserved)
 │   ├── index.d.ts              bundled types
-│   ├── css/cooladmin.css       the only stylesheet — import '@cooladmin/react/css'
+│   ├── css/cooladmin.css       the only stylesheet — import '@madhusudan-hegde/cooladmin-react/css'
 │   ├── layout/                 DashboardLayout, AuthLayout, ErrorLayout, Topbar, Sidebar, PageHeader, Footer
 │   ├── widget/                 MCard, StatCard, Chart, Sparkline, RankList, Tabs, Modal, DataTable, Toast …
 │   ├── form/                   MButton, IconButton, Input, Select, Textarea, Radio, Checkbox, Switch
@@ -93,7 +93,7 @@ const THEME_CLASS = `<body class="app theme-purple">`
 const THEME_PROP = `<DashboardLayout menuItems={menuItems} initialAccent="teal" initialColorMode="auto">`
 
 const THEME_HOOK = `'use client'
-import { useAccent } from '@cooladmin/react'
+import { useAccent } from '@madhusudan-hegde/cooladmin-react'
 
 export function AccentPicker() {
   const { accent, setAccent, presets } = useAccent()
@@ -116,7 +116,7 @@ const FONT_TOKEN = `body.app {
 }`
 
 const TOAST = `'use client'
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 export function SaveButton() {
   const toast = useToast()
@@ -145,7 +145,7 @@ export function SaveButton() {
 }`
 
 const CMDK = `'use client'
-import { useCommandPalette } from '@cooladmin/react'
+import { useCommandPalette } from '@madhusudan-hegde/cooladmin-react'
 
 const { open, close, toggle } = useCommandPalette()`
 
@@ -158,13 +158,13 @@ const CMDK_COMMANDS = `<DashboardLayout
 >`
 
 const COLOR_MODE = `'use client'
-import { useColorMode } from '@cooladmin/react'
+import { useColorMode } from '@madhusudan-hegde/cooladmin-react'
 
 const { mode, resolved, setMode } = useColorMode() // mode: 'light' | 'dark' | 'auto'
 setMode('dark')`
 
 const CHART = `'use client'
-import { Chart, lightTooltip } from '@cooladmin/react'
+import { Chart, lightTooltip } from '@madhusudan-hegde/cooladmin-react'
 
 export function RevenueChart() {
   return (
@@ -189,7 +189,7 @@ export function RevenueChart() {
 }`
 
 const NEW_PAGE = `// app/(dashboard)/reports/page.tsx  — a Server Component
-import { Footer, MCard, PageHeader } from '@cooladmin/react'
+import { Footer, MCard, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 
 export const metadata = { title: 'Reports' }
 
@@ -260,7 +260,7 @@ export default function DocumentationPage() {
               Quick start <Anchor id="install" />
             </h2>
             <p>
-              <code>@cooladmin/react</code> is CoolAdmin re-implemented as a React 19 component
+              <code>@madhusudan-hegde/cooladmin-react</code> is CoolAdmin re-implemented as a React 19 component
               library for the Next.js App Router. It ships ESM modules with their{' '}
               <code>&apos;use client&apos;</code> boundaries intact and one compiled stylesheet — no
               Sass toolchain on your side.
@@ -304,7 +304,7 @@ export default function DocumentationPage() {
               </li>
               <li>Bootstrap 5.3 CSS — grid, utilities and form controls</li>
               <li>
-                <code>@cooladmin/react/css</code> — the CoolAdmin overlay (this is where almost
+                <code>@madhusudan-hegde/cooladmin-react/css</code> — the CoolAdmin overlay (this is where almost
                 everything lives; every rule is scoped under <code>body.app</code>)
               </li>
             </ol>
@@ -350,7 +350,7 @@ export default function DocumentationPage() {
             </p>
             <p>
               To swap fonts globally, redefine the <code>--m-font</code> token in your own
-              stylesheet (load it after <code>@cooladmin/react/css</code>):
+              stylesheet (load it after <code>@madhusudan-hegde/cooladmin-react/css</code>):
             </p>
             <CodeBlock code={FONT_TOKEN} language="css" />
             <p>The type scale used across pages:</p>
@@ -609,7 +609,7 @@ export default function DocumentationPage() {
               Deployment <Anchor id="deploy" />
             </h2>
             <p>
-              A Next.js app using <code>@cooladmin/react</code> deploys like any other Next.js app:
+              A Next.js app using <code>@madhusudan-hegde/cooladmin-react</code> deploys like any other Next.js app:
             </p>
             <ul>
               <li>

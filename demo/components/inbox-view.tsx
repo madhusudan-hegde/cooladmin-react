@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { cn, useBodyClass, useToast } from '@cooladmin/react'
+import { cn, useBodyClass, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { INBOX_FOLDERS, INBOX_PAGE_SIZE, inboxMessages, messagesInFolder } from '@/lib/inbox-data'
 import type { InboxFolder, InboxMessage } from '@/lib/inbox-data'
 import { InboxList } from '@/components/inbox-list'

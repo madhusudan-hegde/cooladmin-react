@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import type { ChartData, ChartOptions } from 'chart.js'
-import { Chart } from '@cooladmin/react'
+import { Chart } from '@madhusudan-hegde/cooladmin-react'
 
 export interface DonutChartProps {
   labels: string[]

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Checkbox, MCard, Select, StatusPill, useToast } from '@cooladmin/react'
+import { Checkbox, MCard, Select, StatusPill, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { orderActions } from '@/lib/tables-data'
 import type { Order } from '@/lib/tables-data'
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { DragEvent, FormEvent, KeyboardEvent } from 'react'
-import { IconButton, MButton, PageHeader, cn, useToast } from '@cooladmin/react'
+import { IconButton, MButton, PageHeader, cn, useToast } from '@madhusudan-hegde/cooladmin-react'
 import {
   KANBAN_COLUMNS,
   KANBAN_LABELS,

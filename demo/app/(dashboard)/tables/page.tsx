@@ -1,4 +1,4 @@
-import { Badge, Footer, MButton, MCard, PageHeader, RankList, StatusPill } from '@cooladmin/react'
+import { Badge, Footer, MButton, MCard, PageHeader, RankList, StatusPill } from '@madhusudan-hegde/cooladmin-react'
 import { earnings, orders, sales, tableUsers, topCampaigns, topCountries } from '@/lib/tables-data'
 import { TablesHeaderActions } from '@/components/tables-header-actions'
 import { TablesOrdersCard } from '@/components/tables-orders-card'

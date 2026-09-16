@@ -1,6 +1,6 @@
 'use client'
 
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Invoice page-header actions (CoolAdmin invoice.html): Print opens the browser

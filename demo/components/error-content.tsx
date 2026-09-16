@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { MButton } from '@cooladmin/react'
+import { MButton } from '@madhusudan-hegde/cooladmin-react'
 import { ReloadButton, SearchButton } from '@/components/error-actions'
 
 /**

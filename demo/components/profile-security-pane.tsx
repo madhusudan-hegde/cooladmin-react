@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { Input, MButton, MCard, StatusPill, useToast } from '@cooladmin/react'
+import { Input, MButton, MCard, StatusPill, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { activeSessions } from '@/lib/profile-data'
 import type { ActiveSession } from '@/lib/profile-data'
 

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 /** Matches CoolAdmin's `initDashboardRefresh` skeleton duration. */
 const REFRESH_MS = 1200

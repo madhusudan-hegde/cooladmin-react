@@ -1,4 +1,4 @@
-// Post-build fixes for the unbundled per-file dist/ output of @cooladmin/react:
+// Post-build fixes for the unbundled per-file dist/ output of @madhusudan-hegde/cooladmin-react:
 //
 // 1. Re-apply 'use client' to every dist file whose source module declares it
 //    (esbuild does not reliably preserve directives during transform).

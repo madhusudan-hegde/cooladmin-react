@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { Avatar, Input, MButton, MCard, Select, Textarea, useToast } from '@cooladmin/react'
+import { Avatar, Input, MButton, MCard, Select, Textarea, useToast } from '@madhusudan-hegde/cooladmin-react'
 import {
   connectedAccounts,
   profileLanguages,

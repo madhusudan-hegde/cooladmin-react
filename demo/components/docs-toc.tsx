@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { cn } from '@cooladmin/react'
+import { cn } from '@madhusudan-hegde/cooladmin-react'
 
 export interface DocsTocItem {
   id: string

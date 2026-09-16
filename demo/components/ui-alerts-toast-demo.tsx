@@ -1,7 +1,7 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { toastDemoButtons } from '@/lib/ui-alerts-data'
 import type { ToastDemoButton } from '@/lib/ui-alerts-data'
 

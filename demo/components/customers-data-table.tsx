@@ -1,7 +1,7 @@
 'use client'
 
-import { Avatar, DataTable, IconButton, StatusPill, useToast } from '@cooladmin/react'
-import type { DataTableColumn } from '@cooladmin/react'
+import { Avatar, DataTable, IconButton, StatusPill, useToast } from '@madhusudan-hegde/cooladmin-react'
+import type { DataTableColumn } from '@madhusudan-hegde/cooladmin-react'
 import { customerStatus, formatMrr, formatSignupDate } from '@/lib/data-table-data'
 import type { Customer } from '@/lib/data-table-data'
 

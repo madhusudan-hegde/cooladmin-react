@@ -1,4 +1,4 @@
-import { Footer, PageHeader } from '@cooladmin/react'
+import { Footer, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { InboxHeaderActions } from '@/components/inbox-header-actions'
 import { InboxView } from '@/components/inbox-view'
 

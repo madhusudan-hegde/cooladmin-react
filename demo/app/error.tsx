@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { ErrorLayout, MButton } from '@cooladmin/react'
+import { ErrorLayout, MButton } from '@madhusudan-hegde/cooladmin-react'
 import { ServerErrorContent } from '@/components/error-content'
 
 /** Route error boundary — CoolAdmin's 500 card with Next's `reset()` as "Try again". */

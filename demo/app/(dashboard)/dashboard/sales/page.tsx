@@ -7,7 +7,7 @@ import {
   RankList,
   StatCard,
   StatusPill,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import {
   dealSources,
   dealSourcesDonut,

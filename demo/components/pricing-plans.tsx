@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MButton, cn, useToast } from '@cooladmin/react'
+import { MButton, cn, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { pricingPlans } from '@/lib/pricing-data'
 import type { PricingPeriod } from '@/lib/pricing-data'
 

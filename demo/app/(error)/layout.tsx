@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { ErrorLayout, flattenMenuToCommands } from '@cooladmin/react'
+import { ErrorLayout, flattenMenuToCommands } from '@madhusudan-hegde/cooladmin-react'
 import { menuItems } from '@/lib/menu'
 
 export const metadata = {

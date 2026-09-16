@@ -1,4 +1,4 @@
-import type { RankListItem } from '@cooladmin/react'
+import type { RankListItem } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Sample values for the /ui/progress showcase (CoolAdmin progress-bar.html).

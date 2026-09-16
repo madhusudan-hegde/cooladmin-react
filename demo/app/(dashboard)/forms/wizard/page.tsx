@@ -1,4 +1,4 @@
-import { Footer, PageHeader } from '@cooladmin/react'
+import { Footer, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { SetupWizard } from '@/components/setup-wizard'
 
 export const metadata = { title: 'Setup wizard' }

@@ -1,4 +1,4 @@
-import { Skeleton } from '@cooladmin/react'
+import { Skeleton } from '@madhusudan-hegde/cooladmin-react'
 
 /** Loading stand-in for a `<StatCard>` (CoolAdmin's `statSkeleton` markup). */
 export function StatCardSkeleton() {

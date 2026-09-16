@@ -1,4 +1,4 @@
-import type { StatusPillStatus } from '@cooladmin/react'
+import type { StatusPillStatus } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Sample data for /account/profile ("Account & settings"), lifted verbatim

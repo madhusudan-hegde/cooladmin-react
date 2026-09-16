@@ -1,6 +1,6 @@
 'use client'
 
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 /** Export / Add row actions shared by the /tables and /tables/data page headers. */
 export function TablesHeaderActions() {

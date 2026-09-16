@@ -1,8 +1,8 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { DashboardLayout, TopbarMenu } from '@cooladmin/react'
-import type { DashboardLayoutProps, TopbarMenuItem } from '@cooladmin/react'
+import { DashboardLayout, TopbarMenu } from '@madhusudan-hegde/cooladmin-react'
+import type { DashboardLayoutProps, TopbarMenuItem } from '@madhusudan-hegde/cooladmin-react'
 import { menuItems } from '@/lib/menu'
 import { avatar } from '@/lib/dashboard-data'
 import { NavLink } from '@/components/nav-link'

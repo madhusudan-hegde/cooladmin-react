@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
-import { Footer, MCard, PageHeader, SectionEyebrow, Tabs } from '@cooladmin/react'
-import type { TabItem } from '@cooladmin/react'
+import { Footer, MCard, PageHeader, SectionEyebrow, Tabs } from '@madhusudan-hegde/cooladmin-react'
+import type { TabItem } from '@madhusudan-hegde/cooladmin-react'
 
 export const metadata = { title: 'Tabs' }
 

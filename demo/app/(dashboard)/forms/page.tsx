@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Footer, Input, PageHeader, Radio, Select, Textarea } from '@cooladmin/react'
+import { Footer, Input, PageHeader, Radio, Select, Textarea } from '@madhusudan-hegde/cooladmin-react'
 import {
   ActionButtons,
   FormCard,

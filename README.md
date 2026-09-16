@@ -40,9 +40,9 @@ This project is a derivative of two MIT-licensed projects by [Colorlib](https://
 ## Installation
 
 ```bash
-pnpm add @cooladmin/react
+pnpm add @madhusudan-hegde/cooladmin-react
 # or
-npm install @cooladmin/react
+npm install @madhusudan-hegde/cooladmin-react
 ```
 
 ### Peer dependencies
@@ -55,7 +55,7 @@ pnpm add chart.js                    # optional — only if you use <Chart> or <
 `next` is declared optional, but the sidebar uses `next/navigation` for active-link detection, so
 in practice the library targets Next.js.
 
-The library ships **only** its own stylesheet (`@cooladmin/react/css`). You provide Bootstrap 5.3
+The library ships **only** its own stylesheet (`@madhusudan-hegde/cooladmin-react/css`). You provide Bootstrap 5.3
 CSS + JS, Font Awesome Free and the Inter font — via CDN is simplest (see below).
 
 ## Quick start
@@ -64,7 +64,7 @@ CSS + JS, Font Awesome Free and the Inter font — via CDN is simplest (see belo
 
 ```tsx
 // app/layout.tsx
-import '@cooladmin/react/css'
+import '@madhusudan-hegde/cooladmin-react/css'
 import './globals.css'
 
 export const metadata = { title: { default: 'CoolAdmin React', template: '%s · CoolAdmin React' } }
@@ -100,8 +100,8 @@ themselves — every CoolAdmin rule is scoped under `body.app`.
 
 ```tsx
 // app/(dashboard)/layout.tsx
-import { DashboardLayout } from '@cooladmin/react'
-import type { MenuNode } from '@cooladmin/react'
+import { DashboardLayout } from '@madhusudan-hegde/cooladmin-react'
+import type { MenuNode } from '@madhusudan-hegde/cooladmin-react'
 
 const menuItems: MenuNode[] = [
   { type: 'header', label: 'Overview' },
@@ -135,7 +135,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // app/(dashboard)/page.tsx
-import { PageHeader, StatCard, MCard, MButton } from '@cooladmin/react'
+import { PageHeader, StatCard, MCard, MButton } from '@madhusudan-hegde/cooladmin-react'
 
 export default function Page() {
   return (

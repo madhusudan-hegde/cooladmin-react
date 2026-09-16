@@ -1,4 +1,4 @@
-import { DateChip, Footer, MButton, MCard, PageHeader, RankList, StatCard } from '@cooladmin/react'
+import { DateChip, Footer, MButton, MCard, PageHeader, RankList, StatCard } from '@madhusudan-hegde/cooladmin-react'
 import { marketingKpis, topPages, topReferrers, trafficSources } from '@/lib/dashboard-data'
 import {
   DashboardRefreshButton,

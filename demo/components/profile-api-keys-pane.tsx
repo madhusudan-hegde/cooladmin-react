@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
-import { IconButton, MButton, MCard, useToast } from '@cooladmin/react'
+import { IconButton, MButton, MCard, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { apiKeys } from '@/lib/profile-data'
 import type { ApiKey } from '@/lib/profile-data'
 

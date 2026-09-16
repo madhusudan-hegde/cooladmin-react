@@ -8,7 +8,7 @@ import {
   Sparkline,
   StatCard,
   cn,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import {
   accentRailCards,
   cardKpis,

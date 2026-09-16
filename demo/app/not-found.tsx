@@ -1,4 +1,4 @@
-import { ErrorLayout, flattenMenuToCommands } from '@cooladmin/react'
+import { ErrorLayout, flattenMenuToCommands } from '@madhusudan-hegde/cooladmin-react'
 import { menuItems } from '@/lib/menu'
 import { NotFoundContent } from '@/components/error-content'
 

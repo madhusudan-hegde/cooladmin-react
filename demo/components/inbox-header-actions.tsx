@@ -1,6 +1,6 @@
 'use client'
 
-import { MButton, useToast } from '@cooladmin/react'
+import { MButton, useToast } from '@madhusudan-hegde/cooladmin-react'
 
 /** Page-header buttons for /inbox (`#inbox-refresh-btn` / `#inbox-compose-btn`). */
 export function InboxHeaderActions() {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { cn, resolveColor, useAccent, useColorMode } from '@cooladmin/react'
+import { cn, resolveColor, useAccent, useColorMode } from '@madhusudan-hegde/cooladmin-react'
 import type { MapConfig } from '@/lib/maps-data'
 import { LEAFLET_CSS, LEAFLET_JS } from '@/lib/maps-data'
 import { loadScript, loadStyle } from '@/lib/load-external'

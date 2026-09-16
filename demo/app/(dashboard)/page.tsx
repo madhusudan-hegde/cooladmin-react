@@ -7,7 +7,7 @@ import {
   PageHeader,
   StatCard,
   StatusPill,
-} from '@cooladmin/react'
+} from '@madhusudan-hegde/cooladmin-react'
 import { overviewActivity, overviewKpis, overviewTasks, topProducts } from '@/lib/dashboard-data'
 import { emphasize } from '@/components/emphasize'
 import {

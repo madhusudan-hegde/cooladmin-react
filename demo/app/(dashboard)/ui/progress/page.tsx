@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { Footer, MCard, PageHeader, RankList, SectionEyebrow } from '@cooladmin/react'
+import { Footer, MCard, PageHeader, RankList, SectionEyebrow } from '@madhusudan-hegde/cooladmin-react'
 import { bootstrapBars, campaignRanking, circularRings, quotaBars } from '@/lib/progress-data'
 import { AnimatedProgress } from '@/components/animated-progress'
 

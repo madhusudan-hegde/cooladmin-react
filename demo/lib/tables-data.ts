@@ -1,4 +1,4 @@
-import type { BadgeVariant, RankListItem, StatusPillStatus } from '@cooladmin/react'
+import type { BadgeVariant, RankListItem, StatusPillStatus } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Sample data for the /tables page, lifted verbatim from CoolAdmin's

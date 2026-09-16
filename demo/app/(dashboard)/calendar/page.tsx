@@ -1,4 +1,4 @@
-import { Footer, MCard, PageHeader } from '@cooladmin/react'
+import { Footer, MCard, PageHeader } from '@madhusudan-hegde/cooladmin-react'
 import { CALENDAR_LEGEND } from '@/lib/calendar-data'
 import {
   CalendarActions,

@@ -1,7 +1,7 @@
 'use client'
 
 import type { ChartData, ChartOptions } from 'chart.js'
-import { Chart } from '@cooladmin/react'
+import { Chart } from '@madhusudan-hegde/cooladmin-react'
 import { pipelineFunnel } from '@/lib/dashboard-data'
 
 const data: ChartData<'bar'> = {

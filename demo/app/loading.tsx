@@ -1,4 +1,4 @@
-import { Skeleton } from '@cooladmin/react'
+import { Skeleton } from '@madhusudan-hegde/cooladmin-react'
 
 /** Root-level route loading state: a lightweight skeleton card. */
 export default function Loading() {

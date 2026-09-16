@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Input, cn } from '@cooladmin/react'
+import { Input, cn } from '@madhusudan-hegde/cooladmin-react'
 import { iconSections } from '@/lib/icons-data'
 import type { IconEntry } from '@/lib/icons-data'
 

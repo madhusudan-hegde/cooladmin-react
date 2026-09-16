@@ -1,6 +1,6 @@
 'use client'
 
-import { EmptyState, IconButton, cn } from '@cooladmin/react'
+import { EmptyState, IconButton, cn } from '@madhusudan-hegde/cooladmin-react'
 import { INBOX_LABELS } from '@/lib/inbox-data'
 import type { InboxMessage } from '@/lib/inbox-data'
 

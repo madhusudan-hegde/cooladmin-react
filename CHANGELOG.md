@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **@cooladmin/react** are documented in this file.
+All notable changes to **@madhusudan-hegde/cooladmin-react** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -60,7 +60,7 @@ the app shell, dashboards and core widgets; Phase 2 ported every remaining CoolA
 - **Forms** — `MButton`, `IconButton`, `Input`, `Select`, `Switch`, `Checkbox`, `DateChip`.
 - **Menu model** — `MenuNode` (`header | item | group`) drives both the sidebar and the command
   palette through `flattenMenuToCommands()`.
-- **Stylesheet** — `@cooladmin/react/css` (`dist/css/cooladmin.css`), compiled with sass from
+- **Stylesheet** — `@madhusudan-hegde/cooladmin-react/css` (`dist/css/cooladmin.css`), compiled with sass from
   CoolAdmin's modern `--m-*` SCSS overlay (scoped under `body.app`), with newly authored dark-mode
   tokens under `[data-bs-theme="dark"] body.app`. The legacy `theme.css` / `--ca-*` / Poppins layer
   is not ported.

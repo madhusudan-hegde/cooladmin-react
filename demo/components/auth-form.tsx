@@ -1,7 +1,7 @@
 'use client'
 
 import type { FormEvent, FormHTMLAttributes, ReactNode } from 'react'
-import { useToast } from '@cooladmin/react'
+import { useToast } from '@madhusudan-hegde/cooladmin-react'
 
 export interface AuthFormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   /** Toast shown on submit (the demo forms never post anywhere). */

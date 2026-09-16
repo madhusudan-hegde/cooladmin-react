@@ -1,5 +1,5 @@
 {
-  "name": "@cooladmin/react",
+  "name": "@madhusudan-hegde/cooladmin-react",
   "version": "0.1.0",
   "description": "CoolAdmin admin dashboard design as a React 19 / Next.js App Router component library (Bootstrap 5.3, RSC-ready)",
   "license": "MIT",
@@ -22,17 +22,18 @@
   },
   "files": [
     "dist",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "sideEffects": [
     "./dist/css/cooladmin.css"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/<owner>/cooladmin-react"
+    "url": "git+https://github.com/madhusudan-hegde/cooladmin-react.git"
   },
   "bugs": {
-    "url": "https://github.com/<owner>/cooladmin-react/issues"
+    "url": "https://github.com/madhusudan-hegde/cooladmin-react/issues"
   },
   "keywords": [
     "admin",
@@ -53,6 +54,7 @@
   ],
   "scripts": {
     "build": "tsup && npm run build:css && npm run fix-dist",
+    "prepublishOnly": "pnpm type-check && pnpm lint && pnpm test && pnpm build",
     "build:css": "sass src/scss/cooladmin.scss dist/css/cooladmin.css --no-source-map --style=expanded",
     "fix-dist": "node fix-dist.js",
     "dev": "concurrently -n tsup,sass -c green,magenta \"tsup --watch\" \"npm run build:css -- --watch\"",
@@ -97,5 +99,10 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.11"
+  },
+  "homepage": "https://github.com/madhusudan-hegde/cooladmin-react#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

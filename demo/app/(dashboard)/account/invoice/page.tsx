@@ -1,4 +1,4 @@
-import { Footer, PageHeader, cn } from '@cooladmin/react'
+import { Footer, PageHeader, cn } from '@madhusudan-hegde/cooladmin-react'
 import {
   invoiceBillTo,
   invoiceFrom,

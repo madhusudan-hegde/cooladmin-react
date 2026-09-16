@@ -1,4 +1,4 @@
-/* Demo-only tweaks on top of @cooladmin/react/css — keep minimal. */
+/* Demo-only tweaks on top of @madhusudan-hegde/cooladmin-react/css — keep minimal. */
 
 /* Row spacing between dashboard sections (CoolAdmin used inline margin-top). */
 body.app .dash-row + .dash-row {

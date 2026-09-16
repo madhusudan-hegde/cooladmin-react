@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Checkbox, MCard, Select, useToast } from '@cooladmin/react'
+import { Checkbox, MCard, Select, useToast } from '@madhusudan-hegde/cooladmin-react'
 import { userPermissions } from '@/lib/tables-data'
 import type { TableUser, UserPermission } from '@/lib/tables-data'
 

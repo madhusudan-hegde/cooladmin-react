@@ -1,4 +1,4 @@
-import type { AlertVariant } from '@cooladmin/react'
+import type { AlertVariant } from '@madhusudan-hegde/cooladmin-react'
 
 /** Sample data for CoolAdmin's alert.html (the /ui/alerts page). */
 

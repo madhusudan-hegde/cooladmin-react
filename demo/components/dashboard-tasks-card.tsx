@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { MButton, MCard, TaskList, useToast } from '@cooladmin/react'
-import type { TaskListItem } from '@cooladmin/react'
+import { MButton, MCard, TaskList, useToast } from '@madhusudan-hegde/cooladmin-react'
+import type { TaskListItem } from '@madhusudan-hegde/cooladmin-react'
 import type { TaskEntry } from '@/lib/dashboard-data'
 
 export interface DashboardTasksCardProps {

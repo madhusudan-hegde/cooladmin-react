@@ -1,4 +1,4 @@
-import type { MenuNode } from '@cooladmin/react'
+import type { MenuNode } from '@madhusudan-hegde/cooladmin-react'
 
 /**
  * Sidebar + command-palette navigation, ported from CoolAdmin's
