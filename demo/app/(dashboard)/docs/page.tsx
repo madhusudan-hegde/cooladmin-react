@@ -222,8 +222,9 @@ const DARK_TOKENS = `[data-bs-theme="dark"] body.app {
 
 const CDN = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-<link rel="preconnect" href="https://rsms.me/">
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>`
 
 /** CoolAdmin docs.html, rewritten for the React library (same sections, TOC + copy buttons). */
@@ -260,8 +261,8 @@ export default function DocumentationPage() {
               Quick start <Anchor id="install" />
             </h2>
             <p>
-              <code>@madhusudan-hegde/cooladmin-react</code> is CoolAdmin re-implemented as a React 19 component
-              library for the Next.js App Router. It ships ESM modules with their{' '}
+              <code>@madhusudan-hegde/cooladmin-react</code> is CoolAdmin re-implemented as a React
+              19 component library for the Next.js App Router. It ships ESM modules with their{' '}
               <code>&apos;use client&apos;</code> boundaries intact and one compiled stylesheet — no
               Sass toolchain on your side.
             </p>
@@ -297,15 +298,16 @@ export default function DocumentationPage() {
             <p>Every consumer app links the same CSS chain in this order:</p>
             <ol>
               <li>
-                <code>https://rsms.me/inter/inter.css</code> — Inter, the UI font
+                <code>fonts.googleapis.com/css2?family=Inter…</code> — Inter, the UI font (Google
+                Fonts)
               </li>
               <li>
                 Font Awesome 7 Free — icons are class strings (<code>fa-solid fa-chart-line</code>)
               </li>
               <li>Bootstrap 5.3 CSS — grid, utilities and form controls</li>
               <li>
-                <code>@madhusudan-hegde/cooladmin-react/css</code> — the CoolAdmin overlay (this is where almost
-                everything lives; every rule is scoped under <code>body.app</code>)
+                <code>@madhusudan-hegde/cooladmin-react/css</code> — the CoolAdmin overlay (this is
+                where almost everything lives; every rule is scoped under <code>body.app</code>)
               </li>
             </ol>
           </section>
@@ -345,8 +347,8 @@ export default function DocumentationPage() {
               Typography <Anchor id="typography" />
             </h2>
             <p>
-              The default sans-serif is <strong>Inter</strong> served from <code>rsms.me</code>.
-              Monospace snippets use the system stack in <code>--m-font-mono</code>.
+              The default sans-serif is <strong>Inter</strong> served from Google Fonts. Monospace
+              snippets use the system stack in <code>--m-font-mono</code>.
             </p>
             <p>
               To swap fonts globally, redefine the <code>--m-font</code> token in your own
@@ -609,7 +611,8 @@ export default function DocumentationPage() {
               Deployment <Anchor id="deploy" />
             </h2>
             <p>
-              A Next.js app using <code>@madhusudan-hegde/cooladmin-react</code> deploys like any other Next.js app:
+              A Next.js app using <code>@madhusudan-hegde/cooladmin-react</code> deploys like any
+              other Next.js app:
             </p>
             <ul>
               <li>

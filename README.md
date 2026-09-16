@@ -9,12 +9,13 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952b3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/5.3/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-The admin dashboard design, re-implemented as a
-**React 19 / Next.js App Router component library**. Server Components by default, client islands
-only where interaction needs them, Bootstrap 5.3 underneath, and CoolAdmin's own CSS class
-vocabulary kept verbatim so the markup looks exactly like the original template.
+The CoolAdmin admin dashboard design, re-implemented as a **React 19 component library** that
+works with any router — Next.js App Router (React Server Components by default, client islands
+only where interaction needs them), Vite + React Router, Remix … Bootstrap 5.3 underneath, and
+CoolAdmin's own CSS class vocabulary kept verbatim so the markup looks exactly like the original
+template.
 
-**Status:** `0.1.0` on npm — all 35 CoolAdmin pages ported. Package:
+**Status:** `0.2.0` — all 35 CoolAdmin pages ported, framework-agnostic routing. Package:
 [`@madhusudan-hegde/cooladmin-react`](https://www.npmjs.com/package/@madhusudan-hegde/cooladmin-react)
 · Source: [github.com/madhusudan-hegde/cooladmin-react](https://github.com/madhusudan-hegde/cooladmin-react)
 
@@ -47,7 +48,9 @@ This project is a derivative of two MIT-licensed projects by [Colorlib](https://
 
 ## Installation
 
-Use it in any **Next.js (App Router) project** as a regular dependency:
+Use it in **any React 19 project** — Next.js, Vite + React Router, Remix … — as a regular
+dependency. The core has no framework dependency; a one-line adapter connects your router
+(see [Routing](#routing-next-js-react-router-or-anything-else)).
 
 ```bash
 # pnpm
@@ -65,7 +68,8 @@ yarn add @madhusudan-hegde/cooladmin-react
 | Dependency | Version | Notes |
 | --- | --- | --- |
 | `react`, `react-dom` | `^19` | peer dependencies |
-| `next` | `>=14` (App Router) | peer dependency; the sidebar's active-link detection and the command palette use `next/navigation` |
+| `next` | `>=14` (App Router) | **optional** — only for the `/next` adapter (`NextNavigationProvider`) |
+| `react-router` | `^7` | **optional** — only for the `/react-router` adapter (`ReactRouterNavigationProvider`) |
 | `chart.js` | `^4.5` | **optional** — only if you render `<Chart>` or `<Sparkline>`; loaded via dynamic import |
 | Bootstrap 5.3 CSS + bundle JS, Font Awesome 7 Free, Inter font | — | **you** load these (CDN links in the Quick start below); the library ships only its own stylesheet |
 
@@ -126,8 +130,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -154,6 +159,7 @@ themselves — every CoolAdmin rule is scoped under `body.app`.
 ```tsx
 // app/(dashboard)/layout.tsx
 import { DashboardLayout } from '@madhusudan-hegde/cooladmin-react'
+import { NextNavigationProvider } from '@madhusudan-hegde/cooladmin-react/next'
 import type { MenuNode } from '@madhusudan-hegde/cooladmin-react'
 
 const menuItems: MenuNode[] = [
@@ -173,16 +179,21 @@ const menuItems: MenuNode[] = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <DashboardLayout
-      menuItems={menuItems}
-      brandName="CoolAdmin"
-      user={{ name: 'John Doe', role: 'Admin', avatarSrc: '/assets/img/avatar-01.jpg' }}
-    >
-      {children}
-    </DashboardLayout>
+    <NextNavigationProvider>
+      <DashboardLayout
+        menuItems={menuItems}
+        brandName="CoolAdmin"
+        user={{ name: 'John Doe', role: 'Admin', avatarSrc: '/assets/img/avatar-01.jpg' }}
+      >
+        {children}
+      </DashboardLayout>
+    </NextNavigationProvider>
   )
 }
 ```
+
+`NextNavigationProvider` is the only Next-specific line: it gives the sidebar `usePathname()`,
+the ⌘K palette `router.push()`, and every link `next/link`.
 
 ### 3. A page
 
@@ -210,6 +221,38 @@ export default function Page() {
 }
 ```
 
+## Routing: Next.js, React Router, or anything else
+
+The core never imports a router. Sidebar active states, command-palette navigation and links
+all read from a tiny **navigation adapter** (`{ pathname, navigate, linkComponent }`):
+
+| Host | Wrap your layout in | Import from |
+| --- | --- | --- |
+| Next.js App Router | `<NextNavigationProvider>` | `@madhusudan-hegde/cooladmin-react/next` |
+| React Router 7 (Vite, Remix …) | `<ReactRouterNavigationProvider>` (inside your `<BrowserRouter>`) | `@madhusudan-hegde/cooladmin-react/react-router` |
+| Anything else | `<NavigationProvider pathname={…} navigate={…} linkComponent={…}>` | `@madhusudan-hegde/cooladmin-react` |
+| No router at all | nothing | — falls back to `window.location` (full-page navigation) |
+
+```tsx
+// Vite + React Router
+import { BrowserRouter, Routes, Route } from 'react-router'
+import { DashboardLayout } from '@madhusudan-hegde/cooladmin-react'
+import { ReactRouterNavigationProvider } from '@madhusudan-hegde/cooladmin-react/react-router'
+import '@madhusudan-hegde/cooladmin-react/css'
+
+<BrowserRouter>
+  <ReactRouterNavigationProvider>
+    <DashboardLayout menuItems={menuItems}>
+      <Routes>…</Routes>
+    </DashboardLayout>
+  </ReactRouterNavigationProvider>
+</BrowserRouter>
+```
+
+Outside Next.js put `class="app"` on `<body>` in your HTML (every style is scoped under
+`body.app`); the library keeps the rest of the body classes in sync at runtime. A complete
+runnable example lives in [`examples/vite-react-router`](./examples/vite-react-router).
+
 ## Components
 
 | Area | Exports |
@@ -217,7 +260,8 @@ export default function Page() {
 | **Layout** | `DashboardLayout`, `AuthLayout`, `ErrorLayout`, `AppContent`, `PageHeader`, `Sidebar`, `SidebarBrand`, `SidebarNav`, `SidebarNavItem`, `SidebarOverlay`, `Topbar`, `TopbarSearch`, `TopbarMenu`, `AccountMenu`, `Footer`, `SkipLink` |
 | **Widgets** | `MCard`, `StatCard`, `Sparkline`, `Chart`, `RankList`, `StatusPill`, `PriorityChip`, `Avatar`, `AvatarGroup`, `EmptyState`, `Skeleton`, `ToastContainer`, `CommandPalette`, `ThemeSwitcher`, `SectionEyebrow`, `ActivityList`, `TaskList`, `ProgressBar`, `Alert`, `Badge`, `Tabs`, `Modal`, `Pagination`, `DataTable`, `Wizard` |
 | **Forms** | `MButton`, `IconButton`, `Input`, `Select`, `Textarea`, `Switch`, `Checkbox`, `Radio`, `DateChip` |
-| **Contexts** | `SidebarProvider`/`useSidebar`, `ColorModeProvider`/`useColorMode`, `AccentProvider`/`useAccent`, `ToastProvider`/`useToast`, `CommandPaletteProvider`/`useCommandPalette`, `LinkProvider`/`useLinkComponent` |
+| **Contexts** | `SidebarProvider`/`useSidebar`, `ColorModeProvider`/`useColorMode`, `AccentProvider`/`useAccent`, `ToastProvider`/`useToast`, `CommandPaletteProvider`/`useCommandPalette`, `LinkProvider`/`useLinkComponent`, `NavigationProvider`/`useNavigation`/`usePathname`/`useNavigate` |
+| **Adapters** | `/next` → `NextNavigationProvider`, `NextNavLink` · `/react-router` → `ReactRouterNavigationProvider`, `ReactRouterNavLink` |
 | **Hooks** | `useMediaQuery`, `useLocalStorage`, `useKeyboardShortcut`, `useBodyClass`, `useIsomorphicLayoutEffect`, `useClickOutside`, `useDisclosure` |
 | **Lib** | `cn`, `flattenMenuToCommands`, `storage` |
 | **Types** | `MenuNode`, `MenuItemNode`, `MenuGroupNode`, `MenuHeaderNode`, `ColorMode`, `AccentPreset`, `AccentPresetInfo`, `Command`, `ToastOptions`, `ToastType`, `LinkComponent`, `LinkProps`, `DashboardUser` |
@@ -250,9 +294,11 @@ and the UI showcase pages (Buttons, Badges, Tabs, Cards, Alerts, Progress bars, 
 Switches, Grid, Icons, Typography) — plus the `Alert`, `Badge`, `Tabs`, `Modal`, `Pagination`,
 `DataTable`, `Wizard`, `Textarea`, `Radio` components they needed.
 
-**Next** — framework-agnostic routing (drop the `next/navigation` dependency so the library works
-with Vite + React Router, Remix, TanStack Router …), Storybook or per-component docs, and optional
-npm-based FullCalendar / Leaflet wrappers in the library. Vote or comment on the
+**0.2.0 (done)** — framework-agnostic routing: the core dropped `next/navigation`; Next.js and
+React Router adapters ship as subpath exports, with a Vite + React Router example.
+
+**Next** — Storybook or per-component docs, a TanStack Router adapter, and optional npm-based
+FullCalendar / Leaflet wrappers in the library. Vote or comment on the
 [issues](https://github.com/madhusudan-hegde/cooladmin-react/issues) to influence priorities.
 
 ## Support & contributing
@@ -286,6 +332,27 @@ pnpm type-check && pnpm lint && pnpm test && pnpm build
 
 See [CLAUDE.md](./CLAUDE.md) for the architecture notes and [CHANGELOG.md](./CHANGELOG.md) for
 release history.
+
+### Releasing (automatic, from commit messages)
+
+Versions are never bumped by hand. Every push to `main` runs
+[`release.yml`](./.github/workflows/release.yml): after the checks pass,
+[semantic-release](https://semantic-release.gitbook.io) reads the
+[Conventional Commits](https://www.conventionalcommits.org) since the last `v*` tag, picks the
+semver bump, publishes to npm, tags the commit, creates a GitHub Release with generated notes and
+commits the new `package.json` version back (`chore(release): vX.Y.Z [skip ci]`).
+
+| Commit message | Release |
+| --- | --- |
+| `fix: …`, `perf: …`, `refactor: …`, `revert: …`, `style(scss): …` | **patch** (0.2.0 → 0.2.1) |
+| `feat: …` | **minor** (0.2.0 → 0.3.0) |
+| `feat!: …` or a `BREAKING CHANGE:` footer | **major** (0.2.0 → 1.0.0) |
+| `docs: …`, `chore: …`, `test: …`, `ci: …`, `build: …` | no release |
+
+Scopes are free-form (`feat(tabs): …`, `fix(data-table): …`). Several commits in one push are
+combined into a single release; the highest bump wins. Write the CHANGELOG entry for
+user-visible changes in the same commit — the GitHub Release notes are generated from commit
+subjects, the CHANGELOG stays the curated, human-written history.
 
 ## License
 

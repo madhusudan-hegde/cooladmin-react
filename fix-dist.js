@@ -76,3 +76,18 @@ for (const distFile of walk(DIST, ['.js'])) {
 console.log(
   `fix-dist: ${directives} 'use client' directives applied, ${rewritten} files with specifiers rewritten`
 )
+
+// --- 3. Type declaration for the side-effect CSS import ---
+// TypeScript 6 reports TS2882 for `import '@…/cooladmin-react/css'` unless the
+// `./css` export resolves to a declaration; package.json points `types` here.
+const cssDts = path.join(DIST, 'css', 'cooladmin.css.d.ts')
+fs.mkdirSync(path.dirname(cssDts), { recursive: true })
+const EOL = String.fromCharCode(10)
+fs.writeFileSync(
+  cssDts,
+  [
+    '// Side-effect stylesheet module: import "@madhusudan-hegde/cooladmin-react/css".',
+    'export {}',
+    '',
+  ].join(EOL)
+)

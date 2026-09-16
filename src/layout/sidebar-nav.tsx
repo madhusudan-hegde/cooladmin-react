@@ -1,25 +1,26 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import type { MenuNode } from '../types/menu'
 import { cn } from '../lib/class-name'
+import { useNavigation } from '../context/navigation-context'
 import { SidebarNavItem } from './sidebar-nav-item'
 import { SidebarTooltipProvider } from './sidebar-tooltip'
 
 export interface SidebarNavProps {
   items: MenuNode[]
-  /** Override the active path (defaults to `usePathname()`). */
+  /** Override the active path (defaults to the navigation adapter's `pathname`). */
   currentPath?: string
   className?: string
 }
 
 /**
  * `nav.navbar-sidebar > ul.navbar__list` — the recursive menu tree with
- * `next/navigation` active-link detection and collapsed-mode tooltips.
+ * active-link detection (from `NavigationProvider` / a framework adapter, or
+ * `window.location` when none is mounted) and collapsed-mode tooltips.
  */
 export function SidebarNav({ items, currentPath, className }: SidebarNavProps) {
-  const pathname = usePathname()
-  const path = currentPath ?? pathname ?? '/'
+  const { pathname } = useNavigation()
+  const path = currentPath ?? (pathname || '/')
 
   return (
     <SidebarTooltipProvider>

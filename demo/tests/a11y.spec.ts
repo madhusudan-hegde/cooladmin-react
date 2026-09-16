@@ -13,7 +13,7 @@ const PAGES = [
 
 for (const path of PAGES) {
   test(`a11y (no serious/critical WCAG-AA violations): ${path}`, async ({ page }) => {
-    await page.goto(path, { waitUntil: 'load', timeout: 45_000 })
+    await page.goto(path, { waitUntil: 'domcontentloaded', timeout: 45_000 })
     await page.waitForTimeout(800)
 
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()

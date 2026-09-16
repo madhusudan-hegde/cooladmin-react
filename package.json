@@ -1,6 +1,6 @@
 {
   "name": "@madhusudan-hegde/cooladmin-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CoolAdmin admin dashboard design as a React 19 / Next.js App Router component library (Bootstrap 5.3, RSC-ready)",
   "license": "MIT",
   "author": "Madhusudan Hegde (https://madhugh.com) - Forked from CoolAdmin by Colorlib",
@@ -18,7 +18,20 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./css": "./dist/css/cooladmin.css"
+    "./next": {
+      "types": "./dist/adapters/next.d.ts",
+      "import": "./dist/adapters/next.js",
+      "default": "./dist/adapters/next.js"
+    },
+    "./react-router": {
+      "types": "./dist/adapters/react-router.d.ts",
+      "import": "./dist/adapters/react-router.js",
+      "default": "./dist/adapters/react-router.js"
+    },
+    "./css": {
+      "types": "./dist/css/cooladmin.css.d.ts",
+      "default": "./dist/css/cooladmin.css"
+    }
   },
   "files": [
     "dist",
@@ -55,6 +68,7 @@
   "scripts": {
     "build": "tsup && npm run build:css && npm run fix-dist",
     "prepublishOnly": "pnpm type-check && pnpm lint && pnpm test && pnpm build",
+    "release": "semantic-release",
     "build:css": "sass src/scss/cooladmin.scss dist/css/cooladmin.css --no-source-map --style=expanded",
     "fix-dist": "node fix-dist.js",
     "dev": "concurrently -n tsup,sass -c green,magenta \"tsup --watch\" \"npm run build:css -- --watch\"",
@@ -69,7 +83,8 @@
     "chart.js": "^4.5.0",
     "next": ">=14.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router": "^7.0.0"
   },
   "peerDependenciesMeta": {
     "chart.js": {
@@ -77,10 +92,14 @@
     },
     "next": {
       "optional": true
+    },
+    "react-router": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@semantic-release/git": "^11.0.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^26.2.0",
@@ -88,13 +107,16 @@
     "@types/react-dom": "^19.2.4",
     "chart.js": "^4.5.1",
     "concurrently": "^10.0.4",
+    "conventional-changelog-conventionalcommits": "^10.4.0",
     "eslint": "^10.8.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^30.0.1",
     "next": "^16.3.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router": "^7.9.0",
     "sass": "^1.102.0",
+    "semantic-release": "^25.0.9",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0",

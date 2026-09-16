@@ -46,7 +46,7 @@ The demo imports the compiled `dist/`, not `src/`. After editing library source,
 
 ### RSC vs. client split (authoring model)
 
-**Pure-presentational** components have no directive and are RSC: `dashboard-layout`, `auth-layout`, `error-layout`, `app-content`, `page-header`, `footer`, `skip-link`, `m-card`, `stat-card` (the `Sparkline` child is the client island), `rank-list`, `status-pill`, `priority-chip`, `avatar`, `empty-state`, `skeleton`, `section-eyebrow`, `activity-list`, `progress-bar`, `m-button`, `icon-button`, `input`, `select`, `date-chip`. **Interactive** modules start with `'use client'`: every `context/*` provider, `sidebar-nav` (uses `usePathname` from `next/navigation`), `sidebar-toggle`/topbar dropdowns, `topbar-search`, `theme-switcher`, `command-palette`, `toast`, `sparkline`, `chart`, `task-list`, `switch`, `checkbox` (if controlled), and all `hooks/*`. Only add `'use client'` when a component genuinely needs state, effects, event handlers, browser APIs or `next/navigation`. `grep -rl "'use client'" src` shows the current set. Shared pure helpers that Server Components call (`lib/flatten-menu.ts`, `lib/class-name.ts`) must live outside `'use client'` modules.
+**Pure-presentational** components have no directive and are RSC: `dashboard-layout`, `auth-layout`, `error-layout`, `app-content`, `page-header`, `footer`, `skip-link`, `m-card`, `stat-card` (the `Sparkline` child is the client island), `rank-list`, `status-pill`, `priority-chip`, `avatar`, `empty-state`, `skeleton`, `section-eyebrow`, `activity-list`, `progress-bar`, `m-button`, `icon-button`, `input`, `select`, `date-chip`. **Interactive** modules start with `'use client'`: every `context/*` provider, `sidebar-nav` (reads the pathname from `context/navigation-context`), `sidebar-toggle`/topbar dropdowns, `topbar-search`, `theme-switcher`, `command-palette`, `toast`, `sparkline`, `chart`, `task-list`, `switch`, `checkbox` (if controlled), and all `hooks/*`. Only add `'use client'` when a component genuinely needs state, effects, event handlers or browser APIs. `grep -rl "'use client'" src` shows the current set. Shared pure helpers that Server Components call (`lib/flatten-menu.ts`, `lib/class-name.ts`) must live outside `'use client'` modules.
 
 ### DashboardLayout = RSC shell + nested client providers
 
@@ -68,7 +68,7 @@ The demo imports the compiled `dist/`, not `src/`. After editing library source,
 
 ### Next.js coupling
 
-`next` is an **optional** peer dependency, but `layout/sidebar-nav.tsx` imports `usePathname` from `next/navigation` for active-link detection — so the sidebar in practice requires Next. Links render through `LinkProvider`/`useLinkComponent()` (default: plain `<a href>`); the demo injects `next/link` via `demo/components/nav-link.tsx`.
+**The core is framework-agnostic (since 0.2.0).** Nothing under `src/` except `src/adapters/*` may import from `next` or `react-router` — CI greps `dist/` for that. Routing goes through `context/navigation-context.tsx`: `NavigationProvider` supplies `{ pathname, navigate }` (plus an optional `linkComponent`, forwarded to `LinkProvider`); `useNavigation()` / `usePathname()` / `useNavigate()` read it, and without a provider fall back to `window.location` (`useSyncExternalStore` on `popstate`; full-page `location.assign`). `layout/sidebar-nav.tsx` (active states) and `widget/command-palette.tsx` (href commands) are the only consumers. Framework adapters are separate subpath exports with their own `.d.ts` (see `tsup.config.ts` `dts.entry` and `package.json` `exports`): `@madhusudan-hegde/cooladmin-react/next` → `NextNavigationProvider` (`usePathname`, `router.push/replace`, `next/link`) and `.../react-router` → `ReactRouterNavigationProvider` (`useLocation`, `navigate`, `Link`). They are **not** re-exported from `src/index.ts`. `LinkProvider` without a `linkComponent` inherits the parent's link (so `DashboardLayout` doesn't reset what an adapter provided). The demo wraps `(dashboard)/layout.tsx` and `(error)/layout.tsx` in `NextNavigationProvider`; `examples/vite-react-router/` is the non-Next proof (Vite + React Router 7, `body.app` set in `index.html`).
 
 ### What the library ships vs. what the consumer provides
 
@@ -76,7 +76,7 @@ The library ships JS + **only** `dist/css/cooladmin.css` (import via `'@madhusud
 
 - **Bootstrap 5.3.8** CSS and **bundle JS** (`bootstrap.bundle.min.js`, needed for dropdowns/collapse/modals; Popper included)
 - **Font Awesome 7.3.1 Free** CSS — icons are FA class strings (`fa-solid fa-chart-line`)
-- **Inter** from `https://rsms.me/inter/inter.css` (with `preconnect`)
+- **Inter** from Google Fonts (`fonts.googleapis.com/css2?family=Inter…`, with `preconnect` to both Google Fonts hosts). rsms.me was dropped in 0.2.0: its font files lack CORS headers for some clients and hang headless Chrome's `load` event.
 - `chart.js` installed by the consumer if `Chart`/`Sparkline` are used
 
 **Gotcha:** markup that Bootstrap JS decorates on load (e.g. `data-bs-toggle` tabs/dropdowns) must render its final attributes (`aria-expanded`, `aria-selected`, `tabIndex={-1}`) in JSX, or Bootstrap's DOM mutations race React hydration and cause mismatch errors. When adding a component that needs runtime JS or CSS the library doesn't bundle, document the CDN requirement and mirror it in the demo's root layout.
@@ -99,6 +99,10 @@ The library ships JS + **only** `dist/css/cooladmin.css` (import via `'@madhusud
 - Shared data consumed by both server and client files (menu, chart data) must live in plain modules — importing a value array from a `'use client'` module turns it into a client-reference proxy and crashes the server render.
 - Static assets: `demo/public/assets/img/avatar-0N.jpg`, `avatar-big-01.jpg` (from CoolAdmin), `demo/public/favicon.svg`.
 - Playwright: `demo/tests/routes.ts` is the explicit list of routes `smoke.spec.ts` loads (add new routes there); `a11y.spec.ts` gates on zero critical axe violations.
+
+## Releases and commit messages
+
+Versioning is automated by **semantic-release** (`.releaserc.json`, `.github/workflows/release.yml`) on every push to `main`: Conventional Commits decide the bump (`fix`/`perf`/`refactor`/`revert` → patch, `feat` → minor, `feat!` or `BREAKING CHANGE:` → major; `docs`/`chore`/`test`/`ci`/`build` → no release), then it publishes to npm (with provenance), tags `vX.Y.Z`, creates the GitHub Release from the commit subjects, and commits `package.json` back as `chore(release): vX.Y.Z [skip ci]`. Consequences: **never edit `version` in `package.json` by hand**, never create `v*` tags manually, and write every commit subject as `type(scope?): summary` — the subject line becomes a release-note bullet. `CHANGELOG.md` is still curated by hand: add the entry in the same commit as the change. `ci.yml` runs on pull requests and non-`main` branches only; `release.yml` repeats those checks on `main` before publishing. Secrets needed in the GitHub repo: `NPM_TOKEN` (npm Automation token). Baseline: the first automated run needs an existing `v*` tag to count from, otherwise semantic-release starts at 1.0.0. semantic-release 25 needs Node `^22.14 || >=24.10` — the workflow uses Node 22; a local `pnpm release --dry-run` fails on this machine's Node 24.1 (harmless, releases only run in CI).
 
 ## Code style
 

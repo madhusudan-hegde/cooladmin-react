@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from 'react'
-import { useRouter } from 'next/navigation'
 import type { Command } from '../types/layout'
 import { cn } from '../lib/class-name'
 import { useOptionalCommandPalette } from '../context/command-palette-context'
+import { useNavigation } from '../context/navigation-context'
 import { useOptionalColorMode } from '../context/color-mode-context'
 import { useOptionalSidebar } from '../context/sidebar-context'
 import { useOptionalAccent } from '../context/accent-context'
@@ -17,7 +17,7 @@ export interface CommandPaletteProps {
   placeholder?: string
   /** Hide the built-in `Actions` group. */
   hideBuiltinActions?: boolean
-  /** Override navigation (default: `next/navigation` router push, or `location.assign`). */
+  /** Override navigation (default: the active `NavigationProvider` adapter, or `location.assign`). */
   onNavigate?: (href: string) => void
 }
 
@@ -78,7 +78,7 @@ export function CommandPalette({
   const sidebar = useOptionalSidebar()
   const accent = useOptionalAccent()
   const toast = useOptionalToast()
-  const router = useRouter()
+  const { navigate: adapterNavigate } = useNavigation()
 
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
@@ -203,10 +203,10 @@ export function CommandPalette({
     (href: string) => {
       if (onNavigate) return onNavigate(href)
       const external = /^(https?:)?\/\//i.test(href) || href.startsWith('mailto:')
-      if (!external && router) router.push(href)
-      else if (typeof window !== 'undefined') window.location.assign(href)
+      if (external && typeof window !== 'undefined') window.location.assign(href)
+      else adapterNavigate(href)
     },
-    [onNavigate, router]
+    [onNavigate, adapterNavigate]
   )
 
   const activate = useCallback(

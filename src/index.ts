@@ -31,6 +31,19 @@ export type {
   CommandPaletteProviderProps,
 } from './context/command-palette-context'
 export { LinkProvider, useLinkComponent, DefaultLink } from './context/link-context'
+export {
+  NavigationProvider,
+  useNavigation,
+  usePathname,
+  useNavigate,
+  useBrowserPathname,
+  browserNavigate,
+} from './context/navigation-context'
+export type {
+  NavigationAdapter,
+  NavigateOptions,
+  NavigationProviderProps,
+} from './context/navigation-context'
 export type { LinkProviderProps } from './context/link-context'
 export { BodyClassSync } from './context/body-class-sync'
 export type { BodyClassSyncProps } from './context/body-class-sync'

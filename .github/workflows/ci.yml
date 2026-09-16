@@ -1,9 +1,11 @@
 name: CI
 
+# Pull requests and feature branches. Pushes to `main` run release.yml
+# instead, which repeats these checks and then publishes via semantic-release.
 on:
-  push:
-    branches: [main]
   pull_request:
+  push:
+    branches-ignore: [main]
 
 jobs:
   ci:
@@ -46,6 +48,9 @@ jobs:
           ! head -1 dist/form/m-button.js | grep -q 'use client'
           # The compiled stylesheet must ship with the package
           test -s dist/css/cooladmin.css
+          # The core must stay framework-agnostic: only dist/adapters/* may import a router
+          ! grep -rlE "from ['\"](next|react-router)" dist --include='*.js' | grep -v '^dist/adapters/' | grep .
+          test -f dist/adapters/next.js && test -f dist/adapters/react-router.js
 
       - name: Type-check (demo)
         run: pnpm --filter cooladmin-react-demo type-check

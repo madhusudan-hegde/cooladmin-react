@@ -18,15 +18,18 @@ export function DefaultLink({ href, children, ...rest }: LinkProps) {
 const LinkContext = createContext<LinkComponent>(DefaultLink)
 
 export interface LinkProviderProps {
-  /** Router link (e.g. an adapter around `next/link`). Defaults to a plain `<a>`. */
+  /**
+   * Router link (e.g. an adapter around `next/link`). When omitted, the nearest
+   * ancestor `LinkProvider` is inherited — typically a framework adapter such as
+   * `NextNavigationProvider` — and a plain `<a>` is the final fallback.
+   */
   linkComponent?: LinkComponent
   children: ReactNode
 }
 
 export function LinkProvider({ linkComponent, children }: LinkProviderProps) {
-  return (
-    <LinkContext.Provider value={linkComponent ?? DefaultLink}>{children}</LinkContext.Provider>
-  )
+  const inherited = useContext(LinkContext)
+  return <LinkContext.Provider value={linkComponent ?? inherited}>{children}</LinkContext.Provider>
 }
 
 /** The active Link component — consumer-injected router link, or a plain `<a>` fallback. */

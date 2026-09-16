@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { ErrorLayout, flattenMenuToCommands } from '@madhusudan-hegde/cooladmin-react'
+import { NextNavigationProvider } from '@madhusudan-hegde/cooladmin-react/next'
 import { menuItems } from '@/lib/menu'
 
 export const metadata = {
@@ -8,17 +9,20 @@ export const metadata = {
 
 /**
  * `body.app.error-page > main.error-card` shell for /errors/404, /errors/500
- * and /errors/maintenance.
+ * and /errors/maintenance. The Next adapter makes the 404 page's command
+ * palette navigate client-side.
  */
 export default function ErrorGroupLayout({ children }: { children: ReactNode }) {
   return (
-    <ErrorLayout
-      brandName="CoolAdmin"
-      brandMark="C"
-      brandHref="/"
-      commands={flattenMenuToCommands(menuItems)}
-    >
-      {children}
-    </ErrorLayout>
+    <NextNavigationProvider>
+      <ErrorLayout
+        brandName="CoolAdmin"
+        brandMark="C"
+        brandHref="/"
+        commands={flattenMenuToCommands(menuItems)}
+      >
+        {children}
+      </ErrorLayout>
+    </NextNavigationProvider>
   )
 }

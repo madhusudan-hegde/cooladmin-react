@@ -5,7 +5,6 @@ import { DashboardLayout, TopbarMenu } from '@madhusudan-hegde/cooladmin-react'
 import type { DashboardLayoutProps, TopbarMenuItem } from '@madhusudan-hegde/cooladmin-react'
 import { menuItems } from '@/lib/menu'
 import { avatar } from '@/lib/dashboard-data'
-import { NavLink } from '@/components/nav-link'
 
 // Topbar dropdown rows — CoolAdmin's placeholder content from header-desktop.pug.
 const messages: TopbarMenuItem[] = [
@@ -84,14 +83,13 @@ export type DemoLayoutProps = Partial<Omit<DashboardLayoutProps, 'children'>> & 
 
 /**
  * Demo-wide shell: brand, signed-in user, CoolAdmin's three topbar dropdowns and
- * the `next/link` adapter, on top of the library `DashboardLayout`. Any extra
+ * `NextNavigationProvider` (see app/(dashboard)/layout.tsx), on top of the library `DashboardLayout`. Any extra
  * `DashboardLayout` props are forwarded.
  */
 export function DemoLayout({ children, ...props }: DemoLayoutProps) {
   return (
     <DashboardLayout
       menuItems={menuItems}
-      linkComponent={NavLink}
       brandName="CoolAdmin"
       brandMark="C"
       brandHref="/"

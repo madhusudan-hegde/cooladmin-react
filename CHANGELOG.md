@@ -5,7 +5,49 @@ All notable changes to **@madhusudan-hegde/cooladmin-react** are documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - Unreleased
+## [0.2.0] - 2026-09-16
+
+### Changed — framework-agnostic routing
+
+The library core no longer imports anything from `next`. Routing is provided through a small
+adapter contract, so the same components work in Next.js, Vite + React Router, Remix or any
+other React host.
+
+- **`NavigationProvider`** (`{ pathname?, navigate?, linkComponent? }`) and the hooks
+  `useNavigation()`, `usePathname()`, `useNavigate()`, plus `useBrowserPathname()` /
+  `browserNavigate()`. Without a provider the library falls back to `window.location`
+  (active states from `location.pathname`, full-page navigation from the command palette).
+- **Adapters as subpath exports:** `@madhusudan-hegde/cooladmin-react/next` →
+  `NextNavigationProvider` (+ `NextNavLink`) and `@madhusudan-hegde/cooladmin-react/react-router` →
+  `ReactRouterNavigationProvider` (+ `ReactRouterNavLink`). Each imports its router only in that
+  module; `react-router` is a new optional peer dependency alongside `next`.
+- `SidebarNav` reads the active path from the adapter instead of `next/navigation`;
+  `CommandPalette` navigates through the adapter instead of `useRouter()`.
+- `LinkProvider` without a `linkComponent` now inherits the nearest ancestor link instead of
+  resetting to a plain `<a>` — so wrapping `DashboardLayout` in an adapter is enough.
+- New example `examples/vite-react-router/` (Vite 7 + React Router 7) proving the non-Next path;
+  CI fails if any non-adapter `dist/` module imports a router.
+- The `./css` export now ships a type declaration (`dist/css/cooladmin.css.d.ts`), so
+  `import '@madhusudan-hegde/cooladmin-react/css'` type-checks under TypeScript 6 without a local
+  `declare module` shim.
+- Inter is loaded from Google Fonts instead of rsms.me (whose font files lack CORS headers for
+  some clients and stalled the browser `load` event).
+- **Automated releases:** semantic-release on `main` derives the version from Conventional
+  Commits, publishes to npm, tags and creates the GitHub Release (`release.yml` replaces the
+  tag-triggered `publish.yml`).
+
+### Migration from 0.1.x
+
+- **Next.js:** wrap your dashboard (and error) layouts once:
+  `import { NextNavigationProvider } from '@madhusudan-hegde/cooladmin-react/next'` →
+  `<NextNavigationProvider><DashboardLayout …>…</DashboardLayout></NextNavigationProvider>`.
+  You can drop any custom `linkComponent` built around `next/link`; the adapter provides it.
+  Without the wrapper everything still renders, but the sidebar highlights from
+  `window.location` after hydration and palette navigation does a full page load.
+- **Other frameworks:** wrap with `ReactRouterNavigationProvider` (inside your router), or build
+  your own with `NavigationProvider` — three fields.
+
+## [0.1.0] - 2026-09-16
 
 The CoolAdmin 3.4.0 design re-implemented as a React 19 / Next.js App Router component
 library, following the architecture of adminlte-react (ESM-only, per-file tsup output with

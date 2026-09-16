@@ -15,7 +15,7 @@ test.describe('route smoke', () => {
       })
       page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message))
 
-      const resp = await page.goto(route, { waitUntil: 'load', timeout: 45_000 })
+      const resp = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 45_000 })
       expect(resp?.status(), `HTTP status for ${route}`).toBeLessThan(400)
 
       // Every route group layout applies the `%s · CoolAdmin React` title template.

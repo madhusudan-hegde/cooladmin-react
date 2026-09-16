@@ -9,6 +9,12 @@ import { defineConfig } from 'tsup'
 // widget/sparkline.tsx); in unbundled output that specifier stays as written
 // and resolves from the consumer's node_modules (an optional peer dependency).
 //
+// Framework adapters (src/adapters/*) are the only modules that import a
+// router (`next/navigation`, `react-router`). They are published as separate
+// subpath exports (`./next`, `./react-router`) with their own .d.ts and are
+// deliberately NOT re-exported from src/index.ts, so the core stays
+// framework-agnostic and consumers never pull in a router they don't use.
+//
 // src/scss/** is NOT handled here — `npm run build:css` compiles
 // src/scss/cooladmin.scss → dist/css/cooladmin.css with sass.
 //
@@ -19,7 +25,13 @@ export default defineConfig({
   entry: ['src/**/*.ts', 'src/**/*.tsx', '!src/**/*.test.*', '!src/scss/**'],
   format: ['esm'],
   bundle: false,
-  dts: { entry: 'src/index.ts' },
+  dts: {
+    entry: {
+      index: 'src/index.ts',
+      'adapters/next': 'src/adapters/next.tsx',
+      'adapters/react-router': 'src/adapters/react-router.tsx',
+    },
+  },
   sourcemap: false,
   clean: true,
 })
