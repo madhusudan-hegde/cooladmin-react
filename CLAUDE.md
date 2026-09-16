@@ -83,7 +83,7 @@ The library ships JS + **only** `dist/css/cooladmin.css` (import via `'@madhusud
 
 ## SCSS conventions (`src/scss/`)
 
-- Entry `src/scss/cooladmin.scss` + `_partials`. Source of truth is CoolAdmin's **modern `--m-*` overlay**: `D:\Others\workspace\CoolAdmin\src\scss\app\*.scss`, `_variables.scss`, `_theme-presets.scss`. The legacy `theme.css` / `--ca-*` / Poppins layer is **dropped**; port only the legacy classes modern pages actually use (`.au-input`, `.au-checkbox`, `.status--*`, `.table-data`, `.copyright`).
+- Entry `src/scss/cooladmin.scss` + `_partials`. Source of truth is CoolAdmin's **modern `--m-*` overlay**: CoolAdmin's `src/scss/app/*.scss`, `_variables.scss`, `_theme-presets.scss`. The legacy `theme.css` / `--ca-*` / Poppins layer is **dropped**; port only the legacy classes modern pages actually use (`.au-input`, `.au-checkbox`, `.status--*`, `.table-data`, `.copyright`).
 - **Every overlay rule stays scoped under `body.app`** exactly as in CoolAdmin (needed to beat Bootstrap specificity). Don't "simplify" selectors.
 - **CoolAdmin class names verbatim** in both SCSS and React markup — `.page-wrapper .page-container .main-content .section__content--p30 .page-header .m-card .m-card__header .stat-card .stat-card__delta--up .m-btn .m-btn--primary .icon-btn .rank-list__* .status--approved .toast--success .cmdk-overlay .theme-switcher__* .menu-sidebar .navbar-sidebar .header-wrap .account-dropdown .login-wrap .error-card` etc. Derive exact markup from CoolAdmin's built HTML (`index.html`, `index2-4.html`, `login.html`, `404.html`) and `src\pug\partials\*.pug`.
 - Accent presets are `body.app.theme-{name}` blocks setting `--m-accent`, `--m-accent-rgb`, `--m-accent-hover`, `--m-accent-soft`.
@@ -113,4 +113,4 @@ Conventions: kebab-case filenames; **PascalCase named exports only** (no default
 ## Upstream references
 
 - A local checkout of [CoolAdmin](https://github.com/puikinsh/CoolAdmin) 3.4.0 (design source): built HTML pages at the root, `src\scss\app\*.scss` (modern overlay), `src\pug\partials\*.pug` (markup), `js\main-vanilla.js` (theme switcher, command palette, sidebar behaviours to mirror in React).
-- `D:\Others\workspace\adminlte-react` — adminlte-react (architecture source): `CLAUDE.md`, `tsup.config.ts`, `fix-dist.js`, `src/context/*`, `src/layout/dashboard-layout.tsx`, `src/widget/apex-chart.tsx` (dynamic-import reference), `demo/` structure and Playwright tests.
+- A local checkout of [adminlte-react](https://github.com/ColorlibHQ/adminlte-react) (architecture source): `CLAUDE.md`, `tsup.config.ts`, `fix-dist.js`, `src/context/*`, `src/layout/dashboard-layout.tsx`, `src/widget/apex-chart.tsx` (dynamic-import reference), `demo/` structure and Playwright tests.
