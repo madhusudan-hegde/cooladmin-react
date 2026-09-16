@@ -102,7 +102,6 @@
   },
   "homepage": "https://github.com/madhusudan-hegde/cooladmin-react#readme",
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }
