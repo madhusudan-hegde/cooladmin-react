@@ -335,12 +335,11 @@ release history.
 
 ### Releasing (automatic, from commit messages)
 
-Versions are never bumped by hand. Every push to `main` runs
-[`release.yml`](./.github/workflows/release.yml): after the checks pass,
-[semantic-release](https://semantic-release.gitbook.io) reads the
-[Conventional Commits](https://www.conventionalcommits.org) since the last `v*` tag, picks the
-semver bump, publishes to npm, tags the commit, creates a GitHub Release with generated notes and
-commits the new `package.json` version back (`chore(release): vX.Y.Z [skip ci]`).
+Versions are never bumped by hand. Merges to `main` are released automatically by
+[semantic-release](https://semantic-release.gitbook.io): the
+[Conventional Commits](https://www.conventionalcommits.org) since the previous release decide
+the semver bump, and the package is published to npm with a matching `vX.Y.Z` tag and GitHub
+Release.
 
 | Commit message | Release |
 | --- | --- |
@@ -348,6 +347,9 @@ commits the new `package.json` version back (`chore(release): vX.Y.Z [skip ci]`)
 | `feat: …` | **minor** (0.2.0 → 0.3.0) |
 | `feat!: …` or a `BREAKING CHANGE:` footer | **major** (0.2.0 → 1.0.0) |
 | `docs: …`, `chore: …`, `test: …`, `ci: …`, `build: …` | no release |
+
+Published versions carry npm [provenance](https://docs.npmjs.com/generating-provenance-statements),
+so you can verify that a release was built from this repository.
 
 Scopes are free-form (`feat(tabs): …`, `fix(data-table): …`). Several commits in one push are
 combined into a single release; the highest bump wins. Write the CHANGELOG entry for
