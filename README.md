@@ -1,5 +1,8 @@
 # CoolAdmin React
 
+[![npm version](https://img.shields.io/npm/v/%40madhusudan-hegde%2Fcooladmin-react.svg?logo=npm&logoColor=white)](https://www.npmjs.com/package/@madhusudan-hegde/cooladmin-react)
+[![GitHub stars](https://img.shields.io/github/stars/madhusudan-hegde/cooladmin-react.svg?style=flat&logo=github)](https://github.com/madhusudan-hegde/cooladmin-react/stargazers)
+[![CI](https://github.com/madhusudan-hegde/cooladmin-react/actions/workflows/ci.yml/badge.svg)](https://github.com/madhusudan-hegde/cooladmin-react/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 [![React 19](https://img.shields.io/badge/React-19-149eca.svg?logo=react&logoColor=white)](https://react.dev)
 [![Next.js App Router](https://img.shields.io/badge/Next.js-App%20Router-000000.svg?logo=nextdotjs&logoColor=white)](https://nextjs.org)
@@ -11,7 +14,12 @@ The admin dashboard design, re-implemented as a
 only where interaction needs them, Bootstrap 5.3 underneath, and CoolAdmin's own CSS class
 vocabulary kept verbatim so the markup looks exactly like the original template.
 
-**Status:** 0.1.0 (unreleased) — all 35 CoolAdmin pages ported
+**Status:** `0.1.0` on npm — all 35 CoolAdmin pages ported. Package:
+[`@madhusudan-hegde/cooladmin-react`](https://www.npmjs.com/package/@madhusudan-hegde/cooladmin-react)
+· Source: [github.com/madhusudan-hegde/cooladmin-react](https://github.com/madhusudan-hegde/cooladmin-react)
+
+> **If this saves you time, please [⭐ star the repo](https://github.com/madhusudan-hegde/cooladmin-react)** —
+> it is the easiest way to support the project and helps others find it. See [Support & contributing](#support--contributing).
 
 ## Credits
 
@@ -39,24 +47,69 @@ This project is a derivative of two MIT-licensed projects by [Colorlib](https://
 
 ## Installation
 
+Use it in any **Next.js (App Router) project** as a regular dependency:
+
 ```bash
+# pnpm
 pnpm add @madhusudan-hegde/cooladmin-react
-# or
+
+# npm
 npm install @madhusudan-hegde/cooladmin-react
+
+# yarn
+yarn add @madhusudan-hegde/cooladmin-react
 ```
 
-### Peer dependencies
+### Requirements
+
+| Dependency | Version | Notes |
+| --- | --- | --- |
+| `react`, `react-dom` | `^19` | peer dependencies |
+| `next` | `>=14` (App Router) | peer dependency; the sidebar's active-link detection and the command palette use `next/navigation` |
+| `chart.js` | `^4.5` | **optional** — only if you render `<Chart>` or `<Sparkline>`; loaded via dynamic import |
+| Bootstrap 5.3 CSS + bundle JS, Font Awesome 7 Free, Inter font | — | **you** load these (CDN links in the Quick start below); the library ships only its own stylesheet |
 
 ```bash
-pnpm add react react-dom next        # react / react-dom ^19, next >=14 (App Router)
-pnpm add chart.js                    # optional — only if you use <Chart> or <Sparkline>
+pnpm add react react-dom next
+pnpm add chart.js        # optional
 ```
 
-`next` is declared optional, but the sidebar uses `next/navigation` for active-link detection, so
-in practice the library targets Next.js.
+### What you get
 
-The library ships **only** its own stylesheet (`@madhusudan-hegde/cooladmin-react/css`). You provide Bootstrap 5.3
-CSS + JS, Font Awesome Free and the Inter font — via CDN is simplest (see below).
+- `@madhusudan-hegde/cooladmin-react` — every component, hook, provider and type (ESM, tree-shakeable,
+  React Server Components by default, `'use client'` only on interactive modules).
+- `@madhusudan-hegde/cooladmin-react/css` — the compiled CoolAdmin stylesheet (`--m-*` design tokens,
+  six accent presets, dark mode). Import it once in your root layout.
+
+### Three steps to a working dashboard
+
+1. **Root layout** — import the CSS, add the Bootstrap / Font Awesome / Inter CDN tags (step 1 of the Quick start).
+2. **Dashboard layout** — wrap your routes in `<DashboardLayout menuItems={…}>` with your own menu (step 2).
+3. **Pages** — compose `PageHeader`, `MCard`, `StatCard`, `DataTable`, `Tabs`, `Modal`, forms … (step 3).
+
+The `demo/` folder in this repo is a complete Next.js 16 app with all 35 CoolAdmin pages
+(dashboards, tables, forms, calendar, maps, inbox, kanban, settings, pricing, invoice, and the
+UI showcase) — copy it as a starter or browse it for real usage of every component. Run it locally with
+`pnpm install && pnpm build && pnpm demo`.
+
+### Starting a brand-new app from the demo
+
+```bash
+git clone https://github.com/madhusudan-hegde/cooladmin-react.git my-admin
+cd my-admin/demo
+# replace "workspace:*" with the published version, then delete the pages you don't need
+pnpm add @madhusudan-hegde/cooladmin-react@latest
+pnpm install && pnpm dev
+```
+
+### Upgrading
+
+```bash
+pnpm up @madhusudan-hegde/cooladmin-react@latest
+```
+
+Releases follow [semver](https://semver.org); every change is listed in [CHANGELOG.md](./CHANGELOG.md).
+While the major version is `0`, minor bumps may contain breaking changes — pin `~0.x.y` if you need stability.
 
 ## Quick start
 
@@ -197,8 +250,30 @@ and the UI showcase pages (Buttons, Badges, Tabs, Cards, Alerts, Progress bars, 
 Switches, Grid, Icons, Typography) — plus the `Alert`, `Badge`, `Tabs`, `Modal`, `Pagination`,
 `DataTable`, `Wizard`, `Textarea`, `Radio` components they needed.
 
-**Next** — first tagged release, Storybook or per-component docs, and optional npm-based
-FullCalendar / Leaflet wrappers in the library.
+**Next** — framework-agnostic routing (drop the `next/navigation` dependency so the library works
+with Vite + React Router, Remix, TanStack Router …), Storybook or per-component docs, and optional
+npm-based FullCalendar / Leaflet wrappers in the library. Vote or comment on the
+[issues](https://github.com/madhusudan-hegde/cooladmin-react/issues) to influence priorities.
+
+## Support & contributing
+
+This is a free, MIT-licensed project maintained in spare time. If it is useful to you:
+
+- **⭐ Star the repository** on [GitHub](https://github.com/madhusudan-hegde/cooladmin-react) — it
+  is the quickest way to say thanks and it helps other developers discover the library.
+- **👀 Watch** the repo to get notified about new releases.
+- **🐛 Report bugs / request features** via
+  [GitHub Issues](https://github.com/madhusudan-hegde/cooladmin-react/issues) — please include the
+  package version, Next.js version and a minimal reproduction.
+- **💬 Ask questions or share what you built** in
+  [GitHub Discussions](https://github.com/madhusudan-hegde/cooladmin-react/discussions).
+- **🔧 Contribute** — pull requests are welcome. Fork, create a branch, run
+  `pnpm type-check && pnpm lint && pnpm test && pnpm build`, and open a PR describing the change.
+  Good first contributions: new accent presets, accessibility fixes, component docs, and porting
+  the routing layer to be framework-agnostic (see Roadmap).
+- **📣 Spread the word** — a mention in a blog post, tweet or your project's README goes a long way.
+
+Thank you for supporting open source!
 
 ## Development
 
