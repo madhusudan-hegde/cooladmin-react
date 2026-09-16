@@ -1,0 +1,399 @@
+// ============================================================================
+// Dashboard lists — activity feed, task list, project list, deadline list,
+// team availability list, donut wrapper. (CoolAdmin _overlay-base.scss +
+// _project-list.scss.)
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Activity feed
+// ----------------------------------------------------------------------------
+body.app .activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--m-divider);
+  align-items: flex-start;
+}
+body.app .activity-item:last-child {
+  border-bottom: 0;
+}
+body.app .activity-item__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  overflow: hidden;
+}
+body.app .activity-item__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+// Icon disc used when an item has no avatar image. React emits
+// `span.activity-item__icon(.activity-item__icon--c1…c4)`; the `__avatar--c*`
+// aliases remain for hand-written markup that tints an avatar wrapper.
+body.app .activity-item__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+body.app .activity-item__icon--c1,
+body.app .activity-item__avatar--c1 {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+}
+body.app .activity-item__icon--c2,
+body.app .activity-item__avatar--c2 {
+  background: var(--m-c2-soft);
+  color: var(--m-c2);
+}
+body.app .activity-item__icon--c3,
+body.app .activity-item__avatar--c3 {
+  background: var(--m-c3-soft);
+  color: var(--m-c3);
+}
+body.app .activity-item__icon--c4,
+body.app .activity-item__avatar--c4 {
+  background: var(--m-c4-soft);
+  color: var(--m-c4);
+}
+body.app .activity-item__body {
+  flex: 1;
+  min-width: 0;
+}
+body.app .activity-item__text {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--m-text);
+  line-height: 1.45;
+}
+body.app .activity-item__text b {
+  font-weight: 600;
+}
+body.app .activity-item__time {
+  font-size: 12px;
+  color: var(--m-text-faint);
+  margin-top: 2px;
+  display: block;
+}
+
+// ----------------------------------------------------------------------------
+// Tasks list
+// ----------------------------------------------------------------------------
+body.app .task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .task-item:last-child {
+  border-bottom: 0;
+}
+body.app .task-item input[type='checkbox'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid var(--m-border);
+  border-radius: 5px;
+  background: var(--m-surface);
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+body.app .task-item input[type='checkbox']:hover {
+  border-color: var(--m-accent);
+}
+body.app .task-item input[type='checkbox']:focus-visible {
+  outline: none;
+  border-color: var(--m-accent);
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.18);
+}
+body.app .task-item input[type='checkbox']:checked {
+  background: var(--m-accent);
+  border-color: var(--m-accent);
+}
+body.app .task-item input[type='checkbox']:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 5px;
+  height: 10px;
+  border: solid var(--m-on-accent);
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transform-origin: center;
+}
+body.app .task-item__title {
+  flex: 1;
+  font-size: 13.5px;
+  color: var(--m-text);
+  margin: 0;
+  line-height: 1.4;
+}
+body.app .task-item input[type='checkbox']:checked + .task-item__title,
+body.app .task-item.is-done .task-item__title {
+  color: var(--m-text-faint);
+  text-decoration: line-through;
+}
+body.app .task-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--m-text-faint);
+  flex-shrink: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Project list (marketing / projects dashboard)
+// ----------------------------------------------------------------------------
+body.app .project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .project-list > li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  row-gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--m-divider);
+  align-items: center;
+}
+body.app .project-list > li:last-child {
+  border-bottom: 0;
+}
+body.app .project-list__title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+  line-height: 1.3;
+}
+body.app .project-list__meta {
+  font-size: 12px;
+  color: var(--m-text-faint);
+  margin-top: 2px;
+  display: block;
+}
+body.app .project-list__avatars {
+  display: inline-flex;
+  align-items: center;
+}
+body.app .project-list__avatars img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--m-surface);
+  margin-left: -6px;
+  object-fit: cover;
+  background: var(--m-surface-2);
+}
+body.app .project-list__avatars img:first-child {
+  margin-left: 0;
+}
+body.app .project-list__bar {
+  grid-column: 1 / span 2;
+  height: 4px;
+  background: var(--m-divider);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+body.app .project-list__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: var(--pct, 0%);
+  background: var(--m-accent);
+  border-radius: inherit;
+}
+body.app .project-list__bar--success::after {
+  background: var(--m-success);
+}
+body.app .project-list__bar--warning::after {
+  background: var(--m-warning);
+}
+body.app .project-list__bar--danger::after {
+  background: var(--m-danger);
+}
+
+// ----------------------------------------------------------------------------
+// Deadline list
+// ----------------------------------------------------------------------------
+body.app .deadline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .deadline-list > li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .deadline-list > li:last-child {
+  border-bottom: 0;
+}
+body.app .deadline-list__date {
+  flex: 0 0 44px;
+  text-align: center;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  border-radius: var(--m-radius-sm);
+  padding: 6px 0;
+  line-height: 1;
+}
+body.app .deadline-list__date strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+body.app .deadline-list__date span {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+body.app .deadline-list__body {
+  flex: 1;
+  min-width: 0;
+}
+body.app .deadline-list__title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+  margin: 2px 0 2px;
+  line-height: 1.3;
+}
+body.app .deadline-list__project {
+  font-size: 12px;
+  color: var(--m-text-faint);
+}
+
+// ----------------------------------------------------------------------------
+// Team availability list
+// ----------------------------------------------------------------------------
+body.app .team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .team-list > li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .team-list > li:last-child {
+  border-bottom: 0;
+}
+body.app .team-list__avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+body.app .team-list__avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+body.app .team-list__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--m-surface);
+}
+body.app .team-list__status--online {
+  background: var(--m-success);
+}
+body.app .team-list__status--away {
+  background: var(--m-warning);
+}
+body.app .team-list__status--busy {
+  background: var(--m-danger);
+}
+body.app .team-list__status--offline {
+  background: var(--m-text-faint);
+}
+body.app .team-list__name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+}
+body.app .team-list__role {
+  display: block;
+  font-size: 11.5px;
+  color: var(--m-text-faint);
+  font-weight: 400;
+  margin-top: 1px;
+}
+body.app .team-list__badge {
+  font-size: 11px;
+  color: var(--m-text-faint);
+  text-transform: capitalize;
+}
+
+// Donut chart wrapper for marketing dashboard
+body.app .donut-wrap {
+  height: 260px;
+  position: relative;
+}
+
+// Responsive
+@media (max-width: 991.98px) {
+  body.app .project-list > li {
+    column-gap: 12px;
+  }
+}
+@media (max-width: 575.98px) {
+  body.app .activity-item,
+  body.app .task-item,
+  body.app .deadline-list > li,
+  body.app .team-list > li {
+    padding: 8px 0;
+  }
+  body.app .activity-item__text,
+  body.app .task-item__title,
+  body.app .deadline-list__title {
+    font-size: 13px;
+  }
+}

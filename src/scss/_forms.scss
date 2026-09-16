@@ -1,0 +1,522 @@
+// ============================================================================
+// Forms — Bootstrap form controls re-skinned, legacy `.au-input`,
+// `.select-wrapper`, form-check / form-switch, notif-row toggle rows,
+// validation states, input groups, fieldsets, calendar legend.
+// ============================================================================
+
+// Form group spacing
+body.app .form-group {
+  margin-bottom: 16px;
+}
+body.app .form-group:last-child {
+  margin-bottom: 0;
+}
+
+// Labels
+body.app .form-label,
+body.app .form-control-label,
+body.app .control-label,
+body.app
+  form
+  label:not(.form-check-label):not(.au-checkbox):not(.btn):not(.m-btn):not(.login-checkbox label) {
+  font-family: var(--m-font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--m-text);
+  margin: 0 0 6px;
+  display: inline-block;
+}
+
+// Inputs / textareas / selects
+body.app .form-control,
+body.app input.form-control,
+body.app textarea.form-control,
+body.app select.form-control,
+body.app .form-select {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  background-color: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 8px;
+  font-family: var(--m-font);
+  font-size: 14px;
+  color: var(--m-text);
+  line-height: 1.4;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  outline: none;
+  box-shadow: none;
+}
+body.app .form-select {
+  padding-right: 32px;
+}
+body.app .form-control-sm,
+body.app .form-select-sm {
+  height: 32px;
+  font-size: 13px;
+  padding: 0 10px;
+}
+body.app .form-control-lg,
+body.app .form-select-lg {
+  height: 44px;
+  font-size: 15px;
+  padding: 0 16px;
+}
+body.app .form-select-sm {
+  padding-right: 28px;
+}
+body.app .form-select-lg {
+  padding-right: 36px;
+}
+body.app textarea.form-control {
+  height: auto;
+  min-height: 96px;
+  padding: 10px 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+body.app .form-control::placeholder,
+body.app .form-select::placeholder {
+  color: var(--m-text-faint);
+}
+body.app .form-control:focus,
+body.app .form-select:focus {
+  border-color: var(--m-accent);
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.15);
+  outline: none;
+  background-color: var(--m-surface);
+  color: var(--m-text);
+}
+body.app .form-control[readonly],
+body.app .form-control[disabled],
+body.app .form-control:disabled,
+body.app .form-select:disabled {
+  background-color: var(--m-surface-2);
+  color: var(--m-text-muted);
+  cursor: not-allowed;
+}
+body.app select.form-control option,
+body.app .form-select option {
+  background: var(--m-surface);
+  color: var(--m-text);
+}
+
+// File input
+body.app input[type='file'].form-control {
+  padding: 7px 12px;
+  line-height: 1.4;
+}
+body.app input[type='file']::file-selector-button {
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-border);
+  border-radius: 6px;
+  color: var(--m-text);
+  padding: 4px 12px;
+  margin: 0 12px 0 -8px;
+  font-family: var(--m-font);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+body.app input[type='file']::file-selector-button:hover {
+  background: var(--m-divider);
+}
+
+// Static / plaintext value
+body.app .form-control-plaintext {
+  color: var(--m-text);
+  font-family: var(--m-font);
+  font-size: 14px;
+  padding: 8px 0;
+  margin: 0;
+}
+
+// Help text
+body.app .help-block,
+body.app .form-text {
+  color: var(--m-text-muted);
+  font-family: var(--m-font);
+  font-size: 12.5px;
+  margin-top: 4px;
+  display: block;
+}
+
+// Validation states
+body.app .has-success .form-control,
+body.app .form-control.is-valid,
+body.app .form-select.is-valid,
+body.app .form-control-success {
+  border-color: var(--m-success);
+  background-image: none;
+  padding-right: 14px;
+}
+body.app .has-success .form-control:focus,
+body.app .form-control.is-valid:focus,
+body.app .form-select.is-valid:focus,
+body.app .form-control-success:focus {
+  border-color: var(--m-success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+body.app .has-warning .form-control,
+body.app .form-control-warning {
+  border-color: var(--m-warning);
+}
+body.app .has-warning .form-control:focus,
+body.app .form-control-warning:focus {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+body.app .has-danger .form-control,
+body.app .form-control.is-invalid,
+body.app .form-select.is-invalid,
+body.app .form-control-danger {
+  border-color: var(--m-danger);
+  background-image: none;
+  padding-right: 14px;
+}
+body.app .has-danger .form-control:focus,
+body.app .form-control.is-invalid:focus,
+body.app .form-select.is-invalid:focus,
+body.app .form-control-danger:focus {
+  border-color: var(--m-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+body.app .has-success .help-block {
+  color: var(--m-success);
+}
+body.app .has-warning .help-block {
+  color: var(--m-warning);
+}
+body.app .has-danger .help-block {
+  color: var(--m-danger);
+}
+body.app .valid-feedback {
+  color: var(--m-success);
+  font-size: 12.5px;
+}
+body.app .invalid-feedback {
+  color: var(--m-danger);
+  font-size: 12.5px;
+}
+
+// Input group (icon prefix / button suffix)
+body.app .input-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 8px;
+}
+body.app .input-group > .form-control,
+body.app .input-group > .form-select {
+  flex: 1 1 auto;
+  border-radius: 0;
+}
+body.app .input-group > :first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+body.app .input-group > :last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+body.app .input-group-text,
+body.app .input-group-addon,
+body.app .input-group-prepend > .input-group-text,
+body.app .input-group-append > .input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  margin: 0;
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-border);
+  color: var(--m-text-muted);
+  font-family: var(--m-font);
+  font-size: 13px;
+  line-height: 1;
+  border-radius: 0;
+}
+body.app .input-group:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.15);
+}
+body.app .input-group:focus-within .form-control,
+body.app .input-group:focus-within .form-select {
+  box-shadow: none;
+}
+
+// ----------------------------------------------------------------------------
+// Form-check (checkbox / radio) — Bootstrap 5 native
+// ----------------------------------------------------------------------------
+body.app .form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 0;
+  margin-bottom: 8px;
+  min-height: auto;
+}
+body.app .form-check-inline {
+  display: inline-flex;
+  margin-right: 16px;
+  margin-bottom: 0;
+}
+body.app .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--m-border);
+  border-radius: 4px;
+  background-color: var(--m-surface);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+body.app .form-check-input[type='radio'] {
+  border-radius: 50%;
+}
+body.app .form-check-input:hover {
+  border-color: var(--m-accent);
+}
+body.app .form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.18);
+  border-color: var(--m-accent);
+  outline: none;
+}
+body.app .form-check-input:checked {
+  background-color: var(--m-accent);
+  border-color: var(--m-accent);
+}
+body.app .form-check-label {
+  font-family: var(--m-font);
+  font-size: 13.5px;
+  color: var(--m-text);
+  cursor: pointer;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+// Switch (`.form-check.form-switch`) — restore Bootstrap's pill + knob,
+// which the 16px square checkbox rule above would otherwise flatten.
+body.app .form-switch {
+  padding-left: 0;
+}
+body.app .form-switch .form-check-input {
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  margin-left: 0;
+  background-color: var(--m-border);
+  border-color: var(--m-border);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: background-position 150ms ease-in-out, background-color 120ms ease,
+    border-color 120ms ease;
+}
+body.app .form-switch .form-check-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+body.app .form-switch .form-check-input:checked {
+  background-color: var(--m-accent);
+  border-color: var(--m-accent);
+  background-position: right center;
+}
+body.app .form-switch.form-switch-sm .form-check-input {
+  width: 28px;
+  height: 16px;
+}
+body.app .form-switch.form-switch-lg .form-check-input {
+  width: 44px;
+  height: 24px;
+}
+
+// Notification / settings toggle rows
+body.app .notif-grid {
+  display: flex;
+  flex-direction: column;
+}
+body.app .notif-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .notif-row:last-child {
+  border-bottom: 0;
+}
+body.app .notif-row .form-check {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+body.app .notif-row__title {
+  font-family: var(--m-font);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+  margin: 0 0 2px;
+}
+body.app .notif-row__sub {
+  font-family: var(--m-font);
+  font-size: 12.5px;
+  color: var(--m-text-muted);
+  margin: 0;
+}
+
+// Form-actions (button row)
+body.app .form-actions,
+body.app .form-actions.form-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--m-divider);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+// Bootstrap "row mb-3" form rows — tighten label-input alignment
+body.app form .row.mb-3 {
+  align-items: center;
+  margin-bottom: 16px;
+}
+body.app form .row.mb-3 > [class*='col-md-3'] label {
+  margin-bottom: 0;
+  color: var(--m-text-muted);
+  font-weight: 500;
+}
+
+// ----------------------------------------------------------------------------
+// Legacy `.au-input` — the search field and auth inputs
+// ----------------------------------------------------------------------------
+body.app .au-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  background-color: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 8px;
+  font-family: var(--m-font);
+  font-size: 14px;
+  line-height: normal;
+  color: var(--m-text);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  outline: none;
+}
+body.app .au-input::placeholder {
+  color: var(--m-text-faint);
+}
+body.app .au-input:focus {
+  border-color: var(--m-accent);
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.15);
+}
+body.app .au-input--xl {
+  height: 42px;
+  min-width: 0;
+}
+body.app .au-input--full {
+  width: 100%;
+}
+// Validation state (React Input adds `.is-invalid` + aria-invalid when `error` is set)
+body.app .au-input.is-invalid,
+body.app .au-input[aria-invalid='true'] {
+  border-color: var(--m-danger);
+}
+body.app .au-input.is-invalid:focus,
+body.app .au-input[aria-invalid='true']:focus {
+  border-color: var(--m-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+body.app .au-input[readonly] {
+  cursor: default;
+}
+
+// `.select-wrapper` — plain <select class="form-select"> wrapper used in
+// table filters
+body.app .select-wrapper {
+  display: inline-block;
+  position: relative;
+  min-width: 140px;
+}
+body.app .select-wrapper select.form-select {
+  height: 36px;
+  padding: 0 32px 0 12px;
+  font-size: 13px;
+  border-radius: var(--m-radius-sm);
+  border-color: var(--m-border);
+  color: var(--m-text);
+  background-color: var(--m-surface);
+}
+body.app .select-wrapper select.form-select:focus {
+  border-color: var(--m-accent);
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.15);
+}
+
+// Fieldset legend
+body.app fieldset {
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  padding: 16px 20px;
+  margin: 0 0 16px;
+  min-width: 0;
+}
+body.app fieldset legend {
+  font-family: var(--m-font);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--m-text);
+  padding: 0 8px;
+  width: auto;
+  margin-bottom: 0;
+  float: none;
+}
+
+// Range
+body.app .form-range::-webkit-slider-thumb {
+  background: var(--m-accent);
+}
+body.app .form-range::-moz-range-thumb {
+  background: var(--m-accent);
+}
+body.app .form-range::-webkit-slider-runnable-track {
+  background: var(--m-divider);
+}
+body.app .form-range::-moz-range-track {
+  background: var(--m-divider);
+}
+
+// Calendar event-types legend
+body.app .legend-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .legend-list > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-family: var(--m-font);
+  font-size: 13px;
+  color: var(--m-text);
+}
+body.app .legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+body.app .calendar-container {
+  padding: 4px;
+}
+body.app .fc {
+  font-family: var(--m-font);
+}
+
+// Responsive
+@media (max-width: 991.98px) {
+  body.app form .row.mb-3 > [class*='col-md-3'] {
+    margin-bottom: 6px;
+  }
+}

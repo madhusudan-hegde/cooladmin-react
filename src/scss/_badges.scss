@@ -1,0 +1,419 @@
+// ============================================================================
+// Badges & chips — status pills, priority chips, role badges, label chips,
+// Bootstrap `.badge` re-tints, avatars.
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Status pills (.status--approved / --process / --denied + legacy td.*)
+// Base pill shape shared by every status variant.
+// ----------------------------------------------------------------------------
+body.app .status--process,
+body.app .status--approved,
+body.app .status--denied,
+body.app .status--online,
+body.app .status--away,
+body.app .status--busy,
+body.app .status--offline,
+body.app td.process,
+body.app td.approved,
+body.app td.denied {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-family: var(--m-font);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+body.app .status--process,
+body.app td.process {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+body.app .status--approved,
+body.app td.approved {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .status--denied,
+body.app td.denied {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+// Presence states (authored for the React StatusPill — CoolAdmin only had
+// the `.team-list__status--*` dots). A leading dot carries the colour.
+body.app .status--online,
+body.app .status--away,
+body.app .status--busy,
+body.app .status--offline {
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+}
+body.app .status--online::before,
+body.app .status--away::before,
+body.app .status--busy::before,
+body.app .status--offline::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: currentColor;
+}
+body.app .status--online {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+body.app .status--away {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .status--busy {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+body.app .status--offline {
+  background: var(--m-surface-2);
+  color: var(--m-text-faint);
+}
+
+// ----------------------------------------------------------------------------
+// Priority chips
+// ----------------------------------------------------------------------------
+body.app .priority-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-family: var(--m-font);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+body.app .priority-chip--high {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+body.app .priority-chip--medium {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .priority-chip--low {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+
+// ----------------------------------------------------------------------------
+// Role badges (user tables)
+// ----------------------------------------------------------------------------
+body.app .role {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  font-family: var(--m-font);
+  font-size: 11.5px;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 1;
+}
+body.app .role.admin {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .role.user {
+  background: var(--m-c2-soft);
+  color: var(--m-c2);
+}
+body.app .role.member {
+  background: var(--m-c3-soft);
+  color: var(--m-c3);
+}
+
+// ----------------------------------------------------------------------------
+// Small uppercase label chips (inbox labels, kanban labels, notification
+// category chips share this shape)
+// ----------------------------------------------------------------------------
+body.app .email-item__label,
+body.app .kanban-card__label,
+body.app .notif-list__chip {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-family: var(--m-font);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+body.app .kanban-card__label,
+body.app .notif-list__chip {
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 999px;
+}
+body.app .email-item__label--work {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+}
+body.app .email-item__label--personal {
+  background: var(--m-c2-soft);
+  color: var(--m-c2);
+}
+body.app .email-item__label--social {
+  background: var(--m-c3-soft);
+  color: var(--m-c3);
+}
+body.app .email-item__label--promo {
+  background: var(--m-c4-soft);
+  color: var(--m-c4);
+}
+body.app .email-item__label--alert {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+
+body.app .kanban-card__label--bug {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+body.app .kanban-card__label--feature {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+}
+body.app .kanban-card__label--design {
+  background: var(--m-c4-soft);
+  color: var(--m-c4);
+}
+body.app .kanban-card__label--docs {
+  background: var(--m-c2-soft);
+  color: var(--m-c2);
+}
+body.app .kanban-card__label--research {
+  background: var(--m-c3-soft);
+  color: var(--m-c3);
+}
+
+body.app .notif-list__chip--mention {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .notif-list__chip--system {
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+}
+body.app .notif-list__chip--billing {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .notif-list__chip--security {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+
+// ----------------------------------------------------------------------------
+// Bootstrap `.badge` colour overrides for a cleaner palette in tables
+// ----------------------------------------------------------------------------
+body.app .badge {
+  font-family: var(--m-font);
+  font-weight: 500;
+  padding: 0.3em 0.6em;
+  border-radius: 999px;
+}
+body.app .badge.bg-success {
+  background-color: var(--m-success-soft) !important;
+  color: var(--m-success) !important;
+}
+body.app .badge.bg-warning {
+  background-color: var(--m-warning-soft) !important;
+  color: var(--m-warning) !important;
+}
+body.app .badge.bg-danger {
+  background-color: var(--m-danger-soft) !important;
+  color: var(--m-danger) !important;
+}
+body.app .badge.bg-info {
+  background-color: var(--m-c1-soft) !important;
+  color: var(--m-c1) !important;
+}
+body.app .badge.bg-primary {
+  background-color: var(--m-accent-soft) !important;
+  color: var(--m-accent) !important;
+}
+body.app .badge.bg-secondary {
+  background-color: var(--m-surface-2) !important;
+  color: var(--m-text-muted) !important;
+}
+
+// ----------------------------------------------------------------------------
+// Avatars (React Avatar / AvatarGroup). CoolAdmin's modern pages use
+// `.img-cir.img-40` and per-widget avatar classes; this generic block is
+// authored for the port.
+// ----------------------------------------------------------------------------
+// Markup (React Avatar):
+//   span.avatar.avatar--{xs|sm|md|lg|xl}(.avatar--initials)[style="--avatar-size:Npx"]
+//     > img.avatar__img | span.avatar__initials
+//     > span.avatar__status.avatar__status--{online|away|busy|offline}
+//   span.avatar-group > .avatar… + span.avatar.avatar--initials.avatar--overflow
+// The size presets and pixel sizes both drive `--avatar-size`; the circle is
+// clipped on the image (not the root) so the status dot can sit on the rim.
+body.app .avatar {
+  --avatar-size: 40px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  font-family: var(--m-font);
+  font-size: calc(var(--avatar-size) * 0.38);
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+}
+body.app .avatar img,
+body.app .avatar__img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+body.app .avatar--initials {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .avatar__initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  user-select: none;
+}
+body.app .avatar--xs {
+  --avatar-size: 24px;
+}
+body.app .avatar--sm {
+  --avatar-size: 32px;
+}
+body.app .avatar--md {
+  --avatar-size: 40px;
+}
+body.app .avatar--lg {
+  --avatar-size: 56px;
+}
+body.app .avatar--xl {
+  --avatar-size: 80px;
+}
+// Presence dot (same palette as `.team-list__status--*`)
+body.app .avatar__status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: max(8px, calc(var(--avatar-size) * 0.28));
+  height: max(8px, calc(var(--avatar-size) * 0.28));
+  border-radius: 50%;
+  border: 2px solid var(--m-surface);
+  background: var(--m-text-faint);
+  box-sizing: border-box;
+}
+body.app .avatar__status--online {
+  background: var(--m-success);
+}
+body.app .avatar__status--away {
+  background: var(--m-warning);
+}
+body.app .avatar__status--busy {
+  background: var(--m-danger);
+}
+body.app .avatar__status--offline {
+  background: var(--m-text-faint);
+}
+
+body.app .avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+body.app .avatar-group > .avatar,
+body.app .avatar-group > img {
+  border: 2px solid var(--m-surface);
+  margin-left: -8px;
+  box-sizing: content-box;
+}
+body.app .avatar-group > .avatar:first-child,
+body.app .avatar-group > img:first-child {
+  margin-left: 0;
+}
+// "+N" overflow bubble (React emits `.avatar--overflow`; `.avatar-group__more`
+// kept as the static-markup alias).
+body.app .avatar--overflow,
+body.app .avatar-group__more {
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  font-size: calc(var(--avatar-size) * 0.34);
+}
+body.app .badge.bg-light {
+  background-color: var(--m-surface-2) !important;
+  color: var(--m-text) !important;
+}
+body.app .badge.bg-dark {
+  background-color: var(--m-text) !important;
+  color: var(--m-surface) !important;
+}
+// Solid Bootstrap `.text-bg-*` badges (React `Badge` default) on the brand palette
+body.app .badge.text-bg-primary {
+  background-color: var(--m-accent) !important;
+  color: var(--m-on-accent) !important;
+}
+body.app .badge.text-bg-success {
+  background-color: var(--m-success) !important;
+  color: var(--m-on-accent) !important;
+}
+body.app .badge.text-bg-warning {
+  background-color: var(--m-warning) !important;
+  color: var(--m-on-accent) !important;
+}
+body.app .badge.text-bg-danger {
+  background-color: var(--m-danger) !important;
+  color: var(--m-on-accent) !important;
+}
+body.app .badge.text-bg-info {
+  background-color: var(--m-c1) !important;
+  color: var(--m-on-accent) !important;
+}
+body.app .badge.text-bg-secondary {
+  background-color: var(--m-text-muted) !important;
+  color: var(--m-surface) !important;
+}
+body.app .badge.text-bg-light {
+  background-color: var(--m-surface-2) !important;
+  color: var(--m-text) !important;
+}
+body.app .badge.text-bg-dark {
+  background-color: var(--m-text) !important;
+  color: var(--m-surface) !important;
+}
+body.app .badge__icon {
+  margin-right: 4px;
+}

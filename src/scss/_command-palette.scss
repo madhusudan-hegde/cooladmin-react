@@ -1,0 +1,198 @@
+// ============================================================================
+// Command palette (⌘K) — CommandPaletteProvider mounts `.cmdk-overlay` in
+// <body>; `.is-open` toggles visibility.
+//   .cmdk-overlay(.is-open) > .cmdk-panel
+//     > .cmdk-input-wrap > i + input.cmdk-input + kbd.cmdk-hint
+//     > ul.cmdk-results > li.cmdk-section | a.cmdk-item(.is-active)
+//         > .cmdk-item__icon + .cmdk-item__body > .cmdk-item__title + .cmdk-item__sub
+//         + .cmdk-item__meta
+//     > .cmdk-empty
+//     > .cmdk-footer > span > kbd
+// ============================================================================
+body.app .cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--m-overlay);
+  backdrop-filter: blur(2px);
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 16px 16px;
+}
+body.app .cmdk-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+body.app .cmdk-panel {
+  width: 100%;
+  max-width: 560px;
+  background: var(--m-surface);
+  color: var(--m-text);
+  border: 1px solid var(--m-border);
+  border-radius: 14px;
+  box-shadow: var(--m-shadow-pop);
+  overflow: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: transform 160ms ease;
+  font-family: var(--m-font);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 96px);
+}
+body.app .cmdk-overlay.is-open .cmdk-panel {
+  transform: translateY(0) scale(1);
+}
+body.app .cmdk-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .cmdk-input-wrap > i {
+  color: var(--m-text-faint);
+  font-size: 14px;
+}
+body.app .cmdk-input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--m-text);
+  padding: 0;
+  min-width: 0;
+}
+body.app .cmdk-input::placeholder {
+  color: var(--m-text-faint);
+}
+body.app .cmdk-hint {
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-border);
+  border-radius: 4px;
+  color: var(--m-text-faint);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  line-height: 1;
+}
+body.app .cmdk-results {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+// React wraps each result in `li[role=option][aria-selected]` around the
+// `a.cmdk-item`; the li is a transparent shell.
+body.app .cmdk-results > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body.app .cmdk-section {
+  padding: 8px 12px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  list-style: none;
+}
+body.app .cmdk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--m-text);
+  font-size: 13.5px;
+  text-decoration: none;
+  list-style: none;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+body.app .cmdk-item.is-active,
+body.app .cmdk-item:hover,
+body.app .cmdk-item[aria-selected='true'],
+body.app .cmdk-results > li[aria-selected='true'] > .cmdk-item {
+  background: var(--m-surface-2);
+  color: var(--m-text);
+}
+// Background is the accent gradient set in `_theme-presets.scss` (shared with
+// the logo marks); only the geometry lives here so that rule is not overridden.
+body.app .cmdk-item__icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  color: var(--m-on-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+body.app .cmdk-item__body {
+  flex: 1;
+  min-width: 0;
+}
+body.app .cmdk-item__title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.app .cmdk-item__sub {
+  font-size: 12px;
+  color: var(--m-text-faint);
+  margin-top: 1px;
+}
+body.app .cmdk-item__meta {
+  color: var(--m-text-faint);
+  font-size: 11.5px;
+  flex-shrink: 0;
+}
+body.app .cmdk-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--m-text-faint);
+  font-size: 13px;
+}
+body.app .cmdk-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-top: 1px solid var(--m-divider);
+  color: var(--m-text-faint);
+  font-size: 11.5px;
+  background: var(--m-surface-2);
+}
+body.app .cmdk-footer kbd {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 10.5px;
+  color: var(--m-text-muted);
+  margin: 0 2px;
+  box-shadow: none;
+}
+@media (max-width: 575.98px) {
+  body.app .cmdk-overlay {
+    padding: 12px;
+    align-items: flex-start;
+  }
+  body.app .cmdk-panel {
+    max-height: calc(100vh - 24px);
+  }
+}

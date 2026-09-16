@@ -1,0 +1,342 @@
+@use 'config' as *;
+
+// ============================================================================
+// Charts — Chart.js wrappers, legend notes, recent-report cards,
+// au-progress skill bars, circular progress ring.
+// ============================================================================
+
+// Generic chart canvas box. React `<Chart>` renders `.chart` and `<Sparkline>`
+// renders `.sparkline` (both set inline `position/height`); `.chart-box` is
+// the hand-authored equivalent for static markup.
+body.app .chart,
+body.app .chart-box {
+  position: relative;
+  width: 100%;
+  min-height: 120px;
+}
+body.app .sparkline {
+  position: relative;
+  width: 100%;
+}
+body.app .chart canvas,
+body.app .sparkline canvas,
+body.app .chart-box canvas,
+body.app .recent-report__chart canvas,
+body.app .donut-wrap canvas,
+body.app .preview-card__chart canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+}
+
+// Legacy Chart.js external tooltip host
+body.app #chartjs-tooltip {
+  opacity: 1;
+  position: absolute;
+  background: var(--m-tooltip-bg);
+  color: var(--m-tooltip-text);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: var(--m-font);
+  font-size: 12px;
+  transition: all 0.1s ease;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+}
+
+// Chart legend notes
+body.app .chart-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-size: 13px;
+}
+body.app .chart-info__left {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+body.app .chart-info-right {
+  display: flex;
+  gap: 8px;
+}
+body.app .chart-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--m-text-muted);
+  text-transform: none;
+  margin: 0;
+}
+body.app .chart-note .dot,
+body.app .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0;
+}
+body.app .dot--blue {
+  background: var(--m-c1);
+}
+body.app .dot--green {
+  background: var(--m-c2);
+}
+body.app .dot--orange {
+  background: var(--m-c3);
+}
+body.app .dot--red {
+  background: var(--m-c4);
+}
+body.app .incre i {
+  color: var(--m-success);
+}
+body.app .decre i {
+  color: var(--m-danger);
+}
+
+// Chart cards (legacy wrappers)
+body.app .recent-report2,
+body.app .recent-report3,
+body.app .statistic-chart-1,
+body.app .chart-percent-2,
+body.app .chart-percent-3,
+body.app .task-progress {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  padding: 20px;
+  box-shadow: var(--m-shadow-xs);
+  margin-bottom: 16px;
+}
+body.app .recent-report__chart {
+  margin: 0 -8px;
+}
+body.app .statistic-chart-1-note span {
+  color: var(--m-text-muted);
+  font-size: 13px;
+}
+body.app .statistic-chart-1-note .big {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--m-text);
+}
+
+// ----------------------------------------------------------------------------
+// Skill / progress bars (`.au-progress`) + React ProgressBar
+// (`.progress-bar-modern` — authored for the port; CoolAdmin has no such
+// class, its progress page uses Bootstrap `.progress > .progress-bar`).
+// ----------------------------------------------------------------------------
+body.app .au-progress {
+  margin: 0 0 14px;
+  padding: 0;
+}
+body.app .au-progress:last-child {
+  margin-bottom: 0;
+}
+body.app .au-progress__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--m-text);
+  margin: 0 0 6px;
+  display: block;
+}
+body.app .au-progress .au-progress__bar,
+body.app .au-progress__bar {
+  height: 6px;
+  background: var(--m-divider);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+body.app .au-progress .au-progress__bar .au-progress__inner,
+body.app .au-progress__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 0;
+  background: var(--m-accent);
+  border-radius: 999px;
+  transition: width 360ms ease;
+}
+body.app .au-progress:nth-child(1) .au-progress__inner {
+  background: var(--m-c1);
+}
+body.app .au-progress:nth-child(2) .au-progress__inner {
+  background: var(--m-c2);
+}
+body.app .au-progress:nth-child(3) .au-progress__inner {
+  background: var(--m-c3);
+}
+body.app .au-progress:nth-child(4) .au-progress__inner {
+  background: var(--m-c4);
+}
+body.app .au-progress__value {
+  position: absolute;
+  right: 0;
+  top: -22px;
+  font-size: 12px;
+  color: var(--m-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+body.app .progress-bar-modern {
+  display: block;
+  width: 100%;
+}
+// Caption row: `<div.progress-bar-modern__label> label + span.__value`
+body.app .progress-bar-modern__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--m-text);
+}
+body.app .progress-bar-modern__value {
+  font-size: 12px;
+  color: var(--m-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+body.app .progress-bar-modern__track {
+  height: 6px;
+  background: var(--m-divider);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+body.app .progress-bar-modern--sm .progress-bar-modern__track {
+  height: 4px;
+}
+body.app .progress-bar-modern--md .progress-bar-modern__track {
+  height: 6px;
+}
+body.app .progress-bar-modern--lg .progress-bar-modern__track {
+  height: 10px;
+}
+// React sets `--pct` (and `--color` when a `color` prop is given) inline on
+// the fill; the block modifiers below cover static markup.
+body.app .progress-bar-modern__fill {
+  display: block;
+  height: 100%;
+  width: var(--pct, 0%);
+  background: var(--color, var(--m-accent));
+  border-radius: inherit;
+  transition: width 360ms ease;
+}
+body.app .progress-bar-modern--c1 .progress-bar-modern__fill {
+  --color: var(--m-c1);
+}
+body.app .progress-bar-modern--c2 .progress-bar-modern__fill {
+  --color: var(--m-c2);
+}
+body.app .progress-bar-modern--c3 .progress-bar-modern__fill {
+  --color: var(--m-c3);
+}
+body.app .progress-bar-modern--c4 .progress-bar-modern__fill {
+  --color: var(--m-c4);
+}
+body.app .progress-bar-modern--success .progress-bar-modern__fill {
+  --color: var(--m-success);
+}
+body.app .progress-bar-modern--warning .progress-bar-modern__fill {
+  --color: var(--m-warning);
+}
+body.app .progress-bar-modern--danger .progress-bar-modern__fill {
+  --color: var(--m-danger);
+}
+
+// Bootstrap progress, harmonised
+body.app .progress {
+  height: 8px;
+  background: var(--m-divider);
+  border-radius: 999px;
+  overflow: hidden;
+}
+body.app .progress-bar {
+  background-color: var(--m-accent);
+  border-radius: 999px;
+}
+body.app .progress-bar.bg-success {
+  background-color: var(--m-success) !important;
+}
+body.app .progress-bar.bg-warning {
+  background-color: var(--m-warning) !important;
+}
+body.app .progress-bar.bg-danger {
+  background-color: var(--m-danger) !important;
+}
+body.app .progress-bar.bg-info {
+  background-color: var(--m-c1) !important;
+}
+
+// ----------------------------------------------------------------------------
+// Circular progress ring (SVG)
+// ----------------------------------------------------------------------------
+body.app .circular-progress {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: inline-block;
+}
+body.app .circular-progress svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+body.app .circular-progress circle {
+  fill: none;
+  stroke-width: 2.6;
+}
+body.app .circular-progress circle.bg {
+  stroke: var(--m-surface-2);
+}
+body.app .circular-progress circle.fg {
+  stroke: var(--color, var(--m-c1));
+  stroke-linecap: round;
+  stroke-dasharray: 100, 100;
+  stroke-dashoffset: calc(100 - var(--pct, 0));
+  transition: stroke-dashoffset 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+body.app .circular-progress__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.1;
+}
+body.app .circular-progress__label strong {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--m-text);
+  letter-spacing: -0.01em;
+}
+body.app .circular-progress__label span {
+  font-size: 11px;
+  color: var(--m-text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+// Charts — slightly shorter on portrait phones
+@media (max-width: $mobile-bp) {
+  body.app .m-card > div[style*='height: 280px'],
+  body.app .m-card > section > div[style*='height: 280px'],
+  body.app .m-card > .chart[style*='height: 280px'],
+  body.app .m-card > .chart-box[style*='height: 280px'] {
+    height: 220px !important;
+  }
+}

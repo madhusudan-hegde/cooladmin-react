@@ -1,0 +1,420 @@
+// ============================================================================
+// Feedback — toasts, skeletons, empty states, notice cards, btn-spinner
+// (spinner lives in _buttons.scss), Bootstrap alerts.
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Toast notifications (ToastProvider mounts `.toast-container` in <body>)
+// NOTE: Bootstrap also defines `.toast` / `.toast-container` and hides any
+// `.toast:not(.show)`. The rules below (scoped under body.app) out-specify
+// Bootstrap's and re-enable display for our `.is-visible` lifecycle.
+// ----------------------------------------------------------------------------
+body.app .toast-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  left: auto;
+  bottom: auto;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  width: auto;
+  max-width: calc(100vw - 32px);
+}
+body.app .toast,
+body.app .toast:not(.show) {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 360px;
+  max-width: 100%;
+  padding: 12px 14px;
+  background: var(--m-surface);
+  background-clip: border-box;
+  color: var(--m-text);
+  border: 1px solid var(--m-border);
+  border-left-width: 4px;
+  border-radius: 10px;
+  box-shadow: var(--m-shadow-lg);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  font-family: var(--m-font);
+  font-size: 13px;
+}
+body.app .toast.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+body.app .toast.is-leaving {
+  opacity: 0;
+  transform: translateX(20px);
+}
+body.app .toast__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+body.app .toast__body {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+}
+body.app .toast__title {
+  margin: 0 0 2px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--m-text);
+  line-height: 1.3;
+}
+body.app .toast__message {
+  margin: 0;
+  font-size: 13px;
+  color: var(--m-text-muted);
+  line-height: 1.45;
+}
+body.app .toast__close {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 4px;
+  color: var(--m-text-faint);
+  cursor: pointer;
+  margin: -2px -2px 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+body.app .toast__close:hover {
+  background: var(--m-surface-2);
+  color: var(--m-text);
+}
+body.app .toast--success {
+  border-left-color: var(--m-success);
+}
+body.app .toast--success .toast__icon {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+body.app .toast--info {
+  border-left-color: var(--m-accent);
+}
+body.app .toast--info .toast__icon {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .toast--warning {
+  border-left-color: var(--m-warning);
+}
+body.app .toast--warning .toast__icon {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .toast--error {
+  border-left-color: var(--m-danger);
+}
+body.app .toast--error .toast__icon {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+@media (max-width: 575.98px) {
+  body.app .toast-container {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+  }
+  body.app .toast {
+    width: 100%;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Empty states
+// ----------------------------------------------------------------------------
+body.app .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  text-align: center;
+  color: var(--m-text-muted);
+}
+body.app .empty-state__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+body.app .empty-state__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0 0 4px;
+}
+body.app .empty-state__text {
+  font-size: 13.5px;
+  color: var(--m-text-muted);
+  margin: 0 0 16px;
+  max-width: 360px;
+  line-height: 1.5;
+}
+body.app .empty-state__actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+// ----------------------------------------------------------------------------
+// Loading skeletons
+// ----------------------------------------------------------------------------
+body.app .skeleton,
+body.app .skeleton-line,
+body.app .skeleton-block,
+body.app .skeleton-circle {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--m-surface-2) 0%,
+    var(--m-border) 50%,
+    var(--m-surface-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: m-shimmer 1.4s linear infinite;
+}
+@keyframes m-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+body.app .skeleton {
+  border-radius: 6px;
+}
+body.app .skeleton-line {
+  display: block;
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+body.app .skeleton-line--sm {
+  height: 8px;
+  width: 40%;
+}
+body.app .skeleton-line--md {
+  height: 14px;
+  width: 70%;
+}
+body.app .skeleton-line--lg {
+  height: 22px;
+  width: 55%;
+}
+body.app .skeleton-line--short {
+  width: 60%;
+}
+body.app .skeleton-line--xshort {
+  width: 40%;
+}
+// Block / circle carry sensible defaults so `<Skeleton variant="block" />`
+// without explicit width/height is still visible; inline styles override.
+body.app .skeleton-block {
+  display: block;
+  width: 100%;
+  height: 96px;
+  border-radius: var(--m-radius-lg);
+}
+body.app .skeleton-circle {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+body.app .skeleton-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--m-divider);
+}
+body.app .skeleton-row:last-child {
+  border-bottom: 0;
+}
+body.app .skeleton-stat-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-lg);
+  padding: 18px 20px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body.app .stat-card__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding-bottom: 18px;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.app .skeleton,
+  body.app .skeleton-line,
+  body.app .skeleton-block,
+  body.app .skeleton-circle {
+    animation: none;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Notification / status card
+// ----------------------------------------------------------------------------
+body.app .notice-card {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+}
+body.app .notice-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .notice-card__body {
+  flex: 1;
+  min-width: 0;
+}
+body.app .notice-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0 0 4px;
+}
+body.app .notice-card__text {
+  font-size: 13px;
+  color: var(--m-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+body.app .notice-card__actions {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+body.app .notice-card--info .notice-card__icon {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+}
+body.app .notice-card--success .notice-card__icon {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+body.app .notice-card--warning .notice-card__icon {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .notice-card--danger .notice-card__icon {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+@media (max-width: 575.98px) {
+  body.app .notice-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  body.app .notice-card__icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Bootstrap alerts — soft tints on the brand palette
+// ----------------------------------------------------------------------------
+body.app .alert {
+  border-radius: var(--m-radius);
+  font-family: var(--m-font);
+  font-size: 13.5px;
+  padding: 12px 16px;
+}
+body.app .alert-primary {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  border-color: rgba(var(--m-accent-rgb), 0.25);
+}
+body.app .alert-info {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+  border-color: rgba(66, 114, 215, 0.25);
+}
+body.app .alert-success {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+body.app .alert-warning {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+body.app .alert-danger {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+body.app .alert-secondary,
+body.app .alert-light {
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  border-color: var(--m-border);
+}
+body.app .alert .alert-link {
+  color: inherit;
+  font-weight: 600;
+}
+body.app .alert-dark {
+  background: var(--m-text);
+  color: var(--m-surface);
+  border-color: var(--m-text);
+}
+// React `Alert`: leading icon + `<strong>` lead-in (alert.html uses an inline
+// `margin-right: 8px` on the icon); close button padding follows the 12px/16px
+// alert padding instead of Bootstrap's 1.25rem/1rem.
+body.app .alert__icon {
+  margin-right: 8px;
+}
+body.app .alert__title {
+  font-weight: 600;
+}
+body.app .alert-dismissible {
+  padding-right: 44px;
+}
+body.app .alert-dismissible .btn-close {
+  padding: 14px 16px;
+}

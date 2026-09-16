@@ -1,0 +1,218 @@
+// ============================================================================
+// Design tokens
+// All `--m-*` custom properties from CoolAdmin's modern overlay
+// (src/scss/app/_variables.scss) live on `body.app`. A full dark set is
+// authored below under `[data-bs-theme="dark"] body.app` — CoolAdmin itself
+// ships no dark `--m-*` tokens, so this is the main value-add of the port.
+// Everything else in the stylesheet references these tokens so that both
+// colour modes and the six accent presets reskin the whole UI automatically.
+// ============================================================================
+
+body.app {
+  // Surfaces
+  --m-bg: #f4f6fa;
+  --m-surface: #ffffff;
+  --m-surface-2: #f8fafc;
+  --m-sidebar: #1c2333;
+  --m-sidebar-soft: #28304a;
+
+  // Borders + dividers
+  --m-border: #e4e7ec;
+  --m-border-soft: #eef0f3;
+  --m-border-hover: #d6dae0;
+  --m-divider: #f1f3f5;
+
+  // Text
+  --m-text: #1f2937;
+  --m-text-muted: #475569;
+  --m-text-faint: #94a3b8;
+  --m-text-on-dark: #f1f5f9;
+
+  // Sidebar (dark navy in both colour modes, so these barely change)
+  --m-sidebar-text: #cbd5e1; // slate-300 — ~7.4:1 on the navy
+  --m-sidebar-icon: #94a3b8; // slate-400
+  --m-sidebar-icon-hover: #e2e8f0;
+  --m-sidebar-icon-active: #93b4ec; // light wash of the brand blue
+  --m-sidebar-rail-text: #b8c4d6; // collapsed 72px rail
+  --m-sidebar-border: rgba(255, 255, 255, 0.06);
+  --m-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --m-sidebar-guide: rgba(255, 255, 255, 0.08);
+  --m-sidebar-caret: rgba(255, 255, 255, 0.4);
+  --m-sidebar-group-label: #64748b;
+
+  // Brand + status — anchored to the original CoolAdmin blue (#4272d7)
+  //     with an additional set of accent hues borrowed from the original
+  //     gradient tiles for the KPI strip.
+  --m-accent: #4272d7;
+  --m-accent-rgb: 66, 114, 215;
+  --m-accent-hover: #355cb8;
+  --m-accent-soft: #eaf0fc;
+  --m-on-accent: #ffffff;
+
+  // Inspired-by-original KPI accents
+  --m-c1: #4272d7; // blue (revenue)
+  --m-c1-soft: #eaf0fc;
+  --m-c2: #11998e; // teal (orders)
+  --m-c2-soft: #e0f3f1;
+  --m-c3: #f97316; // warm orange (users)
+  --m-c3-soft: #fff1e6;
+  --m-c4: #ec4899; // magenta-pink (conversion)
+  --m-c4-soft: #fce7f3;
+
+  --m-success: #10b981;
+  --m-success-soft: #ecfdf5;
+  --m-warning: #f59e0b;
+  --m-warning-soft: #fffbeb;
+  --m-danger: #ef4444;
+  --m-danger-soft: #fef2f2;
+
+  // Overlays, tooltips, code blocks
+  --m-backdrop: rgba(15, 23, 42, 0.55); // mobile drawer backdrop
+  --m-overlay: rgba(15, 23, 42, 0.45); // command palette scrim
+  --m-tooltip-bg: #0f172a;
+  --m-tooltip-text: #ffffff;
+  --m-code-bg: #0f172a;
+  --m-code-text: #e2e8f0;
+
+  // Effects
+  --m-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --m-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --m-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --m-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.1);
+  --m-shadow-xl: 0 24px 48px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --m-shadow-pop: 0 24px 48px rgba(15, 23, 42, 0.2);
+
+  --m-radius-sm: 6px;
+  --m-radius: 10px;
+  --m-radius-md: 10px;
+  --m-radius-lg: 14px;
+
+  --m-font: 'Inter', 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --m-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  // Layout
+  --m-sidebar-width: 260px;
+  --m-sidebar-width-collapsed: 72px;
+  --m-topbar-height: 64px;
+  --m-topbar-height-mobile: 60px;
+
+  // ------------------------------------------------------------------------
+  //     Bootstrap 5.3 bridge — plain Bootstrap components (tables, dropdowns,
+  //     modals, form controls, nav-tabs …) follow the `--m-*` tokens in both
+  //     colour modes. Component-level `--bs-*` vars are rebound in `_base.scss`
+  //     because Bootstrap redeclares them on the component root.
+  //     ------------------------------------------------------------------------
+  --bs-body-bg: var(--m-bg);
+  --bs-body-bg-rgb: 244, 246, 250;
+  --bs-body-color: var(--m-text);
+  --bs-body-font-family: var(--m-font);
+  --bs-emphasis-color: var(--m-text);
+  --bs-heading-color: var(--m-text);
+  --bs-secondary-color: var(--m-text-muted);
+  --bs-secondary-bg: var(--m-surface-2);
+  --bs-tertiary-color: var(--m-text-faint);
+  --bs-tertiary-bg: var(--m-surface-2);
+  --bs-border-color: var(--m-border);
+  --bs-border-color-translucent: var(--m-border);
+  --bs-border-radius: 8px;
+  --bs-card-bg: var(--m-surface);
+  --bs-link-color: var(--m-accent);
+  --bs-link-color-rgb: var(--m-accent-rgb);
+  --bs-link-hover-color: var(--m-accent-hover);
+  --bs-link-hover-color-rgb: var(--m-accent-rgb);
+  --bs-primary: var(--m-accent);
+  --bs-primary-rgb: var(--m-accent-rgb);
+  --bs-success: var(--m-success);
+  --bs-success-rgb: 16, 185, 129;
+  --bs-warning: var(--m-warning);
+  --bs-warning-rgb: 245, 158, 11;
+  --bs-danger: var(--m-danger);
+  --bs-danger-rgb: 239, 68, 68;
+  --bs-focus-ring-color: rgba(var(--m-accent-rgb), 0.25);
+
+  // Body defaults
+  background: var(--m-bg);
+  color: var(--m-text);
+  font-family: var(--m-font);
+  font-size: 14px;
+  line-height: 1.5;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
+}
+
+// ----------------------------------------------------------------------------
+// Dark colour mode — `<html data-bs-theme="dark">`
+// Authored for the React port. Status tints become translucent rgba washes
+// so they sit on any surface; shadows get heavier because there is no
+// ambient light to fake depth with.
+// ----------------------------------------------------------------------------
+[data-bs-theme='dark'] body.app {
+  --m-bg: #0f1115;
+  --m-surface: #161a22;
+  --m-surface-2: #1c2130;
+  --m-sidebar: #0b0e14;
+  --m-sidebar-soft: #141926;
+
+  --m-border: #262c3a;
+  --m-border-soft: #1f2531;
+  --m-border-hover: #323a4a;
+  --m-divider: #1c2230;
+
+  --m-text: #e5e7eb;
+  --m-text-muted: #9aa4b2;
+  --m-text-faint: #6b7280;
+  --m-text-on-dark: #f1f5f9;
+
+  --m-sidebar-text: #c3ccd8;
+  --m-sidebar-icon: #8b95a5;
+  --m-sidebar-icon-hover: #e2e8f0;
+  --m-sidebar-icon-active: #9db9ee;
+  --m-sidebar-rail-text: #aeb9ca;
+  --m-sidebar-border: rgba(255, 255, 255, 0.05);
+  --m-sidebar-hover: rgba(255, 255, 255, 0.05);
+  --m-sidebar-guide: rgba(255, 255, 255, 0.07);
+  --m-sidebar-caret: rgba(255, 255, 255, 0.35);
+  --m-sidebar-group-label: #5d6a7e;
+
+  --m-accent-soft: rgba(var(--m-accent-rgb), 0.18);
+
+  --m-c1: #6f9ae8;
+  --m-c1-soft: rgba(66, 114, 215, 0.18);
+  --m-c2: #34c9bd;
+  --m-c2-soft: rgba(17, 153, 142, 0.18);
+  --m-c3: #fb923c;
+  --m-c3-soft: rgba(249, 115, 22, 0.18);
+  --m-c4: #f472b6;
+  --m-c4-soft: rgba(236, 72, 153, 0.18);
+
+  --m-success: #34d399;
+  --m-success-soft: rgba(16, 185, 129, 0.18);
+  --m-warning: #fbbf24;
+  --m-warning-soft: rgba(245, 158, 11, 0.18);
+  --m-danger: #f87171;
+  --m-danger-soft: rgba(239, 68, 68, 0.18);
+
+  --m-backdrop: rgba(0, 0, 0, 0.65);
+  --m-overlay: rgba(0, 0, 0, 0.6);
+  --m-tooltip-bg: #e5e7eb;
+  --m-tooltip-text: #0f1115;
+  --m-code-bg: #0b0e14;
+  --m-code-text: #d1d5db;
+
+  --m-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --m-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --m-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+  --m-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --m-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --m-shadow-pop: 0 24px 48px rgba(0, 0, 0, 0.7);
+
+  --bs-body-bg-rgb: 15, 17, 21;
+  --bs-success-rgb: 52, 211, 153;
+  --bs-warning-rgb: 251, 191, 36;
+  --bs-danger-rgb: 248, 113, 113;
+
+  color-scheme: dark;
+}

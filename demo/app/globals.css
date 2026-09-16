@@ -1,0 +1,44 @@
+/* Demo-only tweaks on top of @cooladmin/react/css — keep minimal. */
+
+/* Row spacing between dashboard sections (CoolAdmin used inline margin-top). */
+body.app .dash-row + .dash-row {
+  margin-top: 16px;
+}
+body.app .footer-row {
+  margin-top: 28px;
+}
+
+/* Active-projects list: the library ProgressBar replaces `.project-list__bar`
+   and must span both grid columns like the original bar did. */
+body.app .project-list__progress {
+  grid-column: 1 / span 2;
+}
+
+/* Status pages — inline styles from CoolAdmin's 500/maintenance pages as classes. */
+body.app .error-card__ref {
+  background: var(--m-surface-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11.5px;
+}
+body.app .error-card__title--lg {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+body.app .error-card__emphasis {
+  color: var(--m-text);
+}
+
+/* Root loading state (outside any shell). */
+body.app .app-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+body.app .app-loading__card {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

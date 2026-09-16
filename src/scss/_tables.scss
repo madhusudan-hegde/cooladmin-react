@@ -1,0 +1,660 @@
+@use 'config' as *;
+
+// ============================================================================
+// Tables — m-table, legacy table-data / table-data2 / table-data3 /
+// table-earning / top-countries / top-campaign, user-data wrapper,
+// row-product, rank-list, au-checkbox, responsive scroll shadows.
+// Base rules for the legacy classes come from CoolAdmin
+// components/_tables.scss + components/_form.scss, then modernised.
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Modern table (top products etc.)
+// ----------------------------------------------------------------------------
+body.app .m-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  color: var(--m-text);
+}
+body.app .m-table th,
+body.app .m-table td {
+  padding: 10px 0;
+  text-align: left;
+  border-bottom: 1px solid var(--m-divider);
+  background: transparent;
+  color: inherit;
+}
+body.app .m-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+body.app .m-table th {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 8px;
+}
+body.app .m-table td.num,
+body.app .m-table th.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--m-text);
+}
+body.app .m-table th.num {
+  color: var(--m-text-faint);
+}
+body.app .m-table tbody tr:hover td {
+  background: var(--m-surface-2);
+}
+
+// Product cell with icon
+body.app .row-product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--m-text);
+  font-weight: 500;
+}
+body.app .row-product__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Responsive wrapper — scroll affordance (`.has-scroll` when the table
+// overflows, `.scrolled` once the user has scrolled right). CoolAdmin's JS
+// toggles these classes but shipped no CSS for them; authored here.
+// ----------------------------------------------------------------------------
+body.app .table-responsive {
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+body.app .table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+body.app .table-responsive.has-scroll {
+  background: linear-gradient(to right, var(--m-surface) 30%, rgba(255, 255, 255, 0)) left / 40px
+      100% no-repeat,
+    linear-gradient(to left, var(--m-surface) 30%, rgba(255, 255, 255, 0)) right / 40px 100%
+      no-repeat,
+    radial-gradient(farthest-side at 100% 50%, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0)) right /
+      14px 100% no-repeat;
+  background-attachment: local, local, scroll;
+}
+body.app .table-responsive.has-scroll.scrolled {
+  background: linear-gradient(to right, var(--m-surface) 30%, rgba(255, 255, 255, 0)) left / 40px
+      100% no-repeat,
+    linear-gradient(to left, var(--m-surface) 30%, rgba(255, 255, 255, 0)) right / 40px 100%
+      no-repeat,
+    radial-gradient(farthest-side at 0 50%, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0)) left / 14px
+      100% no-repeat,
+    radial-gradient(farthest-side at 100% 50%, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0)) right /
+      14px 100% no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+body.app .table-responsive.has-scroll .table {
+  background: transparent;
+}
+
+// `table--no-card` wrapper used for raw responsive tables
+body.app .table--no-card,
+body.app .table-responsive.table--no-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+// ----------------------------------------------------------------------------
+// Legacy table-data family
+// ----------------------------------------------------------------------------
+body.app .table-data {
+  height: auto;
+  max-height: 472px;
+  overflow-y: auto;
+}
+body.app .table-data thead tr td,
+body.app .table-data thead tr th {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+body.app .table-data .table td {
+  border-top: 0;
+  border-bottom: 1px solid var(--m-divider);
+  padding: 12px;
+}
+body.app .table-data tbody tr:hover td .more {
+  transform: scale(1);
+}
+body.app .table-data__info h6 {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--m-text);
+  text-transform: capitalize;
+}
+body.app .table-data__info span a {
+  color: var(--m-accent);
+  font-size: 12.5px;
+  text-decoration: none;
+}
+body.app .table-data__info span a:hover {
+  text-decoration: underline;
+}
+
+// Toolbar row above a data table
+body.app .table-data__tool {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+}
+body.app .table-data__tool-left,
+body.app .table-data__tool-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+// Action buttons inside table rows
+body.app .table-data-feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+body.app .table-data-feature .item {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  border-radius: var(--m-radius-sm);
+  color: var(--m-text-faint);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: static;
+  transition: background 120ms ease, color 120ms ease;
+}
+body.app .table-data-feature .item:hover {
+  background: var(--m-surface-2);
+  color: var(--m-text);
+}
+body.app .table-data-feature .item i {
+  font-size: 12px;
+  position: static;
+  transform: none;
+  color: inherit;
+}
+
+// "More" 3-dots in tables
+body.app .more {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--m-radius-sm);
+  background: transparent;
+  color: var(--m-text-faint);
+  cursor: pointer;
+  position: relative;
+  transform: none;
+  transition: background 120ms ease, color 120ms ease;
+}
+body.app .more:hover {
+  background: var(--m-surface-2);
+  color: var(--m-text);
+}
+body.app .more i {
+  font-size: 13px;
+  color: inherit;
+  position: static;
+  transform: none;
+}
+
+// Earning table
+body.app .table-earning thead th {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 12px;
+  background: transparent;
+  border-bottom: 1px solid var(--m-border);
+  text-align: left;
+  white-space: nowrap;
+}
+body.app .table-earning tbody td {
+  font-size: 13.5px;
+  color: var(--m-text);
+  padding: 12px;
+  background: transparent;
+  border-bottom: 1px solid var(--m-divider);
+  border-color: var(--m-divider);
+  white-space: nowrap;
+}
+body.app .table-earning tbody tr:hover td {
+  background: var(--m-surface-2);
+  color: var(--m-text);
+}
+body.app .table-earning thead th.text-end,
+body.app .table-earning tbody td.text-end {
+  text-align: right;
+}
+
+// Top countries / top campaigns lists
+body.app .table-top-countries,
+body.app .table-top-campaign {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+body.app .table-top-countries tbody td,
+body.app .table-top-campaign.table td {
+  font-size: 13.5px;
+  padding: 10px 0;
+  color: var(--m-text);
+  border-bottom: 1px solid var(--m-divider);
+  border-top: 0;
+  background: transparent;
+  white-space: normal;
+}
+body.app .table-top-countries tbody tr td:last-child,
+body.app .table-top-campaign.table tr td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--m-text);
+  font-weight: 500;
+}
+body.app .table-top-countries tbody tr td:first-child,
+body.app .table-top-campaign.table tr td:first-child {
+  color: var(--m-text);
+  font-weight: 500;
+}
+body.app .table-top-countries tbody tr:last-child td,
+body.app .table-top-campaign.table tr:last-child td {
+  border-bottom: 0;
+}
+body.app .table-top-countries tbody tr:hover td,
+body.app .table-top-campaign.table tbody tr:hover td {
+  background: var(--m-surface-2);
+}
+body.app .table-top-campaign.table tr td:last-child {
+  color: var(--m-accent);
+}
+
+// User data + Top campaign wrappers — wrapped in `.m-card` in modern markup
+body.app .user-data,
+body.app .top-campaign {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+body.app .user-data .filters,
+body.app .filters {
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+body.app .m-card__header .user-data.filters,
+body.app .m-card__header .filters {
+  margin: 0;
+}
+body.app .user-data__footer {
+  padding: 16px 0 0;
+  text-align: center;
+  border-top: 0;
+}
+
+// Table-data2 — clean modern table (no floating "tr-shadow" rows)
+body.app .table-data2 {
+  border-collapse: collapse;
+  width: 100%;
+}
+body.app .table-data2.table thead th {
+  background: transparent;
+  color: var(--m-text-faint);
+  font-size: 11.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--m-border);
+  border-top: 0;
+  text-align: left;
+  vertical-align: middle;
+}
+body.app .table-data2.table tbody {
+  background: transparent;
+}
+body.app .table-data2.table tbody tr,
+body.app .table-data2.table tr.tr-shadow {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+body.app .table-data2.table tbody td {
+  padding: 12px;
+  background: transparent;
+  border-bottom: 1px solid var(--m-divider);
+  border-top: 0;
+  font-size: 13.5px;
+  color: var(--m-text);
+  border-radius: 0;
+  vertical-align: middle;
+}
+body.app .table-data2.table tbody td.desc {
+  color: var(--m-accent);
+}
+body.app .table-data2.table tr.spacer,
+body.app .table-data2 .spacer {
+  display: none;
+}
+body.app .table-data2.table tbody tr:hover td {
+  background: var(--m-surface-2);
+}
+body.app .block-email {
+  color: var(--m-accent);
+  font-size: 13px;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  line-height: inherit;
+}
+
+// Table-data3 — bottom sales table with framed header
+body.app .table-data3 {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+body.app .table-data3 thead {
+  background: transparent;
+}
+body.app .table-data3 thead th {
+  background: var(--m-surface-2);
+  color: var(--m-text-faint);
+  font-size: 11.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--m-border);
+  border-top: 1px solid var(--m-border);
+  text-align: left;
+}
+body.app .table-data3 thead tr th:first-child {
+  border-top-left-radius: var(--m-radius);
+  border-bottom-left-radius: 0;
+  border-left: 1px solid var(--m-border);
+}
+body.app .table-data3 thead tr th:last-child {
+  border-top-right-radius: var(--m-radius);
+  border-bottom-right-radius: 0;
+  border-right: 1px solid var(--m-border);
+}
+body.app .table-data3 thead tr th:last-child,
+body.app .table-data3 tbody tr td:last-child {
+  text-align: right;
+}
+body.app .table-data3 tbody tr {
+  border-left: 1px solid var(--m-border);
+  border-right: 1px solid var(--m-border);
+}
+body.app .table-data3 tbody td {
+  padding: 12px 16px;
+  background: transparent;
+  border-bottom: 1px solid var(--m-divider);
+  border-top: 0;
+  font-size: 13.5px;
+  color: var(--m-text);
+}
+body.app .table-data3 tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Custom checkboxes (.au-checkbox / .au-checkmark)
+// Markup (React Checkbox): label.au-checkbox > input + span.au-checkmark
+//                          (+ span.au-checkbox__label when a label is given)
+// The label root is a flex row so the 18px box and optional text sit inline;
+// the hidden input stretches over the whole label so any part is clickable.
+// ----------------------------------------------------------------------------
+body.app .au-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin: 0;
+  min-width: 18px;
+  min-height: 18px;
+  position: relative;
+  font-family: var(--m-font);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--m-text);
+  line-height: 1.4;
+  user-select: none;
+  vertical-align: middle;
+}
+body.app .au-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  inset: 0;
+  z-index: 1;
+}
+body.app .au-checkmark {
+  position: relative;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  background: var(--m-surface);
+  border: 1.5px solid var(--m-border);
+  border-radius: 4px;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+body.app .au-checkbox__label {
+  white-space: nowrap;
+}
+body.app .au-checkbox:hover .au-checkmark,
+body.app .au-checkbox input:focus-visible ~ .au-checkmark {
+  border-color: var(--m-accent);
+}
+body.app .au-checkbox input:focus-visible ~ .au-checkmark {
+  box-shadow: 0 0 0 3px rgba(var(--m-accent-rgb), 0.18);
+}
+body.app .au-checkbox input:checked ~ .au-checkmark {
+  background: var(--m-accent);
+  border-color: var(--m-accent);
+}
+body.app .au-checkbox input:checked ~ .au-checkmark::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 5px;
+  height: 10px;
+  border: solid var(--m-on-accent);
+  border-width: 0 2px 2px 0;
+  border-radius: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transform-origin: center;
+}
+body.app .au-checkbox input:indeterminate ~ .au-checkmark {
+  background: var(--m-accent);
+  border-color: var(--m-accent);
+}
+body.app .au-checkbox input:indeterminate ~ .au-checkmark::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 2px;
+  background: var(--m-on-accent);
+  transform: translate(-50%, -50%);
+}
+
+// ----------------------------------------------------------------------------
+// Ranked top-N list (used for "Top campaigns")
+// ----------------------------------------------------------------------------
+body.app .rank-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+body.app .rank-list > li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 14px;
+  row-gap: 6px;
+  align-items: center;
+}
+body.app .rank-list__rank {
+  grid-row: span 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+// Highlight the top three with progressively brighter accent treatment.
+body.app .rank-list > li:nth-child(1) .rank-list__rank {
+  background: var(--m-accent);
+  color: var(--m-on-accent);
+}
+body.app .rank-list > li:nth-child(2) .rank-list__rank,
+body.app .rank-list > li:nth-child(3) .rank-list__rank {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .rank-list__title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  grid-column: 2;
+  align-self: end;
+  line-height: 1.3;
+}
+body.app .rank-list__value {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--m-text);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  align-self: end;
+  line-height: 1.3;
+  grid-column: 3;
+  grid-row: 1;
+}
+body.app .rank-list__bar {
+  grid-column: 2 / span 2;
+  grid-row: 2;
+  display: block;
+  height: 4px;
+  background: var(--m-divider);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+body.app .rank-list__bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rank-pct, 0%);
+  // React sets `--rank-pct` and, when `item.color` is given, `--rank-color`.
+  background: var(
+    --rank-color,
+    linear-gradient(90deg, var(--m-accent) 0%, rgba(var(--m-accent-rgb), 0.7) 100%)
+  );
+  border-radius: inherit;
+  transition: width 360ms ease;
+}
+body.app .rank-list > li:nth-child(1) .rank-list__bar::after {
+  background: var(--rank-color, var(--m-accent));
+}
+
+// ----------------------------------------------------------------------------
+// Responsive
+// ----------------------------------------------------------------------------
+@media (max-width: $mobile-bp) {
+  // Every legacy / modern table inside an m-card gets a horizontal-scroll
+  //     wrapper automatically.
+  body.app .m-card > .m-table,
+  body.app .m-card > .table,
+  body.app .m-card > .table-top-countries,
+  body.app .m-card > .table-top-campaign {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.app .m-table th,
+  body.app .m-table td {
+    white-space: nowrap;
+  }
+
+  body.app .m-card__header .user-data.filters,
+  body.app .m-card__header .filters {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  body.app .m-card__header .user-data.filters .select-wrapper,
+  body.app .m-card__header .filters .select-wrapper {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+  }
+}
+@media (max-width: 575.98px) {
+  body.app .m-table th,
+  body.app .m-table td {
+    font-size: 12.5px;
+    padding: 8px 0;
+  }
+}

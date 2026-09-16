@@ -1,0 +1,119 @@
+// Leaflet maps page (CoolAdmin map.html): `.map-*` wrappers + Leaflet control
+// re-skin on `--m-*` tokens. Leaflet's own stylesheet is loaded lazily by the
+// demo's `LeafletMap` component; these rules only rebrand its chrome.
+@use '../config' as *;
+
+// Container — CoolAdmin gave `#vmap` / `.vmap` inline `border-radius: 8px;
+// overflow: hidden` and a fixed height (set from React via `style={{ height }}`).
+body.app .map-wrap {
+  position: relative;
+  border-radius: var(--m-radius-md);
+  overflow: hidden;
+  background: var(--m-surface-2);
+}
+body.app .map-wrap .vmap {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+body.app .map-wrap .vmap[hidden] {
+  display: none;
+}
+
+// Fallback shown when Leaflet fails to load (port of the inline fallback markup)
+body.app .map-fallback {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  border-radius: var(--m-radius-md);
+  text-align: center;
+}
+body.app .map-fallback i {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+body.app .map-fallback__title {
+  font-size: 14px;
+}
+body.app .map-fallback__hint {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+// Title control (CoolAdmin's `info` control, top-right)
+body.app .leaflet-control.map-title {
+  background: var(--m-surface);
+  color: var(--m-text);
+  padding: 6px 10px;
+  border-radius: var(--m-radius-sm);
+  font-family: var(--m-font);
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: var(--m-shadow-sm);
+  border: 1px solid var(--m-border);
+}
+
+// Zoom control
+body.app .leaflet-bar {
+  border: 1px solid var(--m-border);
+  box-shadow: var(--m-shadow-sm);
+  border-radius: var(--m-radius-sm);
+  overflow: hidden;
+}
+body.app .leaflet-bar a {
+  background: var(--m-surface);
+  color: var(--m-text);
+  border-bottom-color: var(--m-divider);
+  font-family: var(--m-font);
+}
+body.app .leaflet-bar a:hover,
+body.app .leaflet-bar a:focus {
+  background: var(--m-surface-2);
+  color: var(--m-accent);
+}
+body.app .leaflet-bar a.leaflet-disabled {
+  background: var(--m-surface-2);
+  color: var(--m-text-faint);
+}
+
+// Popups
+body.app .leaflet-popup-content-wrapper,
+body.app .leaflet-popup-tip {
+  background: var(--m-surface);
+  color: var(--m-text);
+  box-shadow: var(--m-shadow-md);
+}
+body.app .leaflet-popup-content-wrapper {
+  border-radius: var(--m-radius-md);
+  border: 1px solid var(--m-border);
+}
+body.app .leaflet-popup-content {
+  font-family: var(--m-font);
+  font-size: 13px;
+  margin: 10px 14px;
+}
+body.app .leaflet-container a.leaflet-popup-close-button {
+  color: var(--m-text-faint);
+}
+body.app .leaflet-container a.leaflet-popup-close-button:hover {
+  color: var(--m-text);
+}
+body.app .map-popup {
+  text-align: center;
+  padding: 5px;
+}
+body.app .map-popup strong {
+  color: var(--m-text);
+}
+body.app .map-popup__value {
+  font-weight: 700;
+}
+
+// Dark mode — OSM only ships light tiles; re-tone them under the dark hook so
+// the maps don't glare. (Filter only; every colour above already comes from tokens.)
+[data-bs-theme='dark'] body.app .map-wrap .leaflet-tile-pane {
+  filter: brightness(0.7) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}

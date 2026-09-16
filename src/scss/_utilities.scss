@@ -1,0 +1,158 @@
+// ============================================================================
+// Utilities — only the handful the modern CoolAdmin pages actually use.
+// The 118KB legacy utility dump (m-t-*, p-*, bg-flat-color-*, …) is NOT
+// ported; Bootstrap 5.3 provides spacing/display/text utilities.
+// ============================================================================
+
+// Spacing helpers used by the dashboard layout
+body.app .stack-y > * + * {
+  margin-top: 16px;
+}
+body.app .stack-y-lg > * + * {
+  margin-top: 24px;
+}
+body.app .row-tight {
+  row-gap: 16px;
+}
+
+// Circular image helpers (topbar dropdown avatars, notification discs)
+body.app .img-cir {
+  border-radius: 50%;
+  overflow: hidden;
+}
+body.app .img-40 {
+  width: 40px;
+  height: 40px;
+}
+body.app .img-32 {
+  width: 32px;
+  height: 32px;
+}
+body.app .img-120 {
+  width: 120px;
+  height: 120px;
+}
+
+// Brand colour discs — flat tints (re-tinted inside .notifi__item)
+body.app .bg-c1 {
+  background: var(--m-c1);
+  color: #fff;
+}
+body.app .bg-c2 {
+  background: var(--m-c2);
+  color: #fff;
+}
+body.app .bg-c3 {
+  background: var(--m-c3);
+  color: #fff;
+}
+body.app .bg-c4 {
+  background: var(--m-c4);
+  color: #fff;
+}
+
+// Text tone helpers that follow the tokens (Bootstrap's `.text-muted`
+// maps to --bs-secondary-color which the bridge already rebinds)
+body.app .text-faint {
+  color: var(--m-text-faint) !important;
+}
+body.app .text-accent {
+  color: var(--m-accent) !important;
+}
+body.app .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+// Vintage section titles (`.title-1`…`.title-5`, `.heading-title`) —
+// sentence-case Inter weight 600 instead of UPPERCASE+letterspace
+body.app .title-1,
+body.app .title-2,
+body.app .title-3,
+body.app .title-4,
+body.app .title-5,
+body.app .heading-title {
+  font-family: var(--m-font);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  letter-spacing: -0.005em;
+  text-transform: none;
+  margin: 0 0 12px;
+}
+body.app .title-1 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+body.app .title-2 {
+  font-size: 17px;
+}
+body.app .title-3 i,
+body.app .title-5 i {
+  color: var(--m-accent);
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+// Component-showcase helpers
+body.app .demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+body.app .demo-tile {
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-md);
+  padding: 14px 16px;
+  background: var(--m-surface);
+}
+body.app .demo-tile + .demo-tile {
+  margin: 0;
+}
+body.app .demo-label {
+  font-size: 11px;
+  color: var(--m-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+// Inline code / kbd
+body.app kbd {
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11.5px;
+  font-family: var(--m-font);
+  font-weight: 500;
+  color: var(--m-text);
+  box-shadow: none;
+}
+body.app code {
+  font-family: var(--m-font-mono);
+  font-size: 12.5px;
+  color: var(--m-accent);
+}
+
+// Reduced motion — kill decorative transitions
+@media (prefers-reduced-motion: reduce) {
+  body.app *,
+  body.app *::before,
+  body.app *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+// The three legacy spacing helpers still used by a modern page (fontawesome.html).
+body.app .m-t-25 {
+  margin-top: 25px;
+}
+body.app .m-b-30 {
+  margin-bottom: 30px;
+}
+body.app .m-b-40 {
+  margin-bottom: 40px;
+}

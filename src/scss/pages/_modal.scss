@@ -1,0 +1,70 @@
+// ============================================================================
+// Modals — Bootstrap `.modal` harmonised with the m-card aesthetic.
+// Colour variables are bridged in _base.scss; this is the layout skin.
+// ============================================================================
+body.app .modal-content {
+  background: var(--m-surface);
+  color: var(--m-text);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-lg);
+  box-shadow: var(--m-shadow-pop);
+  font-family: var(--m-font);
+}
+body.app .modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--m-divider);
+  align-items: center;
+}
+body.app .modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--m-text);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+body.app .modal-header .btn-close {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: -4px -4px -4px auto;
+  border-radius: var(--m-radius-sm);
+  background-size: 10px;
+  opacity: 0.6;
+}
+body.app .modal-header .btn-close:hover {
+  background-color: var(--m-surface-2);
+  opacity: 1;
+}
+body.app .modal-body {
+  padding: 20px;
+  font-size: 13.5px;
+  color: var(--m-text);
+  line-height: 1.55;
+}
+body.app .modal-body p {
+  margin: 0 0 12px;
+}
+body.app .modal-body p:last-child {
+  margin-bottom: 0;
+}
+body.app .modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--m-divider);
+  background: var(--m-surface-2);
+  border-bottom-left-radius: var(--m-radius-lg);
+  border-bottom-right-radius: var(--m-radius-lg);
+  gap: 8px;
+}
+body.app .modal-footer > * {
+  margin: 0;
+}
+body.app .modal-backdrop.show {
+  opacity: 0.55;
+}
+body.app .modal.fade .modal-dialog {
+  transform: translateY(-8px) scale(0.98);
+  transition: transform 160ms ease;
+}
+body.app .modal.show .modal-dialog {
+  transform: none;
+}

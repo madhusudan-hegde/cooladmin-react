@@ -1,0 +1,201 @@
+@use 'config' as *;
+
+// ============================================================================
+// Shell — page-wrapper / page-container / main-content / page-header /
+// section-eyebrow / copyright footer.
+// The sidebar and topbar own their own widths and heights; the shell just
+// leaves room for them (260px / 72px collapsed / 0 on mobile, 64px / 60px).
+// ============================================================================
+
+// Section objects (from legacy _objects.scss)
+body.app section {
+  position: relative;
+}
+body.app .section__content {
+  position: relative;
+  margin: 0 auto;
+  z-index: 1;
+}
+body.app .section__content--p30 {
+  padding: 0 30px;
+}
+
+body.app .page-wrapper {
+  overflow: hidden;
+  background: var(--m-bg);
+  min-height: 100vh;
+}
+body.app .page-container {
+  background: var(--m-bg);
+  padding-left: var(--m-sidebar-width);
+  transition: padding-left 200ms ease;
+}
+@media (min-width: 992px) {
+  body.app.sidebar-collapsed .page-container {
+    padding-left: var(--m-sidebar-width-collapsed);
+  }
+}
+@media (max-width: $mobile-bp) {
+  body.app .page-container {
+    padding-left: 0;
+  }
+}
+
+// Layout container — breathing room appropriate for the slim 64px topbar
+body.app .main-content {
+  padding-top: var(--m-topbar-height);
+  min-height: 100vh;
+}
+body.app .main-content > .section__content--p30,
+body.app main .section__content--p30 {
+  padding: 28px 28px 60px;
+}
+@media (max-width: $mobile-bp) {
+  body.app .main-content {
+    padding-top: var(--m-topbar-height-mobile);
+  }
+  body.app .main-content > .section__content--p30,
+  body.app main .section__content--p30 {
+    padding: 16px 16px 40px;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Page header (title + actions row)
+// ----------------------------------------------------------------------------
+body.app .page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+body.app .page-header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--m-text);
+  margin: 0;
+}
+body.app .page-header .subtitle {
+  color: var(--m-text-muted);
+  font-size: 13.5px;
+  margin: 4px 0 0;
+}
+body.app .page-header h1 + .subtitle {
+  white-space: normal;
+}
+body.app .page-header__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+// Section eyebrow (used above content blocks where the inner card has its
+// own header)
+body.app .section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 6px;
+}
+
+// ----------------------------------------------------------------------------
+// Footer
+// ----------------------------------------------------------------------------
+body.app .copyright {
+  text-align: center;
+  padding: 20px 0 0;
+}
+body.app .copyright p {
+  color: var(--m-text-faint);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 0;
+}
+body.app .copyright a {
+  color: var(--m-text-muted);
+}
+body.app .copyright a:hover {
+  color: var(--m-accent);
+}
+
+// ----------------------------------------------------------------------------
+// Responsive page header
+// ----------------------------------------------------------------------------
+@media (max-width: $mobile-bp) {
+  body.app .page-header {
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  body.app .page-header h1 {
+    font-size: 20px;
+  }
+  body.app .page-header .subtitle {
+    font-size: 13px;
+  }
+  body.app .page-header__actions {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  body.app .page-header__actions .m-btn,
+  body.app .page-header__actions .date-chip {
+    flex: 0 1 auto;
+  }
+  body.app .copyright {
+    text-align: center;
+    padding: 16px 8px 0;
+  }
+}
+@media (max-width: 575.98px) {
+  body.app .page-header h1 {
+    font-size: 18px;
+  }
+  body.app .page-header .subtitle {
+    font-size: 12.5px;
+  }
+  body.app .page-header__actions .m-btn,
+  body.app .page-header__actions .date-chip {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12.5px;
+  }
+  body.app .section-eyebrow {
+    font-size: 10.5px;
+    margin-bottom: 6px;
+  }
+}
+@media (max-width: 379.98px) {
+  body.app .page-header__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body.app .page-header__actions .m-btn,
+  body.app .page-header__actions .date-chip {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+// Print — invoice and any other printable page: no chrome
+@media print {
+  body.app .menu-sidebar,
+  body.app .header-desktop,
+  body.app .page-header,
+  body.app .copyright,
+  body.app .theme-switcher,
+  body.app .toast-container,
+  body.app .invoice-actions {
+    display: none !important;
+  }
+  body.app .page-container {
+    padding-left: 0 !important;
+  }
+  body.app .main-content {
+    padding-top: 0 !important;
+  }
+}

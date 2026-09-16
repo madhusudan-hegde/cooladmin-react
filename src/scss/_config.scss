@@ -1,0 +1,7 @@
+// Shared Sass configuration for the CoolAdmin React stylesheet.
+// Consumed via `@use 'config' as *;`. Keep this file tiny — every design
+// value lives as a CSS custom property in `_tokens.scss`, not here.
+
+// Below this width the sidebar becomes a drawer and the topbar compacts.
+// Mirrors `MOBILE_BP = 992` in the React runtime (CSS uses 991.98px).
+$mobile-bp: 991.98px;

@@ -1,0 +1,76 @@
+// ============================================================================
+// Accent presets
+// The accent cascade is driven by `--m-accent`, `--m-accent-rgb`,
+// `--m-accent-hover`, `--m-accent-soft`. Any element using these variables
+// reskins automatically. Apply a `theme-{name}` class on <body> to switch
+// (blue is the default — the base tokens already equal the blue preset).
+// Values are verbatim from CoolAdmin src/scss/app/_theme-presets.scss.
+// ============================================================================
+
+body.app.theme-blue {
+  --m-accent: #4272d7;
+  --m-accent-rgb: 66, 114, 215;
+  --m-accent-hover: #355cb8;
+  --m-accent-soft: #eaf0fc;
+}
+body.app.theme-purple {
+  --m-accent: #7c3aed;
+  --m-accent-rgb: 124, 58, 237;
+  --m-accent-hover: #6b2fd0;
+  --m-accent-soft: #ede9fe;
+}
+body.app.theme-teal {
+  --m-accent: #0d9488;
+  --m-accent-rgb: 13, 148, 136;
+  --m-accent-hover: #0a7d72;
+  --m-accent-soft: #ccfbf1;
+}
+body.app.theme-rose {
+  --m-accent: #e11d48;
+  --m-accent-rgb: 225, 29, 72;
+  --m-accent-hover: #be1239;
+  --m-accent-soft: #ffe4e6;
+}
+body.app.theme-amber {
+  --m-accent: #d97706;
+  --m-accent-rgb: 217, 119, 6;
+  --m-accent-hover: #b86204;
+  --m-accent-soft: #fef3c7;
+}
+body.app.theme-graphite {
+  --m-accent: #334155;
+  --m-accent-rgb: 51, 65, 85;
+  --m-accent-hover: #1f2937;
+  --m-accent-soft: #e2e8f0;
+}
+
+// Dark mode: the pastel `--m-accent-soft` swatches above are far too bright
+// on dark surfaces, so every preset falls back to a translucent wash of its
+// own accent. `[data-bs-theme="dark"] body.app.theme-*` out-specifies the
+// light preset selectors above. Graphite additionally lifts its accent so
+// buttons stay visible against the near-black surfaces.
+[data-bs-theme='dark'] body.app.theme-blue,
+[data-bs-theme='dark'] body.app.theme-purple,
+[data-bs-theme='dark'] body.app.theme-teal,
+[data-bs-theme='dark'] body.app.theme-rose,
+[data-bs-theme='dark'] body.app.theme-amber,
+[data-bs-theme='dark'] body.app.theme-graphite {
+  --m-accent-soft: rgba(var(--m-accent-rgb), 0.18);
+}
+[data-bs-theme='dark'] body.app.theme-graphite {
+  --m-accent: #64748b;
+  --m-accent-rgb: 100, 116, 139;
+  --m-accent-hover: #4b5a70;
+}
+
+// Logo mark — gradient based on the active accent + a darker companion.
+// Shared by the sidebar brand, auth/error cards, the invoice header and the
+// command-palette result icons.
+body.app .menu-sidebar .logo .logo-mark,
+body.app.auth-page .auth-brand .logo-mark,
+body.app .invoice-doc__brand .logo-mark,
+body.app .error-card .logo-mark,
+body.app .cmdk-item__icon {
+  background: linear-gradient(135deg, var(--m-accent) 0%, var(--m-accent-hover) 100%);
+  box-shadow: 0 4px 12px rgba(var(--m-accent-rgb), 0.35);
+}

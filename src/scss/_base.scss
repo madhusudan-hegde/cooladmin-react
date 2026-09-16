@@ -1,0 +1,250 @@
+@use 'config' as *;
+
+// ============================================================================
+// Base — resets the legacy theme.css used to provide, a11y focus styles, and
+// the component-level Bootstrap bridge.
+// Legacy CoolAdmin (`theme.css`) reset paragraph/heading margins and link
+// underlines globally; the modern overlay was authored on top of that, so we
+// re-supply those few resets here under `body.app`.
+// ============================================================================
+
+body.app,
+body.app .page-wrapper,
+body.app .page-container {
+  background: var(--m-bg);
+}
+body.app {
+  margin: 0;
+}
+
+// Legacy generic resets the overlay relied on
+body.app p {
+  margin: 0;
+}
+body.app h1,
+body.app h2,
+body.app h3,
+body.app h4,
+body.app h5,
+body.app h6 {
+  margin: 0;
+  color: var(--m-text);
+  line-height: 1.2;
+}
+body.app a {
+  color: var(--m-accent);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+body.app a:hover {
+  color: var(--m-accent-hover);
+}
+body.app img {
+  max-width: 100%;
+  height: auto;
+}
+body.app button {
+  cursor: pointer;
+  font-family: inherit;
+}
+body.app button,
+body.app input,
+body.app select,
+body.app textarea,
+body.app kbd {
+  font-family: var(--m-font);
+}
+body.app strong,
+body.app b {
+  font-weight: 600;
+}
+
+// Thin scrollbars
+body.app ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body.app ::-webkit-scrollbar-thumb {
+  background-color: rgba(127, 140, 160, 0.35);
+  border-radius: 4px;
+}
+body.app ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(127, 140, 160, 0.55);
+}
+body.app ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+// Visible focus styles (a11y) — modern :focus-visible only
+body.app :focus-visible {
+  outline: 2px solid var(--m-accent);
+  outline-offset: 2px;
+}
+body.app .btn:focus-visible,
+body.app .au-btn:focus-visible,
+body.app .form-control:focus-visible,
+body.app .form-select:focus-visible {
+  outline: 2px solid var(--m-accent);
+  outline-offset: 1px;
+}
+// Topbar dropdown triggers are <div role="button"> — give them keyboard cues
+body.app .noti__item.js-item-menu:focus-visible,
+body.app .account-item.js-item-menu:focus-visible {
+  outline: 2px solid var(--m-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// Skip-to-main-content link (revealed on focus only)
+body.app .skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+}
+body.app .skip-link:focus,
+body.app .skip-link:focus-visible {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--m-accent);
+  color: var(--m-on-accent);
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+// ----------------------------------------------------------------------------
+// Bootstrap 5.3 bridge — component-level variables
+// Bootstrap redeclares `--bs-<component>-*` on the component root, so the
+// body-level bridge in `_tokens.scss` does not reach them. Rebind here.
+// ----------------------------------------------------------------------------
+body.app .card {
+  --bs-card-bg: var(--m-surface);
+  --bs-card-color: var(--m-text);
+  --bs-card-border-color: var(--m-border);
+  --bs-card-cap-bg: var(--m-surface);
+  --bs-card-cap-color: var(--m-text);
+  --bs-card-title-color: var(--m-text);
+  --bs-card-subtitle-color: var(--m-text-muted);
+}
+body.app .dropdown-menu {
+  --bs-dropdown-bg: var(--m-surface);
+  --bs-dropdown-color: var(--m-text);
+  --bs-dropdown-border-color: var(--m-border);
+  --bs-dropdown-divider-bg: var(--m-divider);
+  --bs-dropdown-link-color: var(--m-text);
+  --bs-dropdown-link-hover-color: var(--m-text);
+  --bs-dropdown-link-hover-bg: var(--m-surface-2);
+  --bs-dropdown-link-active-color: var(--m-on-accent);
+  --bs-dropdown-link-active-bg: var(--m-accent);
+  --bs-dropdown-link-disabled-color: var(--m-text-faint);
+  --bs-dropdown-header-color: var(--m-text-faint);
+}
+body.app .modal {
+  --bs-modal-bg: var(--m-surface);
+  --bs-modal-color: var(--m-text);
+  --bs-modal-border-color: var(--m-border);
+  --bs-modal-border-radius: var(--m-radius-lg);
+  --bs-modal-header-border-color: var(--m-divider);
+  --bs-modal-footer-border-color: var(--m-divider);
+  --bs-modal-box-shadow: var(--m-shadow-pop);
+}
+body.app .modal-backdrop {
+  --bs-backdrop-bg: #0f172a;
+}
+body.app .offcanvas,
+body.app .offcanvas-lg,
+body.app .offcanvas-md,
+body.app .offcanvas-sm,
+body.app .offcanvas-xl,
+body.app .offcanvas-xxl {
+  --bs-offcanvas-bg: var(--m-surface);
+  --bs-offcanvas-color: var(--m-text);
+  --bs-offcanvas-border-color: var(--m-border);
+}
+body.app .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--m-text);
+  --bs-table-border-color: var(--m-divider);
+  --bs-table-striped-bg: var(--m-surface-2);
+  --bs-table-striped-color: var(--m-text);
+  --bs-table-hover-bg: var(--m-surface-2);
+  --bs-table-hover-color: var(--m-text);
+  --bs-table-active-bg: var(--m-accent-soft);
+  --bs-table-active-color: var(--m-text);
+  margin: 0;
+}
+body.app .nav {
+  --bs-nav-link-color: var(--m-text-muted);
+  --bs-nav-link-hover-color: var(--m-text);
+  --bs-nav-link-disabled-color: var(--m-text-faint);
+}
+body.app .nav-tabs {
+  --bs-nav-tabs-border-color: var(--m-border);
+  --bs-nav-tabs-link-hover-border-color: var(--m-border) var(--m-border) var(--m-border);
+  --bs-nav-tabs-link-active-color: var(--m-text);
+  --bs-nav-tabs-link-active-bg: var(--m-surface);
+  --bs-nav-tabs-link-active-border-color: var(--m-border) var(--m-border) var(--m-surface);
+}
+body.app .nav-pills {
+  --bs-nav-pills-link-active-color: var(--m-on-accent);
+  --bs-nav-pills-link-active-bg: var(--m-accent);
+}
+body.app .list-group {
+  --bs-list-group-bg: var(--m-surface);
+  --bs-list-group-color: var(--m-text);
+  --bs-list-group-border-color: var(--m-border);
+  --bs-list-group-action-color: var(--m-text);
+  --bs-list-group-action-hover-color: var(--m-text);
+  --bs-list-group-action-hover-bg: var(--m-surface-2);
+  --bs-list-group-action-active-bg: var(--m-accent-soft);
+  --bs-list-group-active-bg: var(--m-accent);
+  --bs-list-group-active-border-color: var(--m-accent);
+}
+body.app .pagination {
+  --bs-pagination-bg: var(--m-surface);
+  --bs-pagination-color: var(--m-text);
+  --bs-pagination-border-color: var(--m-border);
+  --bs-pagination-hover-bg: var(--m-surface-2);
+  --bs-pagination-hover-color: var(--m-text);
+  --bs-pagination-hover-border-color: var(--m-border);
+  --bs-pagination-focus-bg: var(--m-surface-2);
+  --bs-pagination-focus-color: var(--m-text);
+  --bs-pagination-active-bg: var(--m-accent);
+  --bs-pagination-active-border-color: var(--m-accent);
+  --bs-pagination-disabled-bg: var(--m-surface);
+  --bs-pagination-disabled-color: var(--m-text-faint);
+  --bs-pagination-disabled-border-color: var(--m-border);
+}
+body.app .progress,
+body.app .progress-stacked {
+  --bs-progress-bg: var(--m-divider);
+  --bs-progress-bar-bg: var(--m-accent);
+  --bs-progress-border-radius: 999px;
+  --bs-progress-height: 8px;
+}
+body.app .accordion {
+  --bs-accordion-bg: var(--m-surface);
+  --bs-accordion-color: var(--m-text);
+  --bs-accordion-border-color: var(--m-border);
+  --bs-accordion-btn-color: var(--m-text);
+  --bs-accordion-btn-bg: var(--m-surface);
+  --bs-accordion-active-bg: var(--m-accent-soft);
+  --bs-accordion-active-color: var(--m-accent);
+}
+body.app .popover {
+  --bs-popover-bg: var(--m-surface);
+  --bs-popover-border-color: var(--m-border);
+  --bs-popover-body-color: var(--m-text);
+  --bs-popover-header-bg: var(--m-surface-2);
+  --bs-popover-header-color: var(--m-text);
+}
+body.app .breadcrumb {
+  --bs-breadcrumb-divider-color: var(--m-text-faint);
+  --bs-breadcrumb-item-active-color: var(--m-text-muted);
+}
+body.app .alert {
+  --bs-alert-border-radius: var(--m-radius);
+}

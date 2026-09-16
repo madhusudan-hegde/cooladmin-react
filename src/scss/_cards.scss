@@ -1,0 +1,830 @@
+@use 'config' as *;
+
+// ============================================================================
+// Cards — m-card, stat-card (KPI tile), preview-card, accent-card,
+// cover-card, profile-card, pricing-card, notice-card, card-list, trend-mini,
+// plus the Bootstrap `.card` re-skin.
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Modern card
+// ----------------------------------------------------------------------------
+body.app .m-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  box-shadow: var(--m-shadow-xs);
+  padding: 20px;
+  color: var(--m-text);
+}
+body.app .m-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4px 0 16px;
+  gap: 12px;
+}
+body.app .m-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+body.app .m-card__subtitle {
+  font-size: 12.5px;
+  color: var(--m-text-muted);
+  margin: 2px 0 0;
+}
+body.app .m-card__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+body.app .m-card__body {
+  min-width: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Stat card (KPI tile)
+// ----------------------------------------------------------------------------
+body.app .stat-card {
+  position: relative;
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  box-shadow: var(--m-shadow-xs);
+  padding: 18px 20px 0;
+  overflow: hidden;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+// Tiles without a sparkline need their own bottom padding
+body.app .stat-card--flat,
+body.app .stat-card:not(:has(.stat-card__sparkline)) {
+  padding-bottom: 18px;
+}
+body.app .stat-card:hover {
+  border-color: var(--m-border-hover);
+  box-shadow: var(--m-shadow-sm);
+}
+body.app .stat-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+body.app .stat-card__label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--m-text-muted);
+  margin: 0;
+}
+body.app .stat-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--m-radius-sm);
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+// Per-tile palette echoing the original gradient tile family
+// (c1 blue / c2 teal / c3 orange / c4 pink).
+body.app .stat-card__icon--c1 {
+  background: var(--m-c1-soft);
+  color: var(--m-c1);
+}
+body.app .stat-card__icon--c2 {
+  background: var(--m-c2-soft);
+  color: var(--m-c2);
+}
+body.app .stat-card__icon--c3 {
+  background: var(--m-c3-soft);
+  color: var(--m-c3);
+}
+body.app .stat-card__icon--c4 {
+  background: var(--m-c4-soft);
+  color: var(--m-c4);
+}
+body.app .stat-card__icon--success {
+  background: var(--m-success-soft);
+  color: var(--m-success);
+}
+body.app .stat-card__icon--warning {
+  background: var(--m-warning-soft);
+  color: var(--m-warning);
+}
+body.app .stat-card__icon--danger {
+  background: var(--m-danger-soft);
+  color: var(--m-danger);
+}
+body.app .stat-card__value {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--m-text);
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+body.app .stat-card__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+body.app .stat-card__delta--up {
+  color: var(--m-success);
+}
+body.app .stat-card__delta--down {
+  color: var(--m-danger);
+}
+body.app .stat-card__delta i {
+  font-size: 10px;
+}
+body.app .stat-card__delta-period {
+  color: var(--m-text-faint);
+  font-weight: 400;
+  margin-left: 4px;
+}
+body.app .stat-card__sparkline {
+  margin: 10px -20px 0;
+  height: 56px;
+  position: relative;
+}
+body.app .stat-card__sparkline canvas {
+  display: block;
+  width: 100% !important;
+  height: 56px !important;
+}
+
+// Inline trend indicator (tables, lists)
+body.app .trend-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+body.app .trend-mini--up {
+  color: var(--m-success);
+}
+body.app .trend-mini--down {
+  color: var(--m-danger);
+}
+
+// ----------------------------------------------------------------------------
+// Mini stat card with sparkline (chart preview)
+// ----------------------------------------------------------------------------
+body.app .preview-card {
+  padding: 18px 20px 0;
+}
+body.app .preview-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+body.app .preview-card__label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--m-text-muted);
+  margin: 0;
+}
+body.app .preview-card__value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 4px 0 6px;
+  font-variant-numeric: tabular-nums;
+}
+body.app .preview-card__chart {
+  margin: 0 -20px;
+  height: 64px;
+  position: relative;
+}
+
+// ----------------------------------------------------------------------------
+// Outline accent card (left rail in brand colour)
+// ----------------------------------------------------------------------------
+body.app .accent-card {
+  border-left: 4px solid var(--m-accent) !important;
+  padding: 18px 20px 18px 18px !important;
+}
+body.app .accent-card--success {
+  border-left-color: var(--m-success) !important;
+}
+body.app .accent-card--warning {
+  border-left-color: var(--m-warning) !important;
+}
+body.app .accent-card--danger {
+  border-left-color: var(--m-danger) !important;
+}
+
+// ----------------------------------------------------------------------------
+// Image cover card
+// ----------------------------------------------------------------------------
+body.app .cover-card {
+  padding: 0 !important;
+  overflow: hidden;
+}
+body.app .cover-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+body.app .cover-card__body {
+  padding: 18px 20px 20px;
+}
+body.app .cover-card__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+body.app .cover-card__title {
+  font-family: var(--m-font);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0 0 6px;
+  letter-spacing: -0.005em;
+}
+body.app .cover-card__text {
+  font-size: 13.5px;
+  color: var(--m-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+body.app .cover-card__footer {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--m-divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+body.app .cover-card__author {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--m-text-muted);
+}
+body.app .cover-card__author img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// ----------------------------------------------------------------------------
+// Profile / team member card
+// ----------------------------------------------------------------------------
+body.app .profile-card {
+  text-align: center;
+  padding: 24px 20px;
+}
+body.app .profile-card__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  overflow: hidden;
+  border: 3px solid var(--m-surface);
+  box-shadow: var(--m-shadow-md);
+  background: var(--m-surface-2);
+}
+body.app .profile-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+body.app .profile-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0 0 2px;
+}
+body.app .profile-card__role {
+  font-size: 13px;
+  color: var(--m-text-muted);
+  margin: 0;
+}
+body.app .profile-card__divider {
+  border: 0;
+  border-top: 1px solid var(--m-divider);
+  margin: 16px 0;
+  opacity: 1;
+}
+body.app .profile-card__socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+body.app .profile-card__socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--m-surface-2);
+  color: var(--m-text-muted);
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease;
+}
+body.app .profile-card__socials a:hover {
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+}
+body.app .profile-card__socials a i {
+  font-size: 13px;
+}
+body.app .profile-card__stats {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 12px 0 0;
+}
+body.app .profile-card__stat {
+  flex: 0 0 auto;
+}
+body.app .profile-card__stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+body.app .profile-card__stat-label {
+  font-size: 11.5px;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Pricing card
+// ----------------------------------------------------------------------------
+body.app .pricing-card {
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+}
+body.app .pricing-card--featured {
+  border-color: var(--m-accent) !important;
+  box-shadow: 0 4px 24px rgba(var(--m-accent-rgb), 0.12);
+}
+body.app .pricing-card__badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--m-accent);
+  color: var(--m-on-accent);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+body.app .pricing-card__tier {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--m-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 6px;
+}
+body.app .pricing-card__price {
+  margin: 0;
+  color: var(--m-text);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+body.app .pricing-card__price small {
+  font-size: 14px;
+  color: var(--m-text-muted);
+  font-weight: 500;
+  margin-left: 4px;
+}
+body.app .pricing-card__period {
+  color: var(--m-text-faint);
+  font-size: 12.5px;
+  margin: 6px 0 18px;
+}
+body.app .pricing-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body.app .pricing-card__features li {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--m-text);
+}
+body.app .pricing-card__features li i {
+  color: var(--m-success);
+  margin-top: 2px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+// ----------------------------------------------------------------------------
+// List-group card
+// ----------------------------------------------------------------------------
+body.app .card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.app .card-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--m-divider);
+  transition: background 120ms ease;
+}
+body.app .card-list > li:last-child {
+  border-bottom: 0;
+}
+body.app .card-list > li:hover {
+  background: var(--m-surface-2);
+}
+body.app .card-list__main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+body.app .card-list__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--m-accent-soft);
+  color: var(--m-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+body.app .card-list__title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--m-text);
+}
+body.app .card-list__sub {
+  font-size: 11.5px;
+  color: var(--m-text-faint);
+  display: block;
+  margin-top: 2px;
+}
+body.app .card-list__meta {
+  font-size: 12.5px;
+  color: var(--m-text-muted);
+  flex-shrink: 0;
+}
+
+// ----------------------------------------------------------------------------
+// Bootstrap `.card` → m-card-style surface
+// ----------------------------------------------------------------------------
+body.app .card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  box-shadow: var(--m-shadow-xs);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+body.app .card > .card-header,
+body.app .card-header {
+  background: var(--m-surface);
+  color: var(--m-text);
+  border-bottom: 1px solid var(--m-divider);
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+body.app .card-header strong {
+  font-weight: 600;
+}
+body.app .card-header small {
+  color: var(--m-text-muted);
+  font-weight: 400;
+  margin-left: 4px;
+}
+body.app .card-body {
+  padding: 20px;
+}
+body.app .card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--m-text);
+  margin: 0 0 12px;
+  text-transform: none;
+}
+body.app .card-footer {
+  background: var(--m-surface-2);
+  border-top: 1px solid var(--m-divider);
+  padding: 14px 20px;
+}
+body.app .card hr {
+  border: 0;
+  border-top: 1px solid var(--m-divider);
+  margin: 16px 0;
+  opacity: 1;
+}
+
+// Vintage `.au-card` — neutral m-card surface
+body.app .au-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  box-shadow: var(--m-shadow-xs);
+  padding: 20px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+body.app .au-card--no-shadow {
+  box-shadow: var(--m-shadow-xs);
+}
+body.app .au-card--no-pad {
+  padding: 0;
+}
+body.app .au-card--border {
+  border: 1px solid var(--m-border);
+}
+body.app .au-card--bg-blue {
+  background: var(--m-surface);
+  color: var(--m-text);
+}
+body.app .au-card-inner {
+  padding: 20px;
+}
+body.app .au-card-title {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--m-divider);
+  background: var(--m-surface);
+  border-top-left-radius: var(--m-radius);
+  border-top-right-radius: var(--m-radius);
+}
+body.app .au-card-title h3,
+body.app .au-card-title h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--m-text);
+  text-transform: none;
+}
+
+// Vintage `.statistic__item` KPI tile — reset to a clean modern tile
+body.app .statistic {
+  padding-top: 0;
+}
+body.app .statistic .section__content--p30 {
+  padding: 0 28px 0;
+}
+body.app .statistic__item,
+body.app .statistic2 {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  padding: 18px 20px;
+  box-shadow: var(--m-shadow-xs);
+  margin-bottom: 16px;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+body.app .statistic__item:hover {
+  border-color: var(--m-border-hover);
+  box-shadow: var(--m-shadow-sm);
+}
+body.app .statistic__item h2,
+body.app .statistic__item .number {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--m-text);
+  margin: 0 0 4px;
+  font-variant-numeric: tabular-nums;
+}
+body.app .statistic__item .desc {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--m-text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  display: block;
+}
+body.app .statistic__item .icon {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  bottom: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--m-radius-sm);
+  background: var(--m-c1-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+body.app .statistic__item .icon i {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--m-c1);
+  opacity: 1;
+}
+body.app .statistic__item--blue,
+body.app .statistic__item--green,
+body.app .statistic__item--orange,
+body.app .statistic__item--red {
+  background: var(--m-surface);
+}
+body.app .statistic__item--green .icon {
+  background: var(--m-c2-soft);
+}
+body.app .statistic__item--green .icon i {
+  color: var(--m-c2);
+}
+body.app .statistic__item--orange .icon {
+  background: var(--m-c3-soft);
+}
+body.app .statistic__item--orange .icon i {
+  color: var(--m-c3);
+}
+body.app .statistic__item--red .icon {
+  background: var(--m-c4-soft);
+}
+body.app .statistic__item--red .icon i {
+  color: var(--m-c4);
+}
+
+// `.welcome` / `.welcome2` hero blocks
+body.app .welcome,
+body.app .welcome2 {
+  background: linear-gradient(135deg, var(--m-accent-soft) 0%, var(--m-c4-soft) 100%);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius);
+  padding: 32px;
+  margin-bottom: 16px;
+  box-shadow: var(--m-shadow-xs);
+}
+body.app .welcome2 {
+  padding: 40px 32px;
+}
+body.app .welcome2-greeting {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--m-text);
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+body.app .welcome2-greeting + p,
+body.app .welcome2 p {
+  color: var(--m-text-muted);
+  font-size: 14px;
+}
+
+// ----------------------------------------------------------------------------
+// Responsive
+// ----------------------------------------------------------------------------
+@media (max-width: $mobile-bp) {
+  body.app .m-card__header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  body.app .m-card__header > div:first-child {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+  body.app .m-card {
+    padding: 16px;
+  }
+  body.app .stat-card {
+    padding: 14px 16px 0;
+  }
+  body.app .stat-card--flat,
+  body.app .stat-card:not(:has(.stat-card__sparkline)) {
+    padding-bottom: 14px;
+  }
+  body.app .stat-card__sparkline {
+    margin: 10px -16px 0;
+  }
+  body.app .pricing-card {
+    padding: 24px 18px;
+  }
+  body.app .pricing-card--featured {
+    box-shadow: var(--m-shadow-xs);
+  }
+  body.app .cover-card__image {
+    height: 140px;
+  }
+}
+@media (max-width: 575.98px) {
+  body.app .stat-card {
+    padding: 12px 14px 0;
+  }
+  body.app .stat-card--flat,
+  body.app .stat-card:not(:has(.stat-card__sparkline)) {
+    padding-bottom: 12px;
+  }
+  body.app .stat-card__value {
+    font-size: 22px;
+  }
+  body.app .stat-card__sparkline {
+    margin: 8px -14px 0;
+  }
+  body.app .m-card {
+    padding: 14px;
+  }
+  body.app .m-card__title {
+    font-size: 13.5px;
+  }
+  body.app .profile-card {
+    padding: 20px 16px;
+  }
+  body.app .pricing-card {
+    padding: 22px 16px;
+  }
+}
+@media (max-width: 379.98px) {
+  body.app .stat-card__delta-period {
+    display: none;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// card.html showcase variants (ported from the page's inline styles)
+// ----------------------------------------------------------------------------
+// Flush list card: `<section class="m-card" style="padding:0">` whose header
+// carries its own `padding: 18px 20px` so the `.card-list` rows run edge to edge.
+body.app .m-card--flush {
+  padding: 0;
+}
+body.app .m-card--flush > .m-card__header {
+  padding: 18px 20px;
+}
+
+// Accent profile card — the brand gradient tile (`linear-gradient(135deg, #4272d7, #3155b3)`)
+// expressed with the accent tokens so it follows the active preset.
+body.app .profile-card--accent {
+  background: linear-gradient(135deg, var(--m-accent) 0%, var(--m-accent-hover) 100%);
+  color: #fff;
+  border-color: transparent;
+}
+body.app .profile-card--accent .profile-card__avatar {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+body.app .profile-card--accent .profile-card__name {
+  color: #fff;
+}
+body.app .profile-card--accent .profile-card__role {
+  color: rgba(255, 255, 255, 0.85);
+}
+body.app .profile-card--accent .profile-card__divider {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+body.app .profile-card--accent p {
+  color: rgba(255, 255, 255, 0.92);
+}
+body.app .profile-card--accent .profile-card__cta,
+body.app .profile-card--accent .profile-card__cta:hover {
+  background: #fff;
+  color: var(--m-accent);
+  border: 0;
+}

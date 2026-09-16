@@ -1,0 +1,75 @@
+// ============================================================================
+// @cooladmin/react — stylesheet entry (compiled to dist/css/cooladmin.css)
+//
+// A port of CoolAdmin 3.4.0's modern `--m-*` overlay (src/scss/app/*.scss,
+// MIT, Colorlib). Every rule is scoped under `body.app`; the React layouts put
+// `app` on <body>. Legacy theme.css (Poppins, `--ca-*`, the utility dump) is
+// dropped — the few legacy classes modern pages still use are re-supplied in
+// the relevant partial. Consumer loads Bootstrap 5.3 CSS, Font Awesome 7 and
+// Inter itself; this file only depends on their class names.
+//
+// PARTIAL ORDER IS LOAD-BEARING. Many selectors share specificity
+// (`body.app .x` everywhere), so later partials win ties:
+//   1. config / tokens / theme-presets  — custom properties first; the dark
+//      block and the `[data-bs-theme=dark] body.app.theme-*` overrides must
+//      come after the light values they replace.
+//   2. base                              — resets + Bootstrap `--bs-*` bridge.
+//   3. shell → sidebar → topbar          — layout chrome. The topbar's
+//      mobile block overrides shell/sidebar heights and must follow them.
+//   4. cards → buttons → tables → badges → forms → lists — components.
+//      badges after tables so `.status--*` pill shape beats the table cell
+//      colour rules; forms after buttons so `.au-btn`/`.au-input` in forms
+//      win over the generic button skin.
+//   5. feedback → command-palette → theme-switcher — floating layers.
+//   6. auth → error                      — full-page variants that re-style
+//      body/page-wrapper; must follow shell.
+//   7. charts → utilities                — chart wrappers, then the few
+//      utilities (utilities last so `.stack-y`, `.text-faint` win).
+//   8. pages/*                           — per-page partials, last, so page
+//      chrome (inbox reader, kanban, docs …) can override component defaults.
+// Each partial carries its own responsive @media blocks at its end so
+// mobile refinements always follow the desktop rule they override.
+// ============================================================================
+
+/*! @cooladmin/react — CoolAdmin design port (MIT). Original design by Colorlib. */
+
+@use 'config';
+@use 'tokens';
+@use 'theme-presets';
+@use 'base';
+
+@use 'shell';
+@use 'sidebar';
+@use 'topbar';
+
+@use 'cards';
+@use 'buttons';
+@use 'tables';
+@use 'badges';
+@use 'forms';
+@use 'lists';
+
+@use 'feedback';
+@use 'command-palette';
+@use 'theme-switcher';
+
+@use 'auth';
+@use 'error';
+
+@use 'charts';
+@use 'utilities';
+
+// Per-page styling (Phase 2 routes).
+@use 'pages/inbox';
+@use 'pages/kanban';
+@use 'pages/notifications';
+@use 'pages/pricing';
+@use 'pages/invoice';
+@use 'pages/wizard';
+@use 'pages/docs';
+@use 'pages/tabs';
+@use 'pages/modal';
+@use 'pages/data-table';
+@use 'pages/calendar';
+@use 'pages/map';
+@use 'pages/icons';

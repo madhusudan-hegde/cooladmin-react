@@ -1,0 +1,165 @@
+// ============================================================================
+// Theme switcher (floating bottom-right widget)
+//   .theme-switcher(.is-open)
+//     > .theme-switcher__panel
+//         > .theme-switcher__title
+//         > .theme-switcher__grid > button.theme-switcher__swatch(.is-active)
+//             > .theme-switcher__swatch-color + .theme-switcher__swatch-label
+//         > .theme-switcher__modes  (colour-mode row — added for the React port)
+//             > button.theme-switcher__mode(.is-active) × 3 (light / dark / auto)
+//     > button.theme-switcher__toggle
+// ============================================================================
+body.app .theme-switcher {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  font-family: var(--m-font);
+}
+body.app .theme-switcher__toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--m-accent);
+  color: var(--m-on-accent);
+  border: 0;
+  box-shadow: 0 8px 24px rgba(var(--m-accent-rgb), 0.4);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+body.app .theme-switcher__toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(var(--m-accent-rgb), 0.5);
+}
+body.app .theme-switcher__toggle:active {
+  transform: scale(0.95);
+}
+body.app .theme-switcher__panel {
+  background: var(--m-surface);
+  color: var(--m-text);
+  border: 1px solid var(--m-border);
+  border-radius: 14px;
+  box-shadow: var(--m-shadow-pop);
+  padding: 16px;
+  width: 240px;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  transform-origin: bottom right;
+}
+body.app .theme-switcher.is-open .theme-switcher__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+body.app .theme-switcher__title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--m-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 12px;
+}
+body.app .theme-switcher__title + .theme-switcher__title,
+body.app .theme-switcher__grid + .theme-switcher__title {
+  margin-top: 16px;
+}
+body.app .theme-switcher__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+body.app .theme-switcher__swatch {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 120ms ease;
+  position: relative;
+}
+body.app .theme-switcher__swatch:hover {
+  transform: scale(1.06);
+}
+body.app .theme-switcher__swatch-color {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+body.app .theme-switcher__swatch.is-active .theme-switcher__swatch-color {
+  border-color: var(--m-text);
+  box-shadow: 0 0 0 2px var(--m-surface), 0 0 0 4px var(--m-text);
+}
+body.app .theme-switcher__swatch-label {
+  display: block;
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--m-text-muted);
+  margin-top: 4px;
+  text-transform: capitalize;
+}
+body.app .theme-switcher__swatch.is-active .theme-switcher__swatch-label {
+  color: var(--m-text);
+  font-weight: 600;
+}
+
+// Colour-mode row (light / dark / auto)
+body.app .theme-switcher__modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-border);
+  border-radius: 10px;
+}
+body.app .theme-switcher__mode {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--m-text-muted);
+  font-family: var(--m-font);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+body.app .theme-switcher__mode i {
+  font-size: 12px;
+}
+body.app .theme-switcher__mode:hover {
+  color: var(--m-text);
+}
+body.app .theme-switcher__mode.is-active {
+  background: var(--m-surface);
+  color: var(--m-text);
+  box-shadow: var(--m-shadow-xs);
+}
+@media (max-width: 575.98px) {
+  body.app .theme-switcher {
+    bottom: 12px;
+    right: 12px;
+  }
+  body.app .theme-switcher__panel {
+    width: 220px;
+  }
+}

@@ -1,0 +1,536 @@
+@use 'config' as *;
+
+// ============================================================================
+// Sidebar — calmer dark navy, refined typography, accessible contrast.
+// Three states driven by <body> classes:
+//   • expanded (default, ≥992px)              — 260px
+//   • `body.sidebar-collapsed` (≥992px)       — 72px icon rail + .sidebar-tooltip
+//   • `body.sidebar-open` (<992px)            — off-canvas drawer + .sidebar-backdrop
+// Markup (from src/pug/partials/sidebar.pug):
+//   aside.menu-sidebar > .logo > a.logo-link > .logo-mark + .logo-text, button.sidebar-close
+//                     > .menu-sidebar__content > nav.navbar-sidebar > ul.navbar__list
+//                       > li(.active)(.has-sub) > a(.js-arrow)(.open) > i + text
+//                                              > ul.navbar__sub-list > li(.active) > a
+// ============================================================================
+
+body.app .menu-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1010;
+  width: var(--m-sidebar-width);
+  background: var(--m-sidebar);
+  border-right: 1px solid var(--m-sidebar-border);
+  display: block;
+  transition: transform 220ms ease, width 200ms ease;
+}
+
+// Logo strip
+body.app .menu-sidebar .logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  height: var(--m-topbar-height);
+  padding: 0 20px;
+  background: var(--m-sidebar);
+  border-right: 0;
+  border-bottom: 1px solid var(--m-sidebar-border);
+  box-shadow: none;
+}
+body.app .menu-sidebar .logo a {
+  display: inline-flex;
+  align-items: center;
+}
+body.app .menu-sidebar .logo img {
+  height: 26px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+}
+body.app .menu-sidebar .logo .logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  overflow: hidden;
+  line-height: 1;
+}
+body.app .menu-sidebar .logo .logo-mark {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--m-accent) 0%, var(--m-accent-hover) 100%);
+  box-shadow: 0 4px 12px rgba(var(--m-accent-rgb), 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--m-on-accent);
+  font-family: var(--m-font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+}
+body.app .menu-sidebar .logo .logo-text {
+  font-family: var(--m-font);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+// Close (X) button inside the sidebar header — only visible on mobile.
+body.app .sidebar-close {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: var(--m-radius-sm);
+  align-items: center;
+  justify-content: center;
+}
+body.app .sidebar-close:hover {
+  background: var(--m-sidebar-hover);
+  color: #fff;
+}
+
+// Scroll container — match topbar height
+body.app .menu-sidebar__content {
+  position: relative;
+  height: calc(100vh - var(--m-topbar-height));
+  overflow-y: auto;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+body.app .menu-sidebar__content::-webkit-scrollbar {
+  width: 6px;
+}
+body.app .menu-sidebar__content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+// Nav structure
+body.app .navbar-sidebar {
+  padding: 12px 12px 24px;
+}
+body.app .navbar-sidebar .navbar__list,
+body.app .navbar-sidebar .navbar__sub-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+body.app .navbar-sidebar .navbar__list li {
+  list-style: none;
+  position: relative;
+}
+
+// Top-level link — readable contrast (~7:1) at 14px regular.
+body.app .navbar-sidebar .navbar__list > li > a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  margin: 2px 0;
+  color: var(--m-sidebar-text);
+  border-radius: var(--m-radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: background-color 120ms ease, color 120ms ease;
+  position: relative;
+}
+body.app .navbar-sidebar .navbar__list > li > a > i {
+  width: 18px;
+  font-size: 15px;
+  color: var(--m-sidebar-icon);
+  text-align: center;
+  margin-right: 0;
+  flex-shrink: 0;
+  transition: color 120ms ease;
+}
+body.app .navbar-sidebar .navbar__list > li > a:hover {
+  background: var(--m-sidebar-hover);
+  color: #fff;
+}
+body.app .navbar-sidebar .navbar__list > li > a:hover > i {
+  color: var(--m-sidebar-icon-hover);
+}
+
+// Optional badge at the end of a nav row (MenuItemNode.badge / MenuGroupNode.badge)
+body.app .navbar-sidebar .navbar__list a .navbar__badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(var(--m-accent-rgb), 0.35);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+// Active item — brand pill background + accent rail on the left.
+body.app .navbar-sidebar .navbar__list > li.active > a {
+  background: rgba(var(--m-accent-rgb), 0.2);
+  color: #fff;
+  font-weight: 600;
+}
+body.app .navbar-sidebar .navbar__list > li.active > a > i {
+  color: var(--m-sidebar-icon-active);
+}
+body.app .navbar-sidebar .navbar__list > li.active > a::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--m-accent);
+  border-radius: 0 2px 2px 0;
+}
+
+// Disclosure caret on `has-sub` items.
+body.app .navbar-sidebar .navbar__list > li.has-sub > a.js-arrow {
+  padding-right: 32px;
+}
+body.app .navbar-sidebar .navbar__list > li.has-sub > a.js-arrow::after {
+  content: '\f078'; // fa-chevron-down
+  font-family: 'Font Awesome 7 Free';
+  font-weight: 900;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: var(--m-sidebar-caret);
+  transition: transform 200ms ease, color 120ms ease;
+}
+body.app .navbar-sidebar .navbar__list > li.has-sub > a.js-arrow.open::after,
+body.app .navbar-sidebar .navbar__list > li.has-sub.open > a.js-arrow::after {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--m-sidebar-text);
+}
+// Nested groups (a `has-sub` inside a sub-list) get the same caret.
+body.app .navbar-sidebar .navbar__sub-list li.has-sub > a.js-arrow {
+  padding-right: 32px;
+}
+body.app .navbar-sidebar .navbar__sub-list li.has-sub > a.js-arrow::after {
+  content: '\f078';
+  font-family: 'Font Awesome 7 Free';
+  font-weight: 900;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: var(--m-sidebar-caret);
+  transition: transform 200ms ease, color 120ms ease;
+}
+body.app .navbar-sidebar .navbar__sub-list li.has-sub > a.js-arrow.open::after,
+body.app .navbar-sidebar .navbar__sub-list li.has-sub.open > a.js-arrow::after {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--m-sidebar-text);
+}
+
+// Sub-list — hidden until the parent is opened. CoolAdmin toggled this with
+// JS + inline styles; the React SidebarNavItem sets `li.has-sub.open`,
+// `a.js-arrow.open` and `ul.navbar__sub-list.is-open` instead (any one of
+// the three reveals the list). Properly nested with an indent guide rail.
+body.app .navbar-sidebar .navbar__list .navbar__sub-list {
+  display: none;
+  list-style: none;
+  padding: 4px 0 6px 30px;
+  margin: 0 0 4px;
+  position: relative;
+}
+body.app .navbar-sidebar .navbar__list a.js-arrow.open + .navbar__sub-list,
+body.app .navbar-sidebar .navbar__list li.open > .navbar__sub-list,
+body.app .navbar-sidebar .navbar__list .navbar__sub-list.is-open {
+  display: block;
+}
+// Nested sub-lists indent less (the guide rail already carries the depth cue).
+body.app .navbar-sidebar .navbar__sub-list .navbar__sub-list {
+  padding-left: 16px;
+  margin-bottom: 0;
+}
+body.app .navbar-sidebar .navbar__sub-list .navbar__sub-list::before {
+  left: 9px;
+}
+body.app .navbar-sidebar .navbar__list .navbar__sub-list::before {
+  // Vertical guide rail, aligned to where the parent icon sits.
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 4px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--m-sidebar-guide);
+}
+body.app .navbar-sidebar .navbar__list .navbar__sub-list li {
+  list-style: none;
+  margin: 0;
+}
+body.app .navbar-sidebar .navbar__list .navbar__sub-list li a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--m-sidebar-icon);
+  border-radius: var(--m-radius-sm);
+  text-decoration: none;
+  margin: 1px 0;
+  transition: background-color 120ms ease, color 120ms ease;
+  position: relative;
+}
+body.app .navbar-sidebar .navbar__list .navbar__sub-list li a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+body.app .navbar-sidebar .navbar__list .navbar__sub-list li.active > a,
+body.app .navbar-sidebar .navbar__list .navbar__sub-list li > a.active {
+  background: rgba(var(--m-accent-rgb), 0.14);
+  color: #fff;
+}
+
+// Optional section heading between groups (MenuHeaderNode) — CoolAdmin's
+// own class name, rendered by React as `li.nav-group-label`.
+body.app .navbar-sidebar .nav-group-label {
+  padding: 14px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--m-sidebar-group-label);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  list-style: none;
+}
+
+// Consumer slot under the nav (`Sidebar footer` / `DashboardLayout sidebarFooter`).
+body.app .menu-sidebar__footer {
+  padding: 12px 16px 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--m-sidebar-border);
+  color: var(--m-sidebar-text);
+  font-size: 13px;
+}
+body.app .menu-sidebar__footer a {
+  color: var(--m-sidebar-text);
+}
+body.app .menu-sidebar__footer a:hover {
+  color: #fff;
+}
+
+// ----------------------------------------------------------------------------
+// DESKTOP: collapsed-to-icons rail (`body.sidebar-collapsed`, ≥992px)
+// ----------------------------------------------------------------------------
+@media (min-width: 992px) {
+  body.app.sidebar-collapsed .menu-sidebar {
+    width: var(--m-sidebar-width-collapsed);
+  }
+
+  // Logo strip — hide wordmark, centre the square mark.
+  body.app.sidebar-collapsed .menu-sidebar .logo {
+    padding: 0;
+    justify-content: center;
+  }
+  body.app.sidebar-collapsed .menu-sidebar .logo .logo-link {
+    gap: 0;
+    max-width: 36px;
+  }
+  body.app.sidebar-collapsed .menu-sidebar .logo .logo-text {
+    display: none;
+  }
+
+  // Container: items handle their own horizontal breathing so each button
+  //     can span the full rail width with consistent gutters.
+  body.app.sidebar-collapsed .navbar-sidebar {
+    padding: 14px 0 24px;
+  }
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list {
+    padding: 0;
+    margin: 0;
+  }
+  body.app.sidebar-collapsed .navbar-sidebar .nav-group-label {
+    display: none;
+  }
+
+  // List item: holds the horizontal padding so the inner <a> spans 100%.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li {
+    position: relative;
+    margin: 0;
+    padding: 0 12px;
+  }
+
+  // Each link is a full-width 44px-tall icon button.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    height: 44px;
+    margin: 2px 0;
+    padding: 0;
+    font-size: 0; // collapses the raw text node
+    line-height: 1;
+    color: var(--m-sidebar-rail-text);
+    background: transparent;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 120ms ease, color 120ms ease;
+    box-sizing: border-box;
+  }
+  // Force every icon to a fixed 24px square so the glyph sits in the same
+  //     x-position regardless of FA glyph width.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li > a > i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+    color: inherit;
+    flex-shrink: 0;
+    transition: color 120ms ease;
+  }
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list a .navbar__badge {
+    display: none;
+  }
+  // Footer slot has no room on the 72px rail.
+  body.app.sidebar-collapsed .menu-sidebar__footer {
+    display: none;
+  }
+
+  // Disclosure caret has no purpose in collapsed mode.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li.has-sub > a.js-arrow::after {
+    display: none;
+  }
+
+  // Hover — subtle; clearly distinct from the filled active state.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li:not(.active) > a:hover,
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li:not(.active) > a:focus-visible {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+  }
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li:not(.active) > a:hover > i,
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li:not(.active) > a:focus-visible > i {
+    color: #fff;
+  }
+
+  // Active — flat brand pill, no glow shadow.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li.active > a {
+    background: var(--m-accent);
+    color: var(--m-on-accent);
+    box-shadow: none;
+  }
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li.active > a > i {
+    color: var(--m-on-accent);
+  }
+  // Suppress the off-screen `::before` rail used in expanded mode.
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list > li.active > a::before {
+    display: none;
+  }
+
+  // Sub-lists fully hidden in collapsed mode (no fly-out menus).
+  body.app.sidebar-collapsed .navbar-sidebar .navbar__list .navbar__sub-list {
+    display: none !important;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Floating sidebar tooltip (rendered into <body> by the React Sidebar so it
+// escapes the sidebar's `overflow-y: auto` scroll container).
+// ----------------------------------------------------------------------------
+body.app .sidebar-tooltip {
+  position: fixed;
+  background: var(--m-tooltip-bg);
+  color: var(--m-tooltip-text);
+  font-family: var(--m-font, system-ui);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-4px);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+body.app .sidebar-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+// ----------------------------------------------------------------------------
+// MOBILE / TABLET: drawer behaviour (`body.sidebar-open`, <992px)
+// ----------------------------------------------------------------------------
+@media (max-width: $mobile-bp) {
+  body.app .menu-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 86vw;
+    z-index: 1050;
+    transform: translateX(-100%);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  }
+  body.app.sidebar-open .menu-sidebar {
+    transform: translateX(0);
+  }
+  // Surface the close button on mobile only — slightly larger tap target
+  body.app .sidebar-close {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+  }
+  // Header shrinks to 60px on mobile; keep the scroll box in sync
+  body.app .menu-sidebar .logo {
+    height: var(--m-topbar-height); // the drawer keeps its 64px brand row
+  }
+  body.app .menu-sidebar__content {
+    height: calc(100vh - var(--m-topbar-height));
+  }
+}
+
+// Backdrop (rendered by SidebarOverlay when the mobile drawer opens).
+body.app .sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--m-backdrop);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+body.app.sidebar-open .sidebar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (max-width: $mobile-bp) {
+  body.app.sidebar-open {
+    overflow: hidden;
+  }
+}

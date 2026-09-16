@@ -1,0 +1,101 @@
+{
+  "name": "@cooladmin/react",
+  "version": "0.1.0",
+  "description": "CoolAdmin admin dashboard design as a React 19 / Next.js App Router component library (Bootstrap 5.3, RSC-ready)",
+  "license": "MIT",
+  "author": "Madhusudan Hegde (https://madhugh.com) - Forked from CoolAdmin by Colorlib",
+  "contributors": [
+    "cooladmin-react contributors"
+  ],
+  "type": "module",
+  "packageManager": "pnpm@9.12.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./css": "./dist/css/cooladmin.css"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "./dist/css/cooladmin.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<owner>/cooladmin-react"
+  },
+  "bugs": {
+    "url": "https://github.com/<owner>/cooladmin-react/issues"
+  },
+  "keywords": [
+    "admin",
+    "dashboard",
+    "template",
+    "cooladmin",
+    "react",
+    "next",
+    "nextjs",
+    "app-router",
+    "rsc",
+    "bootstrap",
+    "bootstrap5",
+    "chartjs",
+    "components",
+    "madhugh",
+    "onpros"
+  ],
+  "scripts": {
+    "build": "tsup && npm run build:css && npm run fix-dist",
+    "build:css": "sass src/scss/cooladmin.scss dist/css/cooladmin.css --no-source-map --style=expanded",
+    "fix-dist": "node fix-dist.js",
+    "dev": "concurrently -n tsup,sass -c green,magenta \"tsup --watch\" \"npm run build:css -- --watch\"",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src",
+    "demo": "pnpm --filter cooladmin-react-demo dev",
+    "demo:build": "pnpm --filter cooladmin-react-demo build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "chart.js": "^4.5.0",
+    "next": ">=14.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "chart.js": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "chart.js": "^4.5.1",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.8.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "^30.0.1",
+    "next": "^16.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
+  }
+}
